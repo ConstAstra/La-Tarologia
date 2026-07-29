@@ -49,9 +49,15 @@ export default function CartesIndex() {
           />
         </View>
 
-        <Pressable style={styles.combosLink} onPress={() => router.push("/cartes/associations")}>
-          <Ionicons name="git-network-outline" size={16} color={colors.gold} />
-          <Text style={styles.combosLinkText}>Associations de cartes</Text>
+        <Pressable style={styles.combosBanner} onPress={() => router.push("/cartes/associations")}>
+          <View style={styles.combosBannerIcon}>
+            <Ionicons name="git-network-outline" size={20} color={colors.background} />
+          </View>
+          <View style={styles.combosBannerText}>
+            <Text style={styles.combosBannerTitle}>Associations de cartes</Text>
+            <Text style={styles.combosBannerSubtitle}>Ce que deux cartes racontent ensemble</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={colors.gold} />
         </Pressable>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filters}>
@@ -97,13 +103,29 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   searchInput: { flex: 1, color: colors.text },
-  combosLink: {
+  combosBanner: {
     flexDirection: "row",
     alignItems: "center",
-    gap: spacing.xs,
-    marginBottom: spacing.sm,
+    gap: spacing.sm,
+    backgroundColor: colors.cardAlt,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.gold,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.sm,
+    marginBottom: spacing.md,
   },
-  combosLinkText: { color: colors.gold, fontSize: 13, fontFamily: fonts.bodySemiBold },
+  combosBannerIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.gold,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  combosBannerText: { flex: 1 },
+  combosBannerTitle: { color: colors.gold, fontSize: 15, fontFamily: fonts.bodyBold },
+  combosBannerSubtitle: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
   filters: { marginBottom: spacing.sm },
   filterChip: {
     borderWidth: 1,

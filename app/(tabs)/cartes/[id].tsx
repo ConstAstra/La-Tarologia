@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
-import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { getCardById } from "@/data/cards";
 import { colors, fonts, spacing } from "@/theme/colors";
@@ -19,12 +19,19 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function CardDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
+  const navigationState = useRootNavigationState();
   const { isPremium } = useSubscription();
   const card = getCardById(id);
 
   useEffect(() => {
     if (card) navigation.setOptions({ title: card.name });
   }, [card, navigation]);
+
+  useEffect(() => {
+    if (navigationState?.key && card && !card.isFree && !isPremium) {
+      router.replace("/paywall");
+    }
+  }, [navigationState?.key, card, isPremium]);
 
   if (!card) {
     return (
@@ -35,7 +42,6 @@ export default function CardDetail() {
   }
 
   if (!card.isFree && !isPremium) {
-    router.replace("/paywall");
     return null;
   }
 

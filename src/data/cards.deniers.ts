@@ -12,12 +12,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["opportunité concrète", "nouveau départ matériel", "graine à planter"],
     keywordsReversed: ["occasion manquée", "instabilité financière", "projet mal préparé"],
     uprightMeaning:
-      "Une opportunité concrète se présente : offre d'emploi, rentrée d'argent, idée de projet solide à poser sur la table. C'est la graine d'une réussite matérielle, encore à cultiver mais bien réelle.",
+      "Une opportunité concrète se présente : une offre d'emploi, une rentrée d'argent, une idée de projet solide à poser sur la table. C'est la graine d'une réussite matérielle, encore à cultiver mais bien réelle, pas une simple promesse.",
     reversedMeaning:
       "L'opportunité se dérobe, ou un projet matériel démarre sur des bases trop fragiles pour tenir dans la durée.",
-    love: "Un geste concret d'engagement, un cadeau ou un projet matériel construit à deux.",
-    travailArgent: "Une offre professionnelle solide ou une rentrée d'argent bienvenue à ne pas laisser passer.",
-    conseil: "Saisissez cette opportunité concrète et posez les bases sérieusement dès le début.",
+    love: "Un geste concret d'engagement, un cadeau ou un projet matériel construit à deux, pas seulement évoqué.",
+    travailArgent: "Une offre professionnelle solide ou une rentrée d'argent bienvenue, à ne surtout pas laisser passer.",
+    conseil: "Saisissez cette opportunité concrète et posez les bases sérieusement dès le premier jour.",
     symbolisme: "Une main tend un denier doré au-dessus d'un jardin fleuri : la promesse d'une belle récolte à venir.",
   },
   {
@@ -30,12 +30,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["jonglage", "adaptabilité", "équilibre entre priorités"],
     keywordsReversed: ["surcharge financière", "priorités mal gérées", "instabilité"],
     uprightMeaning:
-      "On jongle avec plusieurs priorités à la fois, budget, emploi du temps, projets multiples, avec une certaine agilité. Cette carte parle d'adaptabilité face à des obligations changeantes.",
+      "Vous jonglez avec plusieurs priorités à la fois, budget, emploi du temps, projets multiples, avec une vraie agilité. Cette carte parle d'adaptabilité, pas de désordre.",
     reversedMeaning:
-      "Le jonglage devient épuisant, les priorités s'entrechoquent, ou une gestion budgétaire déséquilibrée crée du stress.",
-    love: "Concilier la relation avec d'autres obligations, sans toujours y parvenir sans tension.",
-    travailArgent: "Gérer plusieurs sources de revenus ou plusieurs projets en même temps, avec souplesse.",
-    conseil: "Priorisez sans culpabiliser : on ne peut pas tout faire tenir parfaitement en même temps.",
+      "Le jonglage devient épuisant, les priorités s'entrechoquent, une gestion budgétaire déséquilibrée crée un stress réel.",
+    love: "Concilier la relation avec d'autres obligations, sans toujours y parvenir sans tension, et ce n'est pas un échec en soi.",
+    travailArgent: "Gérer plusieurs sources de revenus ou plusieurs projets en même temps, avec une souplesse qui fonctionne.",
+    conseil: "Priorisez sans culpabiliser. On ne peut pas tout faire tenir parfaitement en même temps, et ce n'est pas grave.",
     symbolisme: "Un personnage jongle avec deux deniers reliés par un ruban en forme d'infini, sur fond de mer agitée.",
   },
   {
@@ -48,12 +48,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["travail d'équipe", "compétence reconnue", "construction collective"],
     keywordsReversed: ["manque de coordination", "travail non reconnu", "désaccord d'équipe"],
     uprightMeaning:
-      "Un travail bien fait, reconnu par ses pairs, souvent le fruit d'une collaboration où chacun apporte sa compétence. C'est une carte de construction collective solide et de savoir-faire valorisé.",
+      "Un travail bien fait, reconnu par vos pairs, le plus souvent le fruit d'une collaboration où chacun apporte sa compétence propre. Cette carte valorise une construction collective solide, pas un exploit solitaire.",
     reversedMeaning:
       "La coordination d'équipe fait défaut, ou un travail sérieux peine à être reconnu à sa juste valeur.",
-    love: "Construire la relation comme un projet à deux, où chacun apporte ses compétences propres.",
+    love: "Construire la relation comme un vrai projet à deux, où chacun apporte ses compétences propres.",
     travailArgent: "Un travail d'équipe efficace, une compétence enfin reconnue par la hiérarchie ou les clients.",
-    conseil: "Valorisez le travail d'équipe : la réussite collective est souvent plus solide que la réussite solitaire.",
+    conseil: "Valorisez le travail d'équipe : la réussite collective tient presque toujours mieux que la réussite solitaire.",
     symbolisme: "Un artisan discute des plans d'une cathédrale avec deux commanditaires, dans un chantier en cours.",
   },
   {
@@ -66,12 +66,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["sécurité", "contrôle", "attachement matériel"],
     keywordsReversed: ["avarice", "peur de manquer", "ouverture financière nécessaire"],
     uprightMeaning:
-      "On tient fermement ce que l'on a construit, par prudence ou par peur de perdre. Cette carte évoque un besoin de sécurité matérielle, utile en soi, mais qui peut devenir un frein s'il se transforme en rigidité.",
+      "Vous tenez fermement ce que vous avez construit, par prudence ou par peur de perdre. Ce besoin de sécurité matérielle est légitime en soi, mais il devient un frein dès qu'il se transforme en rigidité.",
     reversedMeaning:
       "La peur de manquer se transforme en avarice ou en contrôle excessif, ou au contraire une ouverture financière nécessaire commence enfin à se faire.",
     love: "Une difficulté à lâcher prise ou à partager, par peur de perdre le contrôle sur la relation.",
-    travailArgent: "Un besoin de sécuriser ses finances, parfois au prix d'une prise de risque nécessaire évitée.",
-    conseil: "Desserrez un peu l'étreinte : la sécurité ne doit pas devenir une prison.",
+    travailArgent: "Un besoin de sécuriser vos finances, parfois au prix d'une prise de risque nécessaire que vous évitez depuis trop longtemps.",
+    conseil: "Desserrez un peu l'étreinte. La sécurité ne doit jamais devenir une prison.",
     symbolisme: "Assis, un personnage serre un denier contre sa poitrine, un pied posé sur un autre, deux de plus sur la tête.",
   },
   {
@@ -84,12 +84,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["difficulté matérielle", "sentiment d'exclusion", "période précaire"],
     keywordsReversed: ["aide qui arrive", "sortie de crise", "soutien retrouvé"],
     uprightMeaning:
-      "Une période de difficulté matérielle ou de sentiment d'exclusion, où l'on se sent laissé de côté malgré une aide parfois disponible tout près. Cette carte n'annonce jamais une fatalité, mais un passage difficile à traverser.",
+      "Une période de difficulté matérielle ou de sentiment d'exclusion s'installe, où vous vous sentez laissé de côté malgré une aide parfois disponible tout près. Cette carte n'annonce jamais une fatalité, seulement un passage difficile.",
     reversedMeaning:
-      "Une aide arrive enfin, la situation commence à s'améliorer, ou un soutien longtemps ignoré redevient accessible.",
+      "Une aide arrive enfin, la situation commence à s'améliorer, un soutien longtemps ignoré redevient accessible.",
     love: "Un sentiment de solitude ou de manque de soutien dans une période difficile du couple.",
-    travailArgent: "Une période financière tendue, où il ne faut pas hésiter à demander ou accepter de l'aide.",
-    conseil: "Regardez autour de vous : une aide est peut-être plus proche que vous ne le pensez.",
+    travailArgent: "Une période financière tendue, où il ne faut surtout pas hésiter à demander ou accepter de l'aide.",
+    conseil: "Regardez autour de vous : une aide est peut-être bien plus proche que vous ne le pensez.",
     symbolisme: "Deux personnages démunis passent devant une fenêtre éclairée d'une église, sans lever les yeux vers elle.",
   },
   {
@@ -102,12 +102,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["partage", "générosité équilibrée", "soutien mutuel"],
     keywordsReversed: ["générosité intéressée", "dépendance financière", "aide déséquilibrée"],
     uprightMeaning:
-      "Un échange équilibré entre donner et recevoir : une aide apportée avec générosité, ou reçue avec gratitude. Cette carte parle de justice matérielle et de solidarité concrète.",
+      "Un échange équilibré s'installe entre donner et recevoir : une aide apportée avec générosité, ou reçue avec une vraie gratitude. Cette carte parle de justice matérielle, pas de charité condescendante.",
     reversedMeaning:
-      "L'aide apportée cache une attente en retour, ou une dépendance financière crée un déséquilibre dans la relation.",
+      "L'aide apportée cache une attente en retour, ou une dépendance financière crée un déséquilibre réel dans la relation.",
     love: "Un soutien mutuel équilibré, ou une aide matérielle apportée à l'autre sans arrière-pensée.",
-    travailArgent: "Un financement, un prêt ou une aide professionnelle qui arrive au bon moment.",
-    conseil: "Donnez et recevez sans calcul, l'équilibre se rétablit naturellement avec le temps.",
+    travailArgent: "Un financement, un prêt ou une aide professionnelle qui arrive exactement au bon moment.",
+    conseil: "Donnez et recevez sans calcul. L'équilibre se rétablit naturellement, sans qu'il faille le forcer.",
     symbolisme: "Un marchand pèse des pièces avant de les distribuer à deux personnes agenouillées devant lui.",
   },
   {
@@ -120,12 +120,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["patience", "évaluation des efforts", "récolte à venir"],
     keywordsReversed: ["impatience", "efforts qui semblent vains", "besoin de réajuster la stratégie"],
     uprightMeaning:
-      "On observe ce qui a été semé, en évaluant si les efforts fournis portent leurs fruits ou méritent d'être réajustés. C'est une carte de patience active, entre le travail déjà fait et la récolte encore à venir.",
+      "Vous observez ce qui a été semé, en évaluant honnêtement si les efforts fournis portent leurs fruits ou méritent d'être réajustés. Cette patience active vaut mieux qu'une récolte précipitée.",
     reversedMeaning:
-      "L'impatience grandit, les efforts semblent ne rien donner, ou la stratégie mérite d'être revue avant de continuer.",
-    love: "Évaluer les efforts investis dans la relation et se demander s'ils portent vraiment leurs fruits.",
-    travailArgent: "Un investissement à long terme qui demande encore de la patience avant de porter ses fruits.",
-    conseil: "Prenez du recul pour évaluer honnêtement si vos efforts vont dans la bonne direction.",
+      "L'impatience grandit, les efforts semblent ne rien donner, la stratégie mérite clairement d'être revue avant de continuer.",
+    love: "Évaluer les efforts investis dans la relation et vous demander honnêtement s'ils portent vraiment leurs fruits.",
+    travailArgent: "Un investissement à long terme qui demande encore de la patience avant de porter ses fruits réels.",
+    conseil: "Prenez du recul pour évaluer honnêtement si vos efforts vont dans la bonne direction, pas seulement dans une direction.",
     symbolisme: "Un cultivateur contemple sa récolte de deniers accrochée à un feuillage, pensif, appuyé sur son outil.",
   },
   {
@@ -138,12 +138,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["travail assidu", "perfectionnement", "apprentissage rigoureux"],
     keywordsReversed: ["travail bâclé", "perte de motivation", "perfectionnisme paralysant"],
     uprightMeaning:
-      "Un travail méthodique, répété, où chaque pièce est façonnée avec soin pour progresser vers la maîtrise. Cette carte valorise l'effort discipliné plus que le talent brut, et annonce souvent un vrai perfectionnement des compétences.",
+      "Un travail méthodique, répété, où chaque pièce est façonnée avec soin pour progresser vers la maîtrise. Cette carte valorise l'effort discipliné bien plus que le talent brut.",
     reversedMeaning:
-      "La motivation s'essouffle, le travail devient bâclé, ou un perfectionnisme excessif empêche d'avancer sereinement.",
-    love: "Investir du temps et des efforts réguliers pour faire grandir la relation, sans attendre de miracle.",
-    travailArgent: "Une formation ou un travail minutieux qui va progressivement porter ses fruits.",
-    conseil: "Continuez à peaufiner votre pratique : la maîtrise se construit denier après denier.",
+      "La motivation s'essouffle, le travail devient bâclé, ou un perfectionnisme excessif vous empêche d'avancer sereinement.",
+    love: "Investir du temps et des efforts réguliers pour faire grandir la relation, sans attendre de miracle qui viendrait tout régler d'un coup.",
+    travailArgent: "Une formation ou un travail minutieux qui va progressivement porter ses fruits, à condition de tenir la distance.",
+    conseil: "Continuez à peaufiner votre pratique. La maîtrise se construit denier après denier, jamais d'un seul geste.",
     symbolisme: "Un artisan concentré grave un denier après l'autre, aligné avec méthode sur son établi.",
   },
   {
@@ -156,12 +156,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["indépendance", "réussite personnelle", "confort mérité"],
     keywordsReversed: ["isolement doré", "dépendance financière", "réussite fragile"],
     uprightMeaning:
-      "Une réussite personnelle savourée en toute indépendance : le confort matériel obtenu par ses propres efforts, sans avoir besoin de personne d'autre pour se sentir bien. Une carte d'autonomie satisfaite.",
+      "Une réussite personnelle savourée en toute indépendance : le confort matériel obtenu par vos propres efforts, sans avoir besoin de personne d'autre pour vous sentir bien. Une autonomie pleinement assumée.",
     reversedMeaning:
       "L'indépendance vire à l'isolement, ou une aisance apparente repose en réalité sur des bases plus fragiles qu'il n'y paraît.",
-    love: "Un bien-être personnel qui n'a pas besoin d'une relation pour être complet, propice aux rencontres saines.",
-    travailArgent: "Une stabilité financière construite en solo, fruit d'un travail personnel assidu.",
-    conseil: "Profitez pleinement de cette autonomie que vous avez construite vous-même.",
+    love: "Un bien-être personnel qui n'a pas besoin d'une relation pour être complet, le terrain idéal pour une rencontre saine, justement parce que rien n'est en attente.",
+    travailArgent: "Une stabilité financière construite en solo, fruit d'un travail personnel assidu et assumé.",
+    conseil: "Profitez pleinement de cette autonomie que vous avez construite vous-même, sans avoir à vous en excuser.",
     symbolisme: "Une femme élégante se promène seule dans sa vigne, un faucon sur le poing, entourée de deniers mûrs.",
   },
   {
@@ -174,12 +174,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["héritage", "réussite durable", "stabilité familiale"],
     keywordsReversed: ["conflits d'héritage", "instabilité familiale", "réussite qui ne comble pas"],
     uprightMeaning:
-      "Une réussite qui dépasse l'individu et se transmet : patrimoine, héritage, stabilité familiale construite sur plusieurs générations. C'est l'aboutissement matériel le plus complet du tarot.",
+      "Une réussite qui dépasse l'individu et se transmet : patrimoine, héritage, stabilité familiale construite sur plusieurs générations. C'est l'aboutissement matériel le plus complet du tarot, sans réserve.",
     reversedMeaning:
-      "Des tensions autour d'un héritage ou d'un patrimoine familial, ou une réussite matérielle qui, malgré son ampleur, laisse un sentiment de vide.",
-    love: "Une famille stable et soudée, ou un projet de vie construit pour durer sur le long terme.",
-    travailArgent: "Un héritage, un patrimoine ou une réussite professionnelle qui profite à toute la famille.",
-    conseil: "Pensez sur le long terme : ce que vous construisez aujourd'hui peut profiter à plusieurs générations.",
+      "Des tensions autour d'un héritage ou d'un patrimoine familial apparaissent, ou une réussite matérielle, malgré son ampleur, laisse un sentiment de vide.",
+    love: "Une famille stable et soudée, ou un projet de vie construit pour durer sur le long terme, pas juste pour l'instant présent.",
+    travailArgent: "Un héritage, un patrimoine ou une réussite professionnelle qui profite réellement à toute la famille.",
+    conseil: "Pensez sur le long terme : ce que vous construisez aujourd'hui peut profiter à plusieurs générations après vous.",
     symbolisme: "Une famille entière, jusqu'aux grands-parents, se retrouve dans une cour ornée de dix deniers en arche.",
   },
   {
@@ -192,12 +192,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["étude sérieuse", "nouvelle opportunité concrète", "curiosité pratique"],
     keywordsReversed: ["procrastination", "projet mal étudié", "manque de rigueur"],
     uprightMeaning:
-      "Studieux et appliqué, le Valet de Deniers examine une opportunité concrète avec sérieux avant de s'y engager. Il annonce souvent une nouvelle liée aux études, à l'argent ou à un projet pratique naissant.",
+      "Studieux et appliqué, le Valet de Deniers examine une opportunité concrète avec sérieux avant de s'y engager. Il annonce une nouvelle liée aux études, à l'argent ou à un projet pratique qui commence tout juste à prendre forme.",
     reversedMeaning:
       "Le projet manque de rigueur dans sa préparation, ou une procrastination retarde une opportunité pourtant intéressante.",
-    love: "Une cour discrète et sérieuse, qui prend le temps de construire les choses concrètement.",
-    travailArgent: "Une opportunité d'apprentissage ou un projet professionnel à étudier avec application.",
-    conseil: "Prenez le temps d'étudier sérieusement cette opportunité avant de vous engager pleinement.",
+    love: "Une cour discrète et sérieuse, qui prend le temps de construire les choses concrètement plutôt que de les précipiter.",
+    travailArgent: "Une opportunité d'apprentissage ou un projet professionnel à étudier avec une vraie application.",
+    conseil: "Prenez le temps d'étudier sérieusement cette opportunité avant de vous y engager pleinement.",
     symbolisme: "Un jeune personnage examine attentivement un denier tenu à bout de bras, dans un champ labouré.",
   },
   {
@@ -210,12 +210,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["méthode", "fiabilité", "avancée lente mais sûre"],
     keywordsReversed: ["routine excessive", "lenteur frustrante", "manque d'initiative"],
     uprightMeaning:
-      "Le Cavalier de Deniers avance sans se presser, avec méthode et fiabilité, préférant la constance à la précipitation. Il évoque une progression lente mais solide vers un objectif concret.",
+      "Le Cavalier de Deniers avance sans se presser, avec méthode et fiabilité, préférant la constance à la précipitation. Il évoque une progression lente mais réellement solide vers un objectif concret.",
     reversedMeaning:
       "La méthode tourne à la routine stérile, ou une lenteur excessive freine une avancée qui aurait besoin d'un peu plus d'audace.",
-    love: "Une relation stable, fiable, qui avance à un rythme tranquille mais rassurant.",
-    travailArgent: "Une progression professionnelle régulière, sans éclat mais durable et solide.",
-    conseil: "Avancez à votre rythme, la constance paie souvent plus que la précipitation.",
+    love: "Une relation stable, fiable, qui avance à un rythme tranquille mais sincèrement rassurant.",
+    travailArgent: "Une progression professionnelle régulière, sans éclat particulier mais durable et solide.",
+    conseil: "Avancez à votre rythme. La constance paie presque toujours plus, à terme, que la précipitation.",
     symbolisme: "Un cavalier immobile sur son cheval robuste contemple un denier tenu dans sa main, dans un champ labouré.",
   },
   {
@@ -228,12 +228,12 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["générosité concrète", "sens pratique", "ancrage"],
     keywordsReversed: ["surinvestissement dans les autres", "négligence de soi", "matérialisme excessif"],
     uprightMeaning:
-      "La Reine de Deniers prend soin des siens de façon très concrète : un repas préparé, un budget bien géré, un foyer chaleureux. Son sens pratique et son ancrage rassurent tous ceux qui l'entourent.",
+      "La Reine de Deniers prend soin des siens de façon très concrète : un repas préparé, un budget bien géré, un foyer chaleureux. Son sens pratique et son ancrage rassurent tous ceux qui l'entourent, sans grands discours.",
     reversedMeaning:
       "Elle donne tellement qu'elle s'oublie elle-même, ou un attachement excessif au confort matériel prend le pas sur l'essentiel.",
     love: "Une personne attentionnée et fiable, qui exprime son amour par des gestes concrets plus que par les mots.",
     travailArgent: "Une gestion pragmatique et efficace des ressources, un vrai sens des réalités du terrain.",
-    conseil: "Prenez soin des autres, mais n'oubliez pas de vous accorder la même attention concrète.",
+    conseil: "Prenez soin des autres, mais n'oubliez surtout pas de vous accorder la même attention concrète.",
     symbolisme: "Assise dans un jardin fleuri, elle tient un denier sur ses genoux, un lapin passant discrètement à ses pieds.",
   },
   {
@@ -246,11 +246,11 @@ export const deniers: CardMeaning[] = [
     keywordsUpright: ["réussite matérielle", "sens des affaires", "générosité stable"],
     keywordsReversed: ["matérialisme excessif", "avarice", "réussite sans partage"],
     uprightMeaning:
-      "Le Roi de Deniers a bâti une réussite solide, patiemment, et sait désormais en faire profiter les siens avec générosité. Sens des affaires, stabilité et abondance méritée caractérisent cette énergie.",
+      "Le Roi de Deniers a bâti une réussite solide, patiemment, et sait désormais en faire profiter les siens avec une générosité réelle. Sens des affaires, stabilité et abondance méritée définissent cette énergie.",
     reversedMeaning:
-      "La réussite matérielle devient une fin en soi, avec un risque d'avarice ou de rigidité qui coupe des relations humaines.",
-    love: "Un partenaire stable et généreux, qui offre une sécurité matérielle réelle à la relation.",
-    travailArgent: "Une réussite professionnelle solide, un bon sens des affaires et une gestion avisée du patrimoine.",
+      "La réussite matérielle devient une fin en soi, avec un risque réel d'avarice ou de rigidité qui coupe des relations humaines qui comptaient pourtant.",
+    love: "Un partenaire stable et généreux, qui offre une sécurité matérielle réelle à la relation, pas seulement des promesses.",
+    travailArgent: "Une réussite professionnelle solide, un bon sens des affaires et une gestion avisée du patrimoine construit.",
     conseil: "Utilisez votre réussite pour faire grandir ce qui vous entoure, pas seulement pour vous-même.",
     symbolisme: "Assis sur un trône orné de raisins et de taureaux, il tient fermement son denier, entouré d'abondance.",
   },

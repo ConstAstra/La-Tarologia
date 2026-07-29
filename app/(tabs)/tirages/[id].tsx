@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
-import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { DrawnCardView } from "@/components/DrawnCardView";
 import { getSpreadById } from "@/data/spreads";
@@ -15,6 +15,7 @@ import { supabase } from "@/lib/supabase";
 export default function SpreadDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
+  const navigationState = useRootNavigationState();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   const spread = getSpreadById(id);
@@ -23,6 +24,12 @@ export default function SpreadDetail() {
   useEffect(() => {
     if (spread) navigation.setOptions({ title: spread.name });
   }, [spread, navigation]);
+
+  useEffect(() => {
+    if (navigationState?.key && spread && !spread.isFree && !isPremium) {
+      router.replace("/paywall");
+    }
+  }, [navigationState?.key, spread, isPremium]);
 
   if (!spread) {
     return (
@@ -33,7 +40,6 @@ export default function SpreadDetail() {
   }
 
   if (!spread.isFree && !isPremium) {
-    router.replace("/paywall");
     return null;
   }
 

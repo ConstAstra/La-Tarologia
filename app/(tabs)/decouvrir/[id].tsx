@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { AppText as Text } from "@/components/AppText";
-import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { getArticleById } from "@/data/articles";
 import { colors, fonts, spacing } from "@/theme/colors";
@@ -10,12 +10,19 @@ import { useSubscription } from "@/context/SubscriptionContext";
 export default function ArticleDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
+  const navigationState = useRootNavigationState();
   const { isPremium } = useSubscription();
   const article = getArticleById(id);
 
   useEffect(() => {
     if (article) navigation.setOptions({ title: article.title });
   }, [article, navigation]);
+
+  useEffect(() => {
+    if (navigationState?.key && article && !article.isFree && !isPremium) {
+      router.replace("/paywall");
+    }
+  }, [navigationState?.key, article, isPremium]);
 
   if (!article) {
     return (
@@ -26,7 +33,6 @@ export default function ArticleDetail() {
   }
 
   if (!article.isFree && !isPremium) {
-    router.replace("/paywall");
     return null;
   }
 

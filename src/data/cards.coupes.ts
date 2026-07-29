@@ -10,14 +10,14 @@ export const coupes: CardMeaning[] = [
     suit: "coupes",
     isFree: true,
     keywordsUpright: ["émotion nouvelle", "cœur ouvert", "amour naissant"],
-    keywordsReversed: ["cœur fermé", "émotion refoulée", "déception affective"],
+    keywordsReversed: ["cœur qui se protège", "émotion refoulée", "déception affective"],
     uprightMeaning:
-      "Le cœur déborde d'une émotion neuve : amour naissant, joie sincère, réconciliation, ou simplement une vague de tendresse qui submerge sans prévenir. C'est la carte du sentiment à l'état pur, avant que la raison ne s'en mêle.",
+      "Le cœur déborde sans prévenir : amour naissant, joie sincère, réconciliation, ou simplement une vague de tendresse qui vous submerge. C'est le sentiment à l'état pur, avant que la raison n'ait le temps de s'en mêler ; ne la laissez pas s'en mêler trop vite.",
     reversedMeaning:
-      "L'émotion reste bloquée, difficile à exprimer, ou une déception récente pousse à protéger son cœur plutôt qu'à l'ouvrir.",
-    love: "Un nouvel amour, un début de relation ou un regain de tendresse dans un couple existant.",
-    travailArgent: "Une satisfaction sincère dans ce que l'on fait, un projet porté par le cœur autant que par la raison.",
-    conseil: "Laissez-vous toucher par ce que vous ressentez, sans chercher tout de suite à l'analyser.",
+      "L'émotion reste bloquée, difficile à exprimer, ou une déception récente vous pousse à protéger votre cœur plutôt qu'à l'ouvrir. Ce réflexe vous protège, mais il vous coupe aussi de ce qui pourrait vous faire du bien.",
+    love: "Un nouvel amour, un début de relation ou un regain de tendresse franc dans un couple déjà installé.",
+    travailArgent: "Une satisfaction sincère dans ce que vous faites, un projet porté par le cœur autant que par la raison.",
+    conseil: "Laissez-vous toucher par ce que vous ressentez, sans chercher tout de suite à l'analyser ou à le justifier.",
     symbolisme: "Une main tient une coupe débordante d'eau, une colombe s'y pose : le sentiment coule sans retenue.",
   },
   {
@@ -30,12 +30,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["connexion sincère", "réciprocité", "harmonie à deux"],
     keywordsReversed: ["déséquilibre affectif", "malentendu", "connexion rompue"],
     uprightMeaning:
-      "Deux énergies se rencontrent et s'accordent : lien amoureux, amitié forte, association basée sur une vraie confiance mutuelle. C'est la carte de la réciprocité sincère, quand donner et recevoir s'équilibrent naturellement.",
+      "Deux énergies se rencontrent et s'accordent vraiment : lien amoureux, amitié forte, association fondée sur une confiance mutuelle réelle. Cette carte parle de réciprocité sincère, quand donner et recevoir s'équilibrent sans que personne n'ait à le réclamer.",
     reversedMeaning:
-      "Le déséquilibre s'installe, l'un donne plus que l'autre, ou un malentendu vient fragiliser une connexion qui semblait pourtant solide.",
-    love: "Une rencontre marquante, une demande en mariage, ou un couple qui retrouve son harmonie.",
-    travailArgent: "Une association ou un partenariat basé sur une confiance mutuelle réelle.",
-    conseil: "Cultivez la réciprocité : une bonne relation se nourrit à deux, jamais à sens unique.",
+      "Le déséquilibre s'installe : l'un donne plus que l'autre, ou un malentendu fragilise une connexion qui semblait pourtant solide.",
+    love: "Une rencontre marquante, une demande en mariage, ou un couple qui retrouve une harmonie qu'il croyait perdue.",
+    travailArgent: "Une association ou un partenariat basé sur une confiance mutuelle réelle, pas seulement affichée.",
+    conseil: "Cultivez la réciprocité. Une bonne relation se nourrit à deux, jamais à sens unique, même temporairement.",
     symbolisme: "Un homme et une femme échangent leur coupe, un caducée ailé plane au-dessus d'eux.",
   },
   {
@@ -48,12 +48,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["célébration collective", "amitié", "joie partagée"],
     keywordsReversed: ["excès festifs", "amitié à sens unique", "isolement social"],
     uprightMeaning:
-      "Trois coupes levées ensemble : une fête, des retrouvailles, une célébration entre amis ou en famille. C'est la carte de la joie qui se partage et se démultiplie à plusieurs.",
+      "Trois coupes levées ensemble : une fête, des retrouvailles, une célébration entre amis ou en famille. Cette carte parle d'une joie qui se démultiplie précisément parce qu'elle se partage.",
     reversedMeaning:
-      "La fête tourne à l'excès, une amitié se révèle plus superficielle que prévu, ou un sentiment de mise à l'écart s'installe.",
-    love: "Un cercle amical qui soutient la relation, ou une célébration à plusieurs autour d'un couple.",
-    travailArgent: "Un bon esprit d'équipe, une collaboration joyeuse, un succès à célébrer collectivement.",
-    conseil: "Entourez-vous : la joie vécue à plusieurs a une saveur que la solitude ne donne pas.",
+      "La fête tourne à l'excès, une amitié se révèle plus superficielle que prévu, ou un sentiment de mise à l'écart s'installe au milieu même de la célébration.",
+    love: "Un cercle amical qui soutient réellement la relation, ou une célébration collective autour d'un couple.",
+    travailArgent: "Un bon esprit d'équipe, une collaboration joyeuse, un succès qui mérite d'être fêté collectivement.",
+    conseil: "Entourez-vous : la joie vécue à plusieurs a une saveur que la solitude ne vous donnera jamais.",
     symbolisme: "Trois femmes lèvent leur coupe en cercle, entourées de fruits et de fleurs en abondance.",
   },
   {
@@ -66,12 +66,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["lassitude", "indifférence passagère", "introspection émotionnelle"],
     keywordsReversed: ["sortie de la morosité", "nouvelle opportunité perçue", "réveil de l'envie"],
     uprightMeaning:
-      "Un sentiment de lassitude, de blasement, où même une belle opportunité peine à susciter l'enthousiasme. C'est une carte d'introspection, parfois de bouderie, qui invite à interroger pourquoi plus rien ne semble suffire.",
+      "Une lassitude s'installe, un blasement où même une belle opportunité peine à susciter l'enthousiasme. Cette carte n'est pas un caprice : elle vous force à vous demander pourquoi plus rien ne semble suffire.",
     reversedMeaning:
-      "L'envie revient doucement, une opportunité longtemps ignorée recommence à sembler intéressante, la morosité se dissipe.",
-    love: "Une routine qui pèse, un désintérêt passager à ne pas laisser s'installer durablement.",
-    travailArgent: "Une proposition qui ne suscite pas d'enthousiasme sur le moment, à réexaminer plus tard.",
-    conseil: "Interrogez cette lassitude plutôt que de la fuir : elle indique souvent un vrai besoin insatisfait.",
+      "L'envie revient doucement, une opportunité longtemps ignorée recommence à sembler intéressante, la morosité commence enfin à se dissiper.",
+    love: "Une routine qui pèse, un désintérêt passager à ne pas laisser s'installer durablement sans le nommer.",
+    travailArgent: "Une proposition qui ne suscite aucun enthousiasme sur le moment, à réexaminer plus tard, pas à rejeter d'office.",
+    conseil: "Interrogez cette lassitude plutôt que de la fuir. Elle indique presque toujours un vrai besoin insatisfait.",
     symbolisme: "Assis sous un arbre, bras croisés, un personnage ignore la coupe qu'une main lui tend depuis un nuage.",
   },
   {
@@ -84,12 +84,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["déception", "deuil affectif", "regard tourné vers la perte"],
     keywordsReversed: ["acceptation", "reconstruction", "regard qui se tourne vers l'avenir"],
     uprightMeaning:
-      "Une déception, une perte ou une rupture pèse encore lourd, au point de masquer ce qui reste malgré tout intact. C'est une carte de deuil affectif, légitime, mais qui gagnerait à ne pas s'éterniser.",
+      "Une déception, une perte ou une rupture pèse encore lourd, au point de masquer ce qui reste malgré tout intact. Ce deuil affectif est légitime, mais il ne doit pas s'éterniser au point d'effacer le reste.",
     reversedMeaning:
-      "Le travail de deuil avance, l'acceptation s'installe et le regard commence enfin à se tourner vers ce qui peut encore être construit.",
-    love: "Une rupture ou une déception amoureuse qui laisse des traces, avec un chemin de reconstruction possible.",
-    travailArgent: "Un échec ou une perte à digérer avant de pouvoir rebondir sereinement.",
-    conseil: "Autorisez-vous à pleurer ce qui est perdu, puis tournez-vous vers les coupes qui restent debout.",
+      "Le travail de deuil avance, l'acceptation s'installe, et votre regard commence enfin à se tourner vers ce qui peut encore être construit.",
+    love: "Une rupture ou une déception amoureuse qui laisse des traces, avec un vrai chemin de reconstruction devant vous.",
+    travailArgent: "Un échec ou une perte à digérer avant de pouvoir rebondir sereinement ; ne sautez pas cette étape.",
+    conseil: "Autorisez-vous à pleurer ce qui est perdu, puis tournez-vous vers les coupes qui restent encore debout.",
     symbolisme: "Un personnage en deuil regarde trois coupes renversées, sans voir les deux coupes intactes derrière lui.",
   },
   {
@@ -102,12 +102,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["nostalgie douce", "souvenirs d'enfance", "retrouvailles"],
     keywordsReversed: ["passé idéalisé", "difficulté à avancer", "attachement au passé"],
     uprightMeaning:
-      "Un souvenir tendre, une retrouvaille inattendue ou un geste simple et généreux réveille une nostalgie douce, sans amertume. Cette carte relie souvent au passé, à l'enfance ou à des liens anciens qui refont surface.",
+      "Un souvenir tendre, une retrouvaille inattendue ou un geste simple et généreux réveille une nostalgie douce, sans amertume. Cette carte relie au passé, à l'enfance, à des liens anciens qui refont surface sans prévenir.",
     reversedMeaning:
-      "Le passé devient un refuge trop confortable qui empêche d'avancer, ou une idéalisation qui déforme le souvenir réel.",
-    love: "Retrouvailles avec un amour de jeunesse, ou une tendresse simple qui rappelle les débuts d'une relation.",
+      "Le passé devient un refuge trop confortable qui vous empêche d'avancer, ou une idéalisation déforme un souvenir plus compliqué qu'il n'y paraît.",
+    love: "Des retrouvailles avec un amour de jeunesse, ou une tendresse simple qui rappelle les débuts d'une relation.",
     travailArgent: "Un contact ancien qui rouvre une opportunité, ou un retour vers un domaine familier et rassurant.",
-    conseil: "Savourez la nostalgie sans vous y enfermer : le passé nourrit, il ne doit pas remplacer le présent.",
+    conseil: "Savourez la nostalgie sans vous y enfermer. Le passé nourrit, il ne doit jamais remplacer le présent.",
     symbolisme: "Un enfant offre une coupe fleurie à un autre, dans une cour paisible qui évoque un souvenir tendre.",
   },
   {
@@ -120,12 +120,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["multiples options", "rêverie", "choix à clarifier"],
     keywordsReversed: ["clarté retrouvée", "choix enfin assumé", "illusions dissipées"],
     uprightMeaning:
-      "Beaucoup de possibilités s'offrent, certaines réalistes, d'autres purement illusoires, et il devient difficile de distinguer ce qui mérite vraiment d'être poursuivi. Une carte d'imagination foisonnante qui a besoin d'être triée.",
+      "Beaucoup de possibilités s'offrent à vous, certaines réalistes, d'autres purement illusoires, et il devient difficile de distinguer ce qui mérite vraiment d'être poursuivi. Cette imagination foisonnante a besoin d'être triée, pas censurée.",
     reversedMeaning:
-      "Le brouillard se dissipe, un choix devient enfin clair, ou une illusion longtemps entretenue se révèle pour ce qu'elle est.",
-    love: "Hésitation entre plusieurs possibilités affectives, ou une idéalisation à confronter à la réalité.",
-    travailArgent: "Plusieurs options professionnelles séduisantes, à trier avec un regard lucide avant de choisir.",
-    conseil: "Redescendez sur terre le temps d'évaluer sérieusement laquelle de ces options est vraiment réaliste.",
+      "Le brouillard se dissipe, un choix devient enfin clair, ou une illusion longtemps entretenue se révèle exactement pour ce qu'elle est.",
+    love: "Une hésitation entre plusieurs possibilités affectives, ou une idéalisation à confronter enfin à la réalité.",
+    travailArgent: "Plusieurs options professionnelles séduisantes : triez-les avec un regard lucide avant de vous engager.",
+    conseil: "Redescendez sur terre le temps d'évaluer sérieusement laquelle de ces options tient vraiment la route.",
     symbolisme: "Sept coupes flottent dans les nuages, chacune contenant une vision différente : trésor, monstre, couronne.",
   },
   {
@@ -138,11 +138,11 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["départ volontaire", "quête de sens", "renoncement conscient"],
     keywordsReversed: ["peur de partir", "retour en arrière", "quête interrompue"],
     uprightMeaning:
-      "On tourne le dos à une situation qui, en apparence, avait tout pour satisfaire, parce qu'elle ne nourrit plus vraiment. C'est une carte de départ volontaire, guidée par une quête de sens plus profonde que le confort immédiat.",
+      "Vous tournez le dos à une situation qui, en apparence, avait tout pour satisfaire, parce qu'elle ne nourrit plus rien de réel. Ce départ volontaire répond à une quête de sens plus profonde que le confort immédiat.",
     reversedMeaning:
-      "La peur de partir maintient dans une situation insatisfaisante, ou un retour en arrière interrompt une quête à peine commencée.",
-    love: "S'éloigner d'une relation qui ne correspond plus à ce que l'on recherche vraiment, malgré les apparences.",
-    travailArgent: "Quitter une situation stable mais vide de sens pour aller chercher quelque chose de plus vrai.",
+      "La peur de partir vous maintient dans une situation insatisfaisante, ou un retour en arrière interrompt une quête à peine commencée.",
+    love: "S'éloigner d'une relation qui ne correspond plus à ce que vous cherchez vraiment, malgré des apparences encore convenables.",
+    travailArgent: "Quitter une situation stable mais vide de sens, pour aller chercher quelque chose de plus vrai ailleurs.",
     conseil: "Faites confiance à cette envie de partir, même si elle est difficile à justifier de l'extérieur.",
     symbolisme: "Un personnage s'éloigne de nuit, laissant huit coupes bien rangées mais désormais vides de sens.",
   },
@@ -156,12 +156,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["satisfaction", "contentement", "souhait exaucé"],
     keywordsReversed: ["satisfaction superficielle", "excès de confort", "souhait mal formulé"],
     uprightMeaning:
-      "Surnommée la carte des vœux exaucés, elle indique un contentement sincère : ce que l'on souhaitait se réalise, ou un sentiment de plénitude s'installe simplement parce que l'on a ce qu'il faut.",
+      "Surnommée la carte des vœux exaucés, elle indique un contentement sincère : ce que vous souhaitiez se réalise, ou un sentiment de plénitude s'installe simplement parce que vous avez ce qu'il faut.",
     reversedMeaning:
       "Le contentement reste en surface, plus lié au confort matériel qu'à une vraie satisfaction, ou un souhait se réalise autrement que prévu.",
-    love: "Une relation qui comble sincèrement, ou un moment de bonheur simple à deux.",
-    travailArgent: "Une réussite qui apporte une vraie satisfaction personnelle, pas seulement financière.",
-    conseil: "Savourez ce contentement sans culpabilité, vous l'avez mérité.",
+    love: "Une relation qui vous comble sincèrement, ou un moment de bonheur simple, sans artifice, vécu à deux.",
+    travailArgent: "Une réussite qui apporte une vraie satisfaction personnelle, pas seulement une ligne de plus sur un relevé de compte.",
+    conseil: "Savourez ce contentement sans culpabilité. Vous l'avez mérité, pas hérité.",
     symbolisme: "Assis, bras croisés, un personnage souriant est entouré de neuf coupes alignées derrière lui.",
   },
   {
@@ -174,12 +174,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["bonheur familial", "harmonie durable", "plénitude affective"],
     keywordsReversed: ["harmonie fragilisée", "désaccords familiaux", "bonheur en façade"],
     uprightMeaning:
-      "Le sommet de l'accomplissement émotionnel : une harmonie familiale ou affective durable, un sentiment de plénitude partagé avec ceux que l'on aime. C'est l'une des cartes les plus heureuses de tout le tarot.",
+      "Le sommet de l'accomplissement émotionnel : une harmonie familiale ou affective durable, un sentiment de plénitude partagé avec ceux que vous aimez. C'est l'une des cartes les plus heureuses de tout le tarot, sans réserve à formuler.",
     reversedMeaning:
       "L'harmonie familière se fissure, des tensions couvent sous une image de bonheur trop lisse pour être tout à fait vraie.",
-    love: "Un bonheur familial durable, un couple stable et épanoui, parfois un mariage ou une naissance.",
-    travailArgent: "Un équilibre satisfaisant entre vie professionnelle et vie de famille.",
-    conseil: "Chérissez ce que vous avez construit ensemble, c'est une réussite rare et précieuse.",
+    love: "Un bonheur familial durable, un couple stable et épanoui, parfois un mariage ou une naissance qui approche.",
+    travailArgent: "Un équilibre satisfaisant entre vie professionnelle et vie de famille, rare et à ne pas prendre pour acquis.",
+    conseil: "Chérissez ce que vous avez construit ensemble. C'est une réussite rare, et elle mérite d'être reconnue comme telle.",
     symbolisme: "Un arc-en-ciel de dix coupes surplombe une famille réunie, bras levés vers le ciel.",
   },
   {
@@ -192,12 +192,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["sensibilité", "message affectueux", "imagination"],
     keywordsReversed: ["hypersensibilité", "immaturité affective", "message ambigu"],
     uprightMeaning:
-      "Une sensibilité à fleur de peau, une imagination fertile, souvent une nouvelle tendre ou une déclaration inattendue. Le Valet de Coupes évoque aussi une personne rêveuse et attachante dans votre entourage.",
+      "Une sensibilité à fleur de peau, une imagination fertile, souvent une nouvelle tendre ou une déclaration inattendue. Le Valet de Coupes signale aussi une personne rêveuse et attachante dans votre entourage.",
     reversedMeaning:
-      "L'émotivité devient difficile à gérer, ou un message reçu manque de clarté et laisse place à trop d'interprétations.",
-    love: "Une déclaration touchante, un message plein de sincérité, une cour délicate et poétique.",
+      "L'émotivité devient difficile à gérer, ou un message reçu manque de clarté et laisse place à bien trop d'interprétations.",
+    love: "Une déclaration touchante, un message plein de sincérité, une cour délicate qui prend son temps.",
     travailArgent: "Une proposition créative, une nouvelle qui touche autant qu'elle informe.",
-    conseil: "Accueillez cette sensibilité sans la juger, elle est une force autant qu'une fragilité.",
+    conseil: "Accueillez cette sensibilité sans la juger. Elle est une force autant qu'une fragilité, les deux à la fois, sans contradiction.",
     symbolisme: "Un jeune personnage regarde un poisson sortir de sa coupe, surpris par sa propre imagination.",
   },
   {
@@ -210,11 +210,11 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["romantisme", "proposition séduisante", "idéalisme"],
     keywordsReversed: ["promesses en l'air", "déception romantique", "manipulation émotionnelle"],
     uprightMeaning:
-      "Le Cavalier de Coupes avance avec grâce, porté par un idéal romantique et une envie sincère de séduire ou de convaincre par le cœur. Il annonce souvent une proposition séduisante, amoureuse ou créative.",
+      "Le Cavalier de Coupes avance avec grâce, porté par un idéal romantique et une envie sincère de séduire ou de convaincre par le cœur. Il annonce le plus souvent une proposition séduisante, amoureuse ou créative.",
     reversedMeaning:
-      "Les belles paroles ne sont pas suivies d'actes, ou une déception vient ternir un enthousiasme trop idéalisé.",
-    love: "Une déclaration romantique, une proposition sincère, un soupirant charmant.",
-    travailArgent: "Une offre séduisante à évaluer avec un peu de recul malgré son charme apparent.",
+      "Les belles paroles ne sont pas suivies d'actes, ou une déception vient ternir un enthousiasme qui s'était un peu trop idéalisé.",
+    love: "Une déclaration romantique, une proposition sincère, un soupirant dont le charme opère sans forcer.",
+    travailArgent: "Une offre séduisante à évaluer avec un peu de recul, malgré son charme apparent.",
     conseil: "Laissez-vous porter par le romantisme de la situation, tout en gardant un pied dans le réel.",
     symbolisme: "Un cavalier avance au pas, une coupe tendue devant lui, l'allure posée et rêveuse.",
   },
@@ -228,12 +228,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["intuition profonde", "compassion", "stabilité émotionnelle"],
     keywordsReversed: ["hypersensibilité envahissante", "codépendance", "émotions débordantes"],
     uprightMeaning:
-      "La Reine de Coupes ressent tout, profondément, mais sans se laisser submerger : une intuition fine, une compassion sincère et une stabilité émotionnelle qui rassure son entourage.",
+      "La Reine de Coupes ressent tout, profondément, mais sans jamais se laisser submerger : une intuition fine, une compassion sincère et une stabilité émotionnelle qui rassure tout son entourage.",
     reversedMeaning:
-      "La sensibilité déborde et devient difficile à contenir, ou un attachement trop fusionnel prend le pas sur l'équilibre personnel.",
-    love: "Une personne aimante, intuitive et à l'écoute, qui offre un vrai soutien émotionnel.",
-    travailArgent: "Une intuition fiable pour naviguer une situation délicate, un sens du contact humain précieux.",
-    conseil: "Faites confiance à votre intuition émotionnelle, elle voit souvent plus juste que l'analyse seule.",
+      "La sensibilité déborde et devient difficile à contenir, ou un attachement trop fusionnel prend le pas sur votre propre équilibre.",
+    love: "Une personne aimante, intuitive et à l'écoute, qui offre un vrai soutien émotionnel sans rien exiger en retour.",
+    travailArgent: "Une intuition fiable pour naviguer une situation délicate, un sens du contact humain qui fait toute la différence.",
+    conseil: "Faites confiance à votre intuition émotionnelle : elle voit souvent plus juste que l'analyse seule.",
     symbolisme: "Assise au bord de l'eau, elle contemple une coupe fermée richement ornée, comme un secret intérieur.",
   },
   {
@@ -246,12 +246,12 @@ export const coupes: CardMeaning[] = [
     keywordsUpright: ["maîtrise émotionnelle", "sagesse du cœur", "diplomatie"],
     keywordsReversed: ["émotions réprimées", "manipulation subtile", "instabilité cachée"],
     uprightMeaning:
-      "Le Roi de Coupes a appris à naviguer ses émotions sans se laisser emporter ni les nier : calme, diplomate, à l'écoute, il gère les tempêtes affectives avec sang-froid et bienveillance.",
+      "Le Roi de Coupes a appris à naviguer ses émotions sans se laisser emporter ni les nier : calme, diplomate, à l'écoute, il gère les tempêtes affectives avec sang-froid et bienveillance réelle.",
     reversedMeaning:
-      "Les émotions sont contenues au point de devenir invisibles, ou une apparente sérénité cache une instabilité qui finit par ressortir.",
-    love: "Un partenaire mature, capable de gérer les conflits avec calme et écoute sincère.",
-    travailArgent: "Une gestion posée d'une situation tendue, une diplomatie qui apaise les esprits.",
-    conseil: "Gardez votre calme face aux remous, votre stabilité rassurera ceux qui vous entourent.",
+      "Les émotions sont contenues au point de devenir invisibles, ou une apparente sérénité cache une instabilité qui finit toujours par ressortir.",
+    love: "Un partenaire mature, capable de gérer les conflits avec calme et une écoute qui ne se contente pas d'attendre son tour de parler.",
+    travailArgent: "Une gestion posée d'une situation tendue, une diplomatie qui apaise les esprits sans rien sacrifier au fond.",
+    conseil: "Gardez votre calme face aux remous : votre stabilité rassurera ceux qui vous entourent bien plus que des paroles.",
     symbolisme: "Assis sur un trône presque flottant sur l'eau, il tient sa coupe fermement malgré les vagues autour de lui.",
   },
 ];

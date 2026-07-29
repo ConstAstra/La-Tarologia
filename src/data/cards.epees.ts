@@ -12,12 +12,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["clarté mentale", "vérité", "décision tranchée"],
     keywordsReversed: ["confusion", "vérité mal utilisée", "décision brutale"],
     uprightMeaning:
-      "Une clarté d'esprit soudaine, une vérité qui s'impose, une idée qui tranche net dans le flou. L'As d'Épées apporte une lucidité qui permet enfin de voir une situation telle qu'elle est vraiment.",
+      "Une clarté d'esprit vous frappe soudainement, une vérité s'impose sans ambiguïté, une idée tranche net dans le flou. L'As d'Épées ne propose pas une nuance de plus : il vous montre la situation telle qu'elle est réellement.",
     reversedMeaning:
-      "La clarté espérée tarde à venir, ou une vérité est utilisée de façon blessante plutôt que constructive.",
-    love: "Une conversation franche qui clarifie enfin une situation ambiguë.",
-    travailArgent: "Une décision nette à prendre, une idée qui tranche un dossier bloqué depuis longtemps.",
-    conseil: "Dites les choses clairement, la vérité, même dure, libère plus qu'elle ne blesse à long terme.",
+      "La clarté espérée tarde à venir, ou une vérité est utilisée pour blesser plutôt que pour éclairer.",
+    love: "Une conversation franche qui clarifie enfin une situation ambiguë, plus de sous-entendus possibles après ça.",
+    travailArgent: "Une décision nette à prendre, une idée qui tranche un dossier bloqué depuis bien trop longtemps.",
+    conseil: "Dites les choses clairement. La vérité, même dure, libère toujours plus qu'elle ne blesse à long terme.",
     symbolisme: "Une main surgit d'un nuage, tenant une épée droite couronnée de lauriers : l'esprit qui tranche net.",
   },
   {
@@ -30,12 +30,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["indécision volontaire", "équilibre précaire", "refus de choisir"],
     keywordsReversed: ["décision enfin prise", "vérité qui refait surface", "tension qui éclate"],
     uprightMeaning:
-      "Les yeux bandés, bras croisés sur deux épées : on évite consciemment de trancher, souvent pour ne pas affronter une vérité inconfortable. C'est une carte de statu quo tenu à bout de bras.",
+      "Les yeux bandés, bras croisés sur deux épées, vous évitez consciemment de trancher, souvent pour ne pas affronter une vérité inconfortable. Ce statu quo n'est pas neutre : il vous coûte déjà quelque chose.",
     reversedMeaning:
       "Le refus de choisir devient intenable, une vérité longtemps évitée refait surface et force enfin une décision.",
-    love: "Une situation ambiguë qu'on évite de clarifier, par peur de ce que la réponse pourrait révéler.",
-    travailArgent: "Une décision reportée depuis trop longtemps, qu'il devient urgent de prendre.",
-    conseil: "Retirez le bandeau : vous savez probablement déjà quelle direction est la bonne.",
+    love: "Une situation ambiguë que vous évitez de clarifier, par peur de ce que la réponse pourrait révéler.",
+    travailArgent: "Une décision reportée depuis trop longtemps, qu'il devient urgent de prendre : le report a un coût, lui aussi.",
+    conseil: "Retirez le bandeau. Vous savez probablement déjà quelle direction est la bonne.",
     symbolisme: "Assise face à la mer, les yeux bandés, une femme croise deux épées devant elle.",
   },
   {
@@ -48,12 +48,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["chagrin", "rupture", "vérité douloureuse"],
     keywordsReversed: ["guérison en cours", "douleur qui s'apaise", "pardon possible"],
     uprightMeaning:
-      "Une peine franche, une rupture ou une vérité blessante qui frappe droit au cœur. Cette carte ne cache rien : la douleur est réelle, mais elle est aussi le signe que quelque chose de faux vient d'être révélé.",
+      "Une peine franche, une rupture ou une vérité blessante vous frappe droit au cœur. Cette carte ne cache rien : la douleur est réelle, mais elle signale aussi que quelque chose de faux vient enfin d'être mis à nu.",
     reversedMeaning:
-      "La douleur commence à s'apaiser, un pardon devient envisageable, ou une cicatrisation lente mais réelle se met en place.",
-    love: "Une rupture douloureuse ou une trahison qui blesse profondément, mais qui dit une vérité nécessaire.",
-    travailArgent: "Une déception professionnelle franche, une critique dure mais peut-être fondée.",
-    conseil: "Laissez-vous ressentir cette peine sans la nier, c'est le premier pas vers la guérison.",
+      "La douleur commence à s'apaiser, un pardon devient envisageable, une cicatrisation lente mais réelle se met en place.",
+    love: "Une rupture douloureuse ou une trahison qui blesse profondément, mais qui dit une vérité que vous aviez besoin d'entendre.",
+    travailArgent: "Une déception professionnelle franche, une critique dure mais possiblement fondée.",
+    conseil: "Laissez-vous ressentir cette peine sans la nier. C'est le seul vrai premier pas vers la guérison.",
     symbolisme: "Trois épées transpercent un cœur rouge suspendu sous un ciel d'orage.",
   },
   {
@@ -66,12 +66,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["repos nécessaire", "récupération", "pause mentale"],
     keywordsReversed: ["repos refusé", "reprise trop rapide", "épuisement accumulé"],
     uprightMeaning:
-      "Après le tumulte, un temps de repos s'impose : le corps et l'esprit ont besoin de récupérer avant de repartir au combat. Cette carte invite à ralentir sans culpabiliser.",
+      "Après le tumulte, un temps de repos s'impose sans négociation possible : le corps et l'esprit ont besoin de récupérer avant de repartir au combat.",
     reversedMeaning:
-      "Le repos est écourté, on reprend trop vite avant d'avoir vraiment récupéré, au risque de rechuter.",
-    love: "Un besoin de calme dans la relation, une pause pour reprendre son souffle sans rupture.",
-    travailArgent: "Un vrai besoin de repos avant de reprendre un dossier ou un rythme de travail intense.",
-    conseil: "Accordez-vous ce temps de pause, il n'est pas une faiblesse mais une nécessité.",
+      "Le repos est écourté, vous reprenez trop vite avant d'avoir vraiment récupéré, au risque réel de rechuter.",
+    love: "Un besoin de calme dans la relation, une pause pour reprendre son souffle, sans que ce soit une rupture déguisée.",
+    travailArgent: "Un vrai besoin de repos avant de reprendre un dossier ou un rythme de travail trop intense.",
+    conseil: "Accordez-vous ce temps de pause. Ce n'est pas une faiblesse, c'est une nécessité que vous vous devez.",
     symbolisme: "Un personnage repose allongé, mains jointes en prière, trois épées suspendues au-dessus de lui.",
   },
   {
@@ -84,12 +84,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["victoire amère", "conflit destructeur", "ego blessé"],
     keywordsReversed: ["réconciliation possible", "leçon tirée du conflit", "fierté mal placée abandonnée"],
     uprightMeaning:
-      "Une victoire obtenue, mais à quel prix : relations abîmées, confiance perdue, un conflit gagné qui laisse un goût amer. Cette carte questionne le sens d'avoir eu raison à tout prix.",
+      "Une victoire est obtenue, mais à quel prix : relations abîmées, confiance perdue, un conflit gagné qui laisse un goût amer. Avoir eu raison ne suffit pas toujours à justifier ce que ça a coûté.",
     reversedMeaning:
-      "Une réconciliation devient possible, une leçon est tirée du conflit passé, l'orgueil laisse place à l'apaisement.",
-    love: "Une dispute où l'un des deux gagne mais où la relation en sort abîmée.",
-    travailArgent: "Un conflit professionnel remporté sans gloire, aux conséquences relationnelles durables.",
-    conseil: "Demandez-vous si cette bataille méritait vraiment d'être gagnée à ce prix.",
+      "Une réconciliation devient possible, une leçon est tirée du conflit passé, l'orgueil laisse enfin place à l'apaisement.",
+    love: "Une dispute où l'un des deux gagne, mais où la relation en sort clairement abîmée.",
+    travailArgent: "Un conflit professionnel remporté sans gloire, aux conséquences relationnelles qui dureront plus longtemps que la victoire.",
+    conseil: "Demandez-vous honnêtement si cette bataille méritait vraiment d'être gagnée à ce prix.",
     symbolisme: "Un personnage ramasse les épées de ses adversaires vaincus, qui s'éloignent tête basse.",
   },
   {
@@ -102,12 +102,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["transition", "éloignement apaisant", "passage vers plus calme"],
     keywordsReversed: ["difficulté à tourner la page", "transition bloquée", "retour en arrière"],
     uprightMeaning:
-      "On s'éloigne d'une situation difficile vers des eaux plus calmes, souvent avec un peu de tristesse mais un vrai soulagement. C'est une carte de transition, de passage nécessaire vers l'apaisement.",
+      "Vous vous éloignez d'une situation difficile vers des eaux plus calmes, souvent avec un peu de tristesse mais un vrai soulagement. Cette transition est nécessaire, même si elle n'a rien de spectaculaire.",
     reversedMeaning:
-      "La transition peine à se faire, on reste bloqué entre deux rives, incapable de tourner vraiment la page.",
-    love: "S'éloigner progressivement d'une période difficile pour retrouver un équilibre plus serein.",
+      "La transition peine à se faire, vous restez bloqué entre deux rives, incapable de tourner vraiment la page.",
+    love: "Vous éloigner progressivement d'une période difficile pour retrouver un équilibre plus serein.",
     travailArgent: "Un déménagement, une reconversion ou une transition professionnelle apaisante après une période tendue.",
-    conseil: "Avancez vers des eaux plus calmes, même si la traversée demande un peu de temps.",
+    conseil: "Avancez vers des eaux plus calmes, même si la traversée demande plus de temps que vous ne le voudriez.",
     symbolisme: "Une barque glisse doucement vers une rive plus sereine, six épées plantées à son bord.",
   },
   {
@@ -120,12 +120,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["stratégie discrète", "évitement", "besoin d'agir seul"],
     keywordsReversed: ["vérité qui rattrape", "stratégie découverte", "besoin d'honnêteté"],
     uprightMeaning:
-      "On agit en solitaire, parfois en contournant les règles ou en évitant une confrontation directe. Cette carte peut indiquer une stratégie discrète, légitime ou plus discutable selon le contexte.",
+      "Vous agissez en solitaire, parfois en contournant les règles ou en évitant une confrontation directe. Cette stratégie discrète peut être parfaitement légitime, ou nettement plus discutable selon ce que vous évitez vraiment de dire.",
     reversedMeaning:
       "Une ruse ou un évitement finit par être découvert, ou le besoin d'être enfin honnête devient trop pressant pour continuer à contourner.",
-    love: "Un non-dit qui pèse sur la relation, ou une envie de gérer une situation seul sans en parler.",
-    travailArgent: "Une stratégie discrète en cours, ou une malhonnêteté à surveiller dans les échanges professionnels.",
-    conseil: "Vérifiez que la discrétion que vous employez reste honnête envers vous-même et les autres.",
+    love: "Un non-dit qui pèse sur la relation, ou une envie de gérer une situation seul, sans en parler.",
+    travailArgent: "Une stratégie discrète en cours, ou une malhonnêteté à surveiller de près dans les échanges professionnels.",
+    conseil: "Vérifiez que la discrétion que vous employez reste honnête, envers vous-même autant qu'envers les autres.",
     symbolisme: "Un personnage s'éloigne furtivement d'un campement, cinq épées serrées dans ses bras, deux laissées derrière.",
   },
   {
@@ -138,12 +138,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["sentiment de blocage", "pensées limitantes", "impuissance perçue"],
     keywordsReversed: ["libération mentale", "prise de recul", "sortie du piège intérieur"],
     uprightMeaning:
-      "On se sent piégé, mais souvent par ses propres pensées plus que par la réalité extérieure. Cette carte pointe des croyances limitantes qui empêchent de voir les issues pourtant disponibles.",
+      "Vous vous sentez piégé, mais le plus souvent par vos propres pensées, bien plus que par la réalité extérieure. Cette carte pointe des croyances limitantes qui vous empêchent de voir des issues pourtant disponibles.",
     reversedMeaning:
-      "Le voile se lève, une prise de recul permet enfin de voir que la situation était moins bloquée qu'elle n'y paraissait.",
-    love: "Un sentiment d'impasse dans la relation, souvent amplifié par des peurs plus que par les faits.",
-    travailArgent: "Une impression de blocage professionnel qui gagnerait à être questionnée plutôt que subie.",
-    conseil: "Regardez d'un peu plus près : les liens qui vous entravent sont souvent plus lâches que vous ne le croyez.",
+      "Le voile se lève, une prise de recul vous permet enfin de voir que la situation était moins bloquée qu'elle n'y paraissait.",
+    love: "Un sentiment d'impasse dans la relation, souvent amplifié par des peurs bien plus que par les faits réels.",
+    travailArgent: "Une impression de blocage professionnel qui gagnerait à être questionnée plutôt que simplement subie.",
+    conseil: "Regardez d'un peu plus près : les liens qui vous entravent sont presque toujours plus lâches que vous ne le croyez.",
     symbolisme: "Une femme les yeux bandés se tient entourée de huit épées plantées en cercle autour d'elle, sans lien réel.",
   },
   {
@@ -156,12 +156,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["anxiété", "ruminations nocturnes", "peur amplifiée"],
     keywordsReversed: ["anxiété qui reflue", "peurs relativisées", "aide extérieure acceptée"],
     uprightMeaning:
-      "Les pensées tournent en boucle, souvent la nuit, amplifiant des peurs qui paraissent plus grandes qu'elles ne le sont réellement. C'est une carte d'anxiété, qui invite à ne pas rester seul avec ses ruminations.",
+      "Les pensées tournent en boucle, souvent la nuit, amplifiant des peurs bien plus grandes qu'elles ne le sont réellement. Cette carte d'anxiété vous dit une chose simple : ne restez pas seul avec ces ruminations.",
     reversedMeaning:
-      "L'angoisse commence à refluer, les peurs se relativisent à la lumière du jour, ou une aide extérieure permet de souffler.",
-    love: "Des inquiétudes nocturnes autour de la relation, souvent plus grandes que la réalité de la situation.",
-    travailArgent: "Un stress qui empêche de dormir, à ne pas garder pour soi trop longtemps.",
-    conseil: "Parlez de ce qui vous ronge : la lumière du jour et une oreille attentive réduisent souvent la peur de moitié.",
+      "L'angoisse commence à refluer, les peurs se relativisent à la lumière du jour, une aide extérieure permet enfin de souffler.",
+    love: "Des inquiétudes nocturnes autour de la relation, presque toujours plus grandes que la réalité de la situation.",
+    travailArgent: "Un stress qui vous empêche de dormir, à ne surtout pas garder pour vous trop longtemps.",
+    conseil: "Parlez de ce qui vous ronge. La lumière du jour et une oreille attentive réduisent souvent la peur de moitié.",
     symbolisme: "Assis sur son lit dans le noir, le visage dans les mains, un personnage est veillé par neuf épées suspendues.",
   },
   {
@@ -174,12 +174,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["point de rupture", "fin brutale", "toucher le fond"],
     keywordsReversed: ["fin proche mais pas totale", "reprise progressive", "pire déjà derrière soi"],
     uprightMeaning:
-      "On touche le fond, sans détour : une situation atteint son point de rupture le plus extrême. Paradoxalement, cette carte marque aussi la fin d'un cycle difficile, puisqu'après le fond, il ne reste qu'à remonter.",
+      "Vous touchez le fond, sans détour possible : une situation atteint son point de rupture le plus extrême. Paradoxalement, cette carte marque aussi la fin d'un cycle difficile : après le fond, il ne reste qu'à remonter.",
     reversedMeaning:
-      "Le pire semble passé, même si la reprise reste lente et progressive ; la situation la plus dure est déjà derrière soi.",
+      "Le pire semble passé, même si la reprise reste lente et progressive ; la situation la plus dure est déjà derrière vous.",
     love: "La fin définitive d'une relation devenue destructrice, douloureuse mais libératrice à terme.",
-    travailArgent: "Une situation professionnelle qui s'effondre complètement avant de pouvoir repartir sur de nouvelles bases.",
-    conseil: "Acceptez que ce cycle est terminé : ce qui suit ne peut être qu'une remontée.",
+    travailArgent: "Une situation professionnelle qui s'effondre complètement avant de pouvoir repartir sur des bases enfin saines.",
+    conseil: "Acceptez que ce cycle est terminé. Ce qui suit ne peut être qu'une remontée.",
     symbolisme: "Un personnage gît face contre terre, dix épées plantées dans le dos, sous un ciel qui commence à s'éclaircir à l'horizon.",
   },
   {
@@ -192,12 +192,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["curiosité intellectuelle", "vigilance", "message direct"],
     keywordsReversed: ["commérage", "précipitation verbale", "information incomplète"],
     uprightMeaning:
-      "Vif d'esprit, observateur et direct, le Valet d'Épées annonce souvent une nouvelle franche ou une information à examiner avec attention avant de trancher. Une énergie curieuse et légèrement méfiante.",
+      "Vif d'esprit, observateur et direct, le Valet d'Épées annonce une nouvelle franche ou une information à examiner attentivement avant de trancher. Une énergie curieuse, et légèrement méfiante, à raison.",
     reversedMeaning:
-      "Les mots dépassent la pensée, une rumeur circule sans être vérifiée, ou une information reçue reste incomplète.",
-    love: "Une conversation directe, parfois un peu abrupte, mais sincère sur l'état de la relation.",
-    travailArgent: "Une information importante à vérifier avant d'agir ; restez vigilant face aux détails.",
-    conseil: "Écoutez et observez avant de juger : toutes les informations ne sont pas encore sur la table.",
+      "Les mots dépassent la pensée, une rumeur circule sans être vérifiée, une information reçue reste dangereusement incomplète.",
+    love: "Une conversation directe, parfois un peu abrupte, mais sincère sur l'état réel de la relation.",
+    travailArgent: "Une information importante à vérifier avant d'agir : restez vigilant sur les détails qui comptent.",
+    conseil: "Écoutez et observez avant de juger. Toutes les informations ne sont pas encore sur la table.",
     symbolisme: "Un jeune personnage scrute l'horizon, épée levée, prêt à réagir au moindre signal.",
   },
   {
@@ -210,11 +210,11 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["action rapide", "franc-parler", "impatience déterminée"],
     keywordsReversed: ["précipitation dangereuse", "conflit verbal", "action sans réflexion"],
     uprightMeaning:
-      "Le Cavalier d'Épées fonce droit au but, sans détour, porté par une détermination et un franc-parler qui ne laissent pas de place à l'ambiguïté. Rapide, parfois brusque, mais efficace.",
+      "Le Cavalier d'Épées fonce droit au but, sans détour, porté par une détermination et un franc-parler qui ne laissent aucune place à l'ambiguïté. Rapide, parfois brusque, mais redoutablement efficace.",
     reversedMeaning:
-      "La rapidité devient précipitation, les mots blessent plus qu'ils ne clarifient, une action lancée sans réflexion suffisante.",
-    love: "Une déclaration franche et rapide, parfois trop abrupte pour être bien reçue.",
-    travailArgent: "Une décision prise vite, avec efficacité, mais qui gagnerait à être un peu plus réfléchie.",
+      "La rapidité devient précipitation, les mots blessent plus qu'ils ne clarifient, une action est lancée sans réflexion suffisante.",
+    love: "Une déclaration franche et rapide, parfois trop abrupte pour être bien reçue sur le moment.",
+    travailArgent: "Une décision prise vite, avec efficacité, mais qui gagnerait clairement à être un peu plus réfléchie.",
     conseil: "Allez droit au but, mais laissez une seconde à la réflexion avant de parler ou d'agir.",
     symbolisme: "Un cavalier charge au galop, épée brandie, sous un ciel balayé par le vent.",
   },
@@ -228,12 +228,12 @@ export const epees: CardMeaning[] = [
     keywordsUpright: ["lucidité", "indépendance d'esprit", "franchise"],
     keywordsReversed: ["froideur excessive", "sévérité", "blessure derrière la lucidité"],
     uprightMeaning:
-      "La Reine d'Épées voit clair, dit les choses avec précision et ne se laisse pas influencer par les sentiments des autres. Son indépendance d'esprit et sa franchise sont une force, même si elles peuvent déranger.",
+      "La Reine d'Épées voit clair, dit les choses avec précision et ne se laisse influencer par les sentiments de personne, pas même les siens. Son indépendance d'esprit et sa franchise sont une vraie force, même quand elles dérangent.",
     reversedMeaning:
       "La franchise devient froideur ou dureté, ou une blessure passée s'est transformée en carapace plus rigide que nécessaire.",
     love: "Une personne indépendante, qui a besoin d'honnêteté avant tout et n'a pas peur de dire ce qui ne va pas.",
-    travailArgent: "Un jugement clair et sans complaisance, utile pour trancher une situation confuse.",
-    conseil: "Dites la vérité, mais laissez un peu de place à la douceur dans la façon de la formuler.",
+    travailArgent: "Un jugement clair et sans complaisance, précieux pour trancher une situation confuse.",
+    conseil: "Dites la vérité, mais laissez un peu de place à la douceur dans la façon dont vous la formulez.",
     symbolisme: "Assise, épée dressée vers le ciel, elle regarde au loin, le visage impassible mais attentif.",
   },
   {
@@ -248,10 +248,10 @@ export const epees: CardMeaning[] = [
     uprightMeaning:
       "Le Roi d'Épées dirige par la clarté de son jugement : rationnel, structuré, impartial, il tranche les situations complexes avec une logique qui inspire confiance, même quand elle est exigeante.",
     reversedMeaning:
-      "La logique devient rigide, l'autorité intellectuelle écrase plus qu'elle ne guide, ou un jugement se fait sans tenir compte des émotions en jeu.",
-    love: "Un partenaire rationnel, parfois perçu comme distant, mais réellement fiable dans les décisions importantes.",
-    travailArgent: "Une autorité respectée pour la clarté de son jugement, utile pour arbitrer un dossier complexe.",
-    conseil: "Tranchez avec votre tête, mais n'oubliez pas d'écouter aussi ce que ressentent les autres.",
+      "La logique devient rigide, l'autorité intellectuelle écrase plus qu'elle ne guide, un jugement se rend sans tenir compte des émotions réellement en jeu.",
+    love: "Un partenaire rationnel, parfois perçu comme distant, mais réellement fiable dans les décisions qui comptent.",
+    travailArgent: "Une autorité respectée pour la clarté de son jugement, précieuse pour arbitrer un dossier complexe.",
+    conseil: "Tranchez avec votre tête, mais n'oubliez jamais d'écouter aussi ce que ressentent les autres.",
     symbolisme: "Assis sur un trône orné de papillons, symboles de transformation, il tient son épée bien droite devant lui.",
   },
 ];
