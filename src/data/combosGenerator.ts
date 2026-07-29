@@ -28,60 +28,76 @@ function firstSentence(text: string): string {
   return idx === -1 ? text : text.slice(0, idx + 1);
 }
 
+function low(text: string): string {
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+// Élision : "de" devient "d'" devant une voyelle (ou un h muet) — indispensable ici
+// puisque les mots-clés et noms de cartes interpolés commencent parfois par une voyelle
+// ("élan", "indépendance", "As de Bâtons"...).
+function de(word: string): string {
+  return /^[aeiouyéèêàâîïôûhAEIOUYÉÈÊÀÂÎÏÔÛH]/.test(word) ? `d'${word}` : `de ${word}`;
+}
+
 const CONTEXTE_TEMPLATES: ((a: CardMeaning, b: CardMeaning, kwA: string, kwB: string) => string)[] = [
-  (a, b, kwA, kwB) =>
-    `${a.name} imprime ici son énergie de ${kwA}, que ${b.name} vient éclairer sous l'angle de ${kwB} : les deux thèmes se répondent dans ce tirage.`,
-  (a, b, kwA, kwB) =>
-    `Cette association marie ${kwA}, porté par ${a.name}, et ${kwB}, apporté par ${b.name} — un mélange à lire comme un seul mouvement plutôt que deux messages séparés.`,
-  (a, b, kwA, kwB) =>
-    `${a.name} pose le décor avec ${kwA} ; ${b.name} vient ensuite le nuancer de ${kwB}, ce qui colore sensiblement la lecture d'ensemble.`,
-  (a, b, kwA, kwB) =>
-    `Entre ${a.name} et ${b.name}, c'est la rencontre de ${kwA} et de ${kwB} qui donne le ton de cette association.`,
-  (a, b, kwA, kwB) =>
-    `${a.name} et ${b.name} se répondent ici autour d'un même fil : ${kwA} d'un côté, ${kwB} de l'autre, deux facettes d'une même situation.`,
+  (a, b, kwA, kwB) => `${a.name} imprime son énergie ${de(kwA)} ; ${b.name} vient la nuancer avec ${kwB}.`,
+  (a, b, kwA, kwB) => `${a.name} et ${b.name} se répondent ici : ${kwA} d'un côté, ${kwB} de l'autre, deux facettes d'une même situation.`,
+  (a, b, kwA, kwB) => `${a.name} pose ${kwA} en toile de fond, et ${b.name} y ajoute ${kwB} — les deux tirent dans le même sens.`,
+  (a, b, kwA, kwB) => `Entre ${a.name} et ${b.name}, le tirage tient sur une tension féconde entre ${kwA} et ${kwB}.`,
+  (a, b, kwA, kwB) => `${a.name} donne le ton avec ${kwA} ; ${b.name} le colore ensuite ${de(kwB)}.`,
+  (a, b, kwA, kwB) => `Lisez ${a.name} et ${b.name} ensemble : ${kwA} rencontre ${kwB}, et c'est cette rencontre qui compte, pas chaque carte isolément.`,
+  (a, b, kwA, kwB) => `${kwA} et ${kwB} : voilà les deux forces que ${a.name} et ${b.name} font jouer l'une avec l'autre dans ce tirage.`,
+  (a, b, kwA, kwB) => `${a.name} amène ${kwA} sur la table ; ${b.name} y répond par ${kwB}, sans jamais l'effacer.`,
 ];
 
 const GENERAL_CONNECTORS: ((a: CardMeaning, b: CardMeaning) => string)[] = [
+  (a, b) => `${firstSentence(a.uprightMeaning)} Avec ${b.name} à ses côtés, cette énergie se précise : ${low(firstSentence(b.uprightMeaning))}`,
   (a, b) =>
-    `${firstSentence(a.uprightMeaning)} Associée à ${b.name}, cette énergie se trouve précisée : ${firstSentence(b.uprightMeaning).toLowerCase()}`,
-  (a, b) =>
-    `D'un côté, ${a.name} évoque ${a.keywordsUpright.slice(0, 2).join(" et ")}. De l'autre, ${b.name} apporte ${b.keywordsUpright.slice(0, 2).join(" et ")} — la combinaison des deux mérite d'être lue comme un tout cohérent plutôt que comme deux messages séparés.`,
-  (a, b) =>
-    `${a.name} donne le ton principal de cette lecture, tandis que ${b.name} vient en préciser le sens concret : ${firstSentence(b.uprightMeaning).toLowerCase()}`,
+    `D'un côté, ${a.name} porte ${a.keywordsUpright.slice(0, 2).join(" et ")}. De l'autre, ${b.name} apporte ${b.keywordsUpright.slice(0, 2).join(" et ")} : lisez les deux comme un seul mouvement.`,
+  (a, b) => `${a.name} donne le fil principal de cette lecture ; ${b.name} vient en préciser le terrain concret : ${low(firstSentence(b.uprightMeaning))}`,
+  (a, b) => `${firstSentence(b.uprightMeaning)} ${a.name} vient appuyer ce mouvement d'une note ${de(a.keywordsUpright[0])}.`,
+  (a, b) => `Prises ensemble, ${a.name} et ${b.name} racontent une histoire à deux temps : d'abord ${a.keywordsUpright[0]}, puis ${b.keywordsUpright[0]} qui vient y répondre.`,
 ];
 
 function buildAmour(a: CardMeaning, b: CardMeaning, seed: number): string {
   const templates = [
-    `Côté cœur, ${a.name} évoque ${a.love.charAt(0).toLowerCase()}${a.love.slice(1)} ${b.name} ajoute une nuance : ${b.love.charAt(0).toLowerCase()}${b.love.slice(1)}`,
-    `En amour, l'énergie de ${a.name} (${a.keywordsUpright[0]}) se combine à celle de ${b.name} : ${b.love.charAt(0).toLowerCase()}${b.love.slice(1)}`,
-    `Cette association parle d'une relation où ${a.keywordsUpright[0]} et ${b.keywordsUpright[0]} cohabitent, avec cette tonalité propre à ${b.name} : ${b.love.charAt(0).toLowerCase()}${b.love.slice(1)}`,
+    `Côté cœur, ${a.name} évoque ${low(a.love)} ${b.name} y ajoute une nuance : ${low(b.love)}`,
+    `En amour, l'énergie ${de(a.name)} (${a.keywordsUpright[0]}) se combine à celle ${de(b.name)} : ${low(b.love)}`,
+    `Cette association parle d'une relation où ${a.keywordsUpright[0]} et ${b.keywordsUpright[0]} cohabitent, avec cette tonalité propre à ${b.name} : ${low(b.love)}`,
+    `${b.love} ${a.name} y mêle en plus une couleur ${de(a.keywordsUpright[0])}, pas à ignorer.`,
+    `Sur le plan sentimental, ${a.name} pose ${a.keywordsUpright[0]} comme fond, et ${b.name} précise ce que ça donne concrètement : ${low(b.love)}`,
   ];
   return pick(templates, seed);
 }
 
 function buildTravail(a: CardMeaning, b: CardMeaning, seed: number): string {
   const templates = [
-    `Sur le plan professionnel, ${a.name} apporte ${a.keywordsUpright[0]}, tandis que ${b.name} précise : ${b.travailArgent.charAt(0).toLowerCase()}${b.travailArgent.slice(1)}`,
-    `Dans le travail, cette combinaison mêle ${a.keywordsUpright[0]} et ${b.keywordsUpright[0]} — ${b.travailArgent.charAt(0).toLowerCase()}${b.travailArgent.slice(1)}`,
+    `Sur le plan professionnel, ${a.name} apporte ${a.keywordsUpright[0]}, tandis que ${b.name} précise : ${low(b.travailArgent)}`,
+    `Dans le travail, cette combinaison mêle ${a.keywordsUpright[0]} et ${b.keywordsUpright[0]} — ${low(b.travailArgent)}`,
     `${a.travailArgent} Avec ${b.name} en complément, l'accent se déplace vers ${b.keywordsUpright[0]}.`,
+    `${b.travailArgent} ${a.name} teinte ce mouvement d'une exigence ${de(a.keywordsUpright[0])}.`,
+    `Côté travail et argent, ${a.name} et ${b.name} se partagent la scène : ${a.keywordsUpright[0]} d'abord, puis ${low(b.travailArgent)}`,
   ];
   return pick(templates, seed);
 }
 
 function buildGuidance(a: CardMeaning, b: CardMeaning, seed: number): string {
   const templates = [
-    `${a.conseil} ${b.name} ajoute : ${b.conseil.charAt(0).toLowerCase()}${b.conseil.slice(1)}`,
-    `Associez le conseil de ${a.name} (${a.conseil.charAt(0).toLowerCase()}${a.conseil.slice(1)}) à celui de ${b.name}, plus orienté vers ${b.keywordsUpright[0]}.`,
+    `${a.conseil} ${b.name} ajoute : ${low(b.conseil)}`,
+    `Associez le conseil ${de(a.name)} (${low(a.conseil)}) à celui ${de(b.name)}, plus orienté vers ${b.keywordsUpright[0]}.`,
     `${b.conseil} Cela rejoint ce que suggère aussi ${a.name} de son côté.`,
+    `Ce tirage demande les deux à la fois : ${low(a.conseil)} et, dans le même mouvement, ${low(b.conseil)}`,
+    `${a.name} vous pousse vers ${a.keywordsUpright[0]} ; ${b.name} rappelle qu'il faut aussi tenir compte ${de(b.keywordsUpright[0])} avant d'agir.`,
   ];
   return pick(templates, seed);
 }
 
 function buildSentiments(a: CardMeaning, b: CardMeaning, seed: number): string {
   const templates = [
-    `Ce que ressent cette personne se rapproche de ce que décrit ${b.name} : ${b.love.charAt(0).toLowerCase()}${b.love.slice(1)} teinté d'une dimension de ${a.keywordsUpright[0]}, propre à ${a.name}.`,
-    `Cette personne vit quelque chose de proche de ${b.keywordsUpright[0]} (${b.name}), coloré par une énergie de ${a.keywordsUpright[0]} qui vient de vous ou de la situation entre vous.`,
-    `À travers ${b.name}, cette personne exprime surtout ${b.keywordsUpright[0]} ; l'influence de ${a.name} y ajoute une note de ${a.keywordsUpright[0]}.`,
+    `Ce que ressent cette personne se rapproche de ce que décrit ${b.name} : ${low(b.love)} teinté d'une dimension ${de(a.keywordsUpright[0])}, propre à ${a.name}.`,
+    `Cette personne vit quelque chose de proche ${de(b.keywordsUpright[0])} (${b.name}), coloré par une énergie ${de(a.keywordsUpright[0])} qui vient de vous ou de la situation entre vous.`,
+    `À travers ${b.name}, cette personne exprime surtout ${b.keywordsUpright[0]} ; l'influence ${de(a.name)} y ajoute une note ${de(a.keywordsUpright[0])}.`,
+    `Chez l'autre, ${a.keywordsUpright[0]} domine dans un premier temps, avant de laisser place à quelque chose de plus proche ${de(b.keywordsUpright[0])}.`,
   ];
   return pick(templates, seed);
 }
@@ -89,8 +105,9 @@ function buildSentiments(a: CardMeaning, b: CardMeaning, seed: number): string {
 function buildOrdreInverse(a: CardMeaning, b: CardMeaning, seed: number): string {
   const templates = [
     `Si ${b.name} sort en premier et ${a.name} ensuite, c'est ${b.keywordsUpright[0]} qui devient l'énergie dominante, nuancée cette fois par ${a.keywordsUpright[0]} plutôt que l'inverse.`,
-    `En sens inverse (${b.name} puis ${a.name}), l'accent se déplace vers ${b.name} : ${firstSentence(b.uprightMeaning).toLowerCase()}`,
+    `En sens inverse (${b.name} puis ${a.name}), l'accent se déplace vers ${b.name} : ${low(firstSentence(b.uprightMeaning))}`,
     `Si l'ordre de tirage s'inverse, ${b.name} prend le rôle de carte dominante, et ${a.name} devient celle qui vient en préciser le sens.`,
+    `Inversez l'ordre et le rapport de force change : ${b.keywordsUpright[0]} mène la lecture, ${a.keywordsUpright[0]} ne fait plus que l'accompagner.`,
   ];
   return pick(templates, seed);
 }
