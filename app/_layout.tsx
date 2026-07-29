@@ -52,6 +52,8 @@ export default function RootLayout() {
           <Stack.Screen name="auth/login" options={{ title: "Connexion", presentation: "modal" }} />
           <Stack.Screen name="auth/signup" options={{ title: "Créer un compte", presentation: "modal" }} />
           <Stack.Screen name="paywall" options={{ title: "Passer en Premium", presentation: "modal" }} />
+          <Stack.Screen name="legal/terms" options={{ title: "Conditions d'utilisation" }} />
+          <Stack.Screen name="legal/privacy" options={{ title: "Confidentialité" }} />
         </Stack>
       </SubscriptionProvider>
     </AuthProvider>

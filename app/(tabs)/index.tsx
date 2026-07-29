@@ -25,6 +25,7 @@ export default function AccueilScreen() {
   const { isPremium } = useSubscription();
   const [draw, setDraw] = useState<DrawnCard[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [justDrawn, setJustDrawn] = useState(false);
 
   const loadOrCreateDraw = useCallback(async () => {
     setIsLoading(true);
@@ -41,6 +42,7 @@ export default function AccueilScreen() {
             return card ? { card, reversed: parsed.reversed[i] } : null;
           })
           .filter((d): d is DrawnCard => d !== null);
+        setJustDrawn(false);
         setDraw(reconstructed);
         setIsLoading(false);
         return;
@@ -48,6 +50,7 @@ export default function AccueilScreen() {
     }
 
     const fresh = drawRandomCards(2);
+    setJustDrawn(true);
     setDraw(fresh);
     await AsyncStorage.setItem(
       STORAGE_KEY,
@@ -93,6 +96,7 @@ export default function AccueilScreen() {
                 drawn={d}
                 positionLabel={i === 0 ? "Ce qui vous influence" : "Ce à quoi tendre"}
                 onPress={() => router.push(`/cartes/${d.card.id}`)}
+                revealDelay={justDrawn ? 300 + i * 300 : undefined}
               />
             ))}
           </View>

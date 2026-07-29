@@ -1,44 +1,107 @@
-import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Easing, Platform, Pressable, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import * as Haptics from "expo-haptics";
 import { AppText as Text } from "@/components/AppText";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { iconForCard } from "@/lib/suitIcon";
+import { playCardReveal } from "@/lib/sound";
 
 interface Props {
   drawn: DrawnCard;
   positionLabel?: string;
   onPress?: () => void;
+  /** Delay in ms before the card auto-flips from its back to its face. Omit to render already revealed. */
+  revealDelay?: number;
 }
 
 function Corner({ style }: { style: object }) {
   return <View style={[styles.corner, style]} />;
 }
 
-export function DrawnCardView({ drawn, positionLabel, onPress }: Props) {
-  const { card, reversed } = drawn;
+function CardBack() {
   return (
-    <Pressable style={styles.container} onPress={onPress} disabled={!onPress}>
+    <LinearGradient
+      colors={[colors.mystic, colors.card, colors.accentDeep]}
+      locations={[0, 0.5, 1]}
+      start={{ x: 0.15, y: 1 }}
+      end={{ x: 0.85, y: 0 }}
+      style={styles.cardFace}
+    >
+      <View style={styles.innerBorder} />
+      <View style={styles.backEmblemRing}>
+        <View style={styles.backEmblemDiamond} />
+      </View>
+      <Corner style={styles.cornerTL} />
+      <Corner style={styles.cornerTR} />
+      <Corner style={styles.cornerBL} />
+      <Corner style={styles.cornerBR} />
+    </LinearGradient>
+  );
+}
+
+export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Props) {
+  const { card, reversed } = drawn;
+  const startsHidden = revealDelay !== undefined;
+  const flip = useRef(new Animated.Value(startsHidden ? 0 : 1)).current;
+  const [revealed, setRevealed] = useState(!startsHidden);
+
+  useEffect(() => {
+    if (!startsHidden) return;
+    const timer = setTimeout(() => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+      playCardReveal();
+      Animated.timing(flip, {
+        toValue: 1,
+        duration: 550,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: Platform.OS !== "web",
+      }).start();
+      setRevealed(true);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, revealDelay);
+    return () => clearTimeout(timer);
+  }, [startsHidden, revealDelay]);
+
+  const backRotateY = flip.interpolate({ inputRange: [0, 1], outputRange: ["0deg", "180deg"] });
+  const frontRotateY = flip.interpolate({ inputRange: [0, 1], outputRange: ["180deg", "360deg"] });
+  const backOpacity = flip.interpolate({ inputRange: [0, 0.5, 0.501, 1], outputRange: [1, 1, 0, 0] });
+  const frontOpacity = flip.interpolate({ inputRange: [0, 0.5, 0.501, 1], outputRange: [0, 0, 1, 1] });
+
+  return (
+    <Pressable style={styles.container} onPress={onPress} disabled={!onPress || !revealed}>
       {positionLabel && <Text style={styles.position}>{positionLabel}</Text>}
-      <View style={[styles.cardOuter, reversed && styles.reversed]}>
-        <LinearGradient
-          colors={[colors.mystic, colors.card, colors.accentDeep]}
-          locations={[0, 0.55, 1]}
-          start={{ x: 0.15, y: 0 }}
-          end={{ x: 0.85, y: 1 }}
-          style={styles.cardFace}
+      <View style={styles.cardOuter}>
+        <Animated.View
+          style={[styles.flipFace, { opacity: backOpacity, transform: [{ rotateY: backRotateY }] }]}
         >
-          <View style={styles.innerBorder} />
-          <Ionicons name={iconForCard(card)} size={26} color={colors.gold} />
-          <Text style={styles.name}>{card.name}</Text>
-          {reversed && <Text style={styles.reversedLabel}>Inversée</Text>}
-          <Corner style={styles.cornerTL} />
-          <Corner style={styles.cornerTR} />
-          <Corner style={styles.cornerBL} />
-          <Corner style={styles.cornerBR} />
-        </LinearGradient>
+          <CardBack />
+        </Animated.View>
+        <Animated.View
+          style={[
+            styles.flipFace,
+            { opacity: frontOpacity, transform: [{ rotateY: frontRotateY }, { rotate: reversed ? "180deg" : "0deg" }] },
+          ]}
+        >
+          <LinearGradient
+            colors={[colors.mystic, colors.card, colors.accentDeep]}
+            locations={[0, 0.55, 1]}
+            start={{ x: 0.15, y: 0 }}
+            end={{ x: 0.85, y: 1 }}
+            style={styles.cardFace}
+          >
+            <View style={styles.innerBorder} />
+            <Ionicons name={iconForCard(card)} size={26} color={colors.gold} />
+            <Text style={styles.name}>{card.name}</Text>
+            {reversed && <Text style={styles.reversedLabel}>Inversée</Text>}
+            <Corner style={styles.cornerTL} />
+            <Corner style={styles.cornerTR} />
+            <Corner style={styles.cornerBL} />
+            <Corner style={styles.cornerBR} />
+          </LinearGradient>
+        </Animated.View>
       </View>
       <Text style={styles.keyword}>
         {(reversed ? card.keywordsReversed : card.keywordsUpright).slice(0, 2).join(" · ")}
@@ -59,6 +122,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 10,
     elevation: 6,
+  },
+  flipFace: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backfaceVisibility: "hidden",
   },
   cardFace: {
     flex: 1,
@@ -82,7 +153,21 @@ const styles = StyleSheet.create({
     borderColor: colors.goldSoft,
     opacity: 0.45,
   },
-  reversed: { transform: [{ rotate: "180deg" }] },
+  backEmblemRing: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    borderWidth: 1.5,
+    borderColor: colors.gold,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backEmblemDiamond: {
+    width: 16,
+    height: 16,
+    backgroundColor: colors.gold,
+    transform: [{ rotate: "45deg" }],
+  },
   name: { color: colors.text, fontFamily: fonts.heading, textAlign: "center", fontSize: 15 },
   reversedLabel: { color: colors.gold, fontSize: 10 },
   keyword: { color: colors.textMuted, fontSize: 11, marginTop: spacing.xs, textAlign: "center" },

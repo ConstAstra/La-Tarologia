@@ -104,6 +104,23 @@ export default function PaywallScreen() {
         </Text>
       )}
 
+      <Text style={styles.disclosure}>
+        Abonnement à renouvellement automatique. Le paiement est prélevé sur votre compte Apple ID ou Google Play à
+        la confirmation d'achat, et l'abonnement se renouvelle automatiquement pour une durée identique sauf
+        désactivation au moins 24h avant la fin de la période en cours, dans les réglages de votre compte. Résiliable
+        à tout moment.
+      </Text>
+
+      <View style={styles.legalLinks}>
+        <Pressable onPress={() => router.push("/legal/terms")}>
+          <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+        </Pressable>
+        <Text style={styles.legalSeparator}>·</Text>
+        <Pressable onPress={() => router.push("/legal/privacy")}>
+          <Text style={styles.legalLink}>Confidentialité</Text>
+        </Pressable>
+      </View>
+
       <Pressable style={styles.secondaryButton} onPress={restore}>
         <Text style={styles.secondaryButtonText}>Restaurer mes achats</Text>
       </Pressable>
@@ -141,4 +158,8 @@ const styles = StyleSheet.create({
   },
   secondaryButtonText: { color: colors.text, fontFamily: fonts.bodySemiBold },
   link: { color: colors.primary, textAlign: "center" },
+  disclosure: { color: colors.textMuted, fontSize: 11, lineHeight: 15, textAlign: "center", marginTop: spacing.sm },
+  legalLinks: { flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 6, marginTop: spacing.sm },
+  legalLink: { color: colors.primary, fontSize: 12 },
+  legalSeparator: { color: colors.textMuted, fontSize: 12 },
 });

@@ -4,7 +4,7 @@ import { CardMeaning } from "@/types/tarot";
 const SUIT_ICON: Record<string, keyof typeof Ionicons.glyphMap> = {
   majeur: "sparkles",
   batons: "flame",
-  coupes: "water",
+  coupes: "wine",
   epees: "flash",
   deniers: "diamond",
 };

@@ -51,6 +51,15 @@ export default function ProfilScreen() {
           <Pressable style={styles.secondaryButton} onPress={() => router.push("/auth/signup")}>
             <Text style={styles.secondaryButtonText}>Créer un compte</Text>
           </Pressable>
+          <View style={styles.legalLinks}>
+            <Pressable onPress={() => router.push("/legal/terms")}>
+              <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+            </Pressable>
+            <Text style={styles.legalSeparator}>·</Text>
+            <Pressable onPress={() => router.push("/legal/privacy")}>
+              <Text style={styles.legalLink}>Confidentialité</Text>
+            </Pressable>
+          </View>
         </View>
       </Screen>
     );
@@ -95,6 +104,16 @@ export default function ProfilScreen() {
       <Pressable style={styles.signOutButton} onPress={signOut}>
         <Text style={styles.signOutText}>Se déconnecter</Text>
       </Pressable>
+
+      <View style={styles.legalLinks}>
+        <Pressable onPress={() => router.push("/legal/terms")}>
+          <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+        </Pressable>
+        <Text style={styles.legalSeparator}>·</Text>
+        <Pressable onPress={() => router.push("/legal/privacy")}>
+          <Text style={styles.legalLink}>Confidentialité</Text>
+        </Pressable>
+      </View>
     </Screen>
   );
 }
@@ -133,4 +152,7 @@ const styles = StyleSheet.create({
   historyCards: { color: colors.text, fontSize: 13, marginTop: 2 },
   signOutButton: { marginTop: spacing.lg, alignItems: "center" },
   signOutText: { color: colors.danger, fontFamily: fonts.bodySemiBold },
+  legalLinks: { flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 6, marginTop: spacing.lg },
+  legalLink: { color: colors.primary, fontSize: 12 },
+  legalSeparator: { color: colors.textMuted, fontSize: 12 },
 });

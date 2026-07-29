@@ -8,6 +8,7 @@ import { getSpreadById } from "@/data/spreads";
 import { drawRandomCards } from "@/data/cards";
 import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
+import { playCardShuffle } from "@/lib/sound";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { supabase } from "@/lib/supabase";
@@ -20,6 +21,7 @@ export default function SpreadDetail() {
   const { isPremium } = useSubscription();
   const spread = getSpreadById(id);
   const [draw, setDraw] = useState<DrawnCard[] | null>(null);
+  const [drawNonce, setDrawNonce] = useState(0);
 
   useEffect(() => {
     if (spread) navigation.setOptions({ title: spread.name });
@@ -44,8 +46,10 @@ export default function SpreadDetail() {
   }
 
   const handleDraw = async () => {
+    playCardShuffle();
     const fresh = drawRandomCards(spread.cardCount);
     setDraw(fresh);
+    setDrawNonce((n) => n + 1);
     if (user) {
       await supabase.from("draws").insert({
         user_id: user.id,
@@ -68,11 +72,12 @@ export default function SpreadDetail() {
       {draw ? (
         <View style={styles.results}>
           {draw.map((d, i) => (
-            <View key={d.card.id} style={styles.resultRow}>
+            <View key={`${drawNonce}-${i}-${d.card.id}`} style={styles.resultRow}>
               <DrawnCardView
                 drawn={d}
                 positionLabel={spread.positions[i]?.label}
                 onPress={() => router.push(`/cartes/${d.card.id}`)}
+                revealDelay={300 + i * 300}
               />
               <View style={styles.resultText}>
                 <Text style={styles.positionMeaning}>{spread.positions[i]?.meaning}</Text>
