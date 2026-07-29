@@ -85,6 +85,20 @@ export const articles: Article[] = [
     ],
   },
   {
+    id: "art-etat-esprit-libre-arbitre",
+    category: "pratique",
+    title: "Comment tirer les cartes : état d'esprit, rituel et libre arbitre",
+    isFree: true,
+    summary: "Bien lire le tarot commence avant même de sortir les cartes. Voici comment vous préparer à un tirage, et pourquoi aucune carte ne décide jamais à votre place.",
+    body: [
+      "Le tarot ne fonctionne pas comme un moteur de recherche : poser la même question dix fois dans l'espoir d'obtenir une réponse plus agréable ne change rien, sinon brouiller la lecture. Avant de tirer, accordez-vous quelques minutes de calme réel, pas un geste automatique entre deux notifications. Posez-vous, respirez, laissez retomber ce qui vous agite, puis formulez clairement ce que vous cherchez à comprendre. Une lecture faite dans la précipitation ou l'anxiété donnera une interprétation faite dans la précipitation et l'anxiété : le tirage reflète autant votre état du moment que la situation qu'il éclaire.",
+      "Le deuxième ingrédient, plus exigeant que le premier, est la sincérité : accepter d'entendre une réponse qui ne vous arrange pas. Il est tentant de retourner une carte, de la mal lire ou de forcer son sens vers ce qu'on espérait déjà entendre. Une bonne lecture demande l'inverse, une curiosité honnête, prête à accueillir un inconfort si c'est ce que la carte apporte. Ce n'est pas un exercice de confirmation, c'est un exercice d'écoute.",
+      "Beaucoup de tarologues prennent l'habitude de « purifier » leur jeu : frapper doucement le paquet trois fois avant de mélanger, le laisser reposer une nuit à l'air libre, ou simplement reprendre les cartes dans l'ordre de temps en temps pour repartir sur une base neutre. Rien de tout cela n'a besoin d'être pris au pied de la lettre pour être utile : ce geste marque une frontière claire entre le temps ordinaire et le temps du tirage, un peu comme on se lave les mains avant de cuisiner. Il recentre l'attention, et signale au corps comme à l'esprit qu'un moment différent commence. Adoptez le rituel qui vous parle, ou n'en adoptez aucun : ce qui compte, c'est l'intention que vous y mettez, pas la formule exacte.",
+      "Reste le point le plus important, celui qu'aucune application de tarot sérieuse ne devrait jamais laisser dans l'ombre : les cartes n'écrivent rien à votre place. Elles éclairent une dynamique, nomment une énergie, révèlent un angle mort ; elles ne décident jamais de ce que vous ferez ensuite. Une carte difficile n'est pas une sentence, et une carte favorable n'est pas une garantie : dans les deux cas, ce qui se joue vraiment se joue dans vos choix, pas dans le tirage. Le tarot fonctionne comme un miroir plus que comme un oracle figé : il vous montre quelque chose que vous saviez peut-être déjà, sans avoir encore le mot pour le dire. Ce que vous faites de cette clarté vous appartient entièrement, et à personne d'autre.",
+      "Gardez cette liberté en tête à chaque tirage. Le meilleur usage du tarot n'est pas de vous dire quoi faire, mais de vous donner de quoi décider par vous-même, plus lucidement qu'avant d'avoir posé les cartes sur la table.",
+    ],
+  },
+  {
     id: "art-symbolisme-nombres",
     category: "pratique",
     title: "Ce que racontent les nombres dans le tarot",
