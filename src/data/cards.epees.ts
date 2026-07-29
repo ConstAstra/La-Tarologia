@@ -117,15 +117,15 @@ export const epees: CardMeaning[] = [
     arcana: "mineur",
     suit: "epees",
     isFree: false,
-    keywordsUpright: ["stratégie discrète", "évitement", "besoin d'agir seul"],
-    keywordsReversed: ["vérité qui rattrape", "stratégie découverte", "besoin d'honnêteté"],
+    keywordsUpright: ["stratégie discrète", "duplicité", "trahison possible"],
+    keywordsReversed: ["vérité qui rattrape", "trahison révélée", "besoin d'honnêteté"],
     uprightMeaning:
-      "Vous agissez en solitaire, parfois en contournant les règles ou en évitant une confrontation directe. Cette stratégie discrète peut être parfaitement légitime, ou nettement plus discutable selon ce que vous évitez vraiment de dire.",
+      "Vous agissez en solitaire, parfois en contournant les règles ou en évitant une confrontation directe : une stratégie discrète, légitime dans certains contextes. Mais cette carte a aussi un tranchant plus dur, qu'il ne faut pas édulcorer : elle décrit tout autant quelqu'un qui agit dans votre dos, une trahison en préparation, une confiance exploitée pendant que vous aviez le regard ailleurs. Le Sept d'Épées ne dit pas qui triche, il vous force à regarder qui, dans cette situation, ne joue pas franc jeu.",
     reversedMeaning:
-      "Une ruse ou un évitement finit par être découvert, ou le besoin d'être enfin honnête devient trop pressant pour continuer à contourner.",
-    love: "Un non-dit qui pèse sur la relation, ou une envie de gérer une situation seul, sans en parler.",
-    travailArgent: "Une stratégie discrète en cours, ou une malhonnêteté à surveiller de près dans les échanges professionnels.",
-    conseil: "Vérifiez que la discrétion que vous employez reste honnête, envers vous-même autant qu'envers les autres.",
+      "Une ruse ou un évitement finit par être découvert, une trahison longtemps soupçonnée se confirme, ou le besoin d'être enfin honnête devient trop pressant pour continuer à contourner.",
+    love: "Un non-dit qui pèse sur la relation, une infidélité qui couve ou vient d'éclater, ou une envie de gérer seul une situation plutôt que d'en parler.",
+    travailArgent: "Une stratégie discrète en cours, ou un collègue prêt à s'approprier un mérite qui n'est pas le sien : restez attentif à qui agit hors de votre vue.",
+    conseil: "Vérifiez que votre propre discrétion reste honnête, et gardez un œil sur qui, autour de vous, ne joue pas franc jeu.",
     symbolisme: "Un personnage s'éloigne furtivement d'un campement, cinq épées serrées dans ses bras, deux laissées derrière.",
   },
   {
@@ -190,11 +190,11 @@ export const epees: CardMeaning[] = [
     suit: "epees",
     isFree: false,
     keywordsUpright: ["curiosité intellectuelle", "vigilance", "message direct"],
-    keywordsReversed: ["commérage", "précipitation verbale", "information incomplète"],
+    keywordsReversed: ["commérage malveillant", "précipitation verbale", "mots utilisés pour blesser"],
     uprightMeaning:
       "Vif d'esprit, observateur et direct, le Valet d'Épées annonce une nouvelle franche ou une information à examiner attentivement avant de trancher. Une énergie curieuse, et légèrement méfiante, à raison.",
     reversedMeaning:
-      "Les mots dépassent la pensée, une rumeur circule sans être vérifiée, une information reçue reste dangereusement incomplète.",
+      "Les mots dépassent la pensée, une rumeur circule sans être vérifiée, ou pire, un commérage est colporté sciemment pour nuire. L'information reçue reste dangereusement incomplète, et parfois délibérément déformée.",
     love: "Une conversation directe, parfois un peu abrupte, mais sincère sur l'état réel de la relation.",
     travailArgent: "Une information importante à vérifier avant d'agir : restez vigilant sur les détails qui comptent.",
     conseil: "Écoutez et observez avant de juger. Toutes les informations ne sont pas encore sur la table.",
