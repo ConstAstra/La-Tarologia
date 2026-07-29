@@ -29,6 +29,21 @@ export const articles: Article[] = [
     ],
   },
   {
+    id: "art-chemin-du-fou",
+    category: "histoire",
+    title: "Le chemin du Fou : l'histoire que racontent les arcanes majeurs",
+    isFree: true,
+    summary: "Du Fou qui saute dans le vide au Monde qui referme la boucle, les 22 arcanes majeurs ne sont pas une simple liste : c'est un parcours. Voici l'histoire qu'ils racontent, étape par étape.",
+    body: [
+      "Prises une par une, les vingt-deux arcanes majeurs ressemblent à une galerie de portraits sans lien apparent. Remises dans l'ordre, elles racontent tout autre chose : une seule histoire, celle d'un personnage qui traverse une existence entière en vingt-deux étapes. La tradition appelle ce parcours le chemin du Fou, parce que c'est lui, le numéro zéro, sans même un chiffre plein pour l'ancrer, qui ouvre la marche.",
+      "Tout commence par un saut. Le Fou n'a ni bagage solide ni plan établi, seulement l'élan. Ce n'est pas un hasard s'il ouvre le chemin : il pose la question que tout le reste va mettre vingt-et-un arcanes à explorer — que se passe-t-il quand on avance sans savoir ce qui attend au bout ? Chaque carte suivante est une réponse partielle, une leçon que le Fou croise sur sa route et qui le transforme.",
+      "Les sept premières étapes, du Bateleur au Chariot, construisent quelqu'un dans le monde. Le Bateleur apprend à agir, la Prêtresse à écouter ce qui ne se voit pas, l'Impératrice à créer et donner sans compter, l'Empereur à structurer, le Pape à recevoir un savoir transmis, l'Amoureux à choisir vraiment, le Chariot à faire tenir ensemble deux forces contraires pour avancer. À la fin de ce premier tiers, le Fou a un nom, une place, une volonté. Ce n'est encore que la moitié du travail.",
+      "Les sept étapes suivantes, de la Justice à Tempérance, ne construisent plus rien : elles font le tri. La Justice impose de regarder les conséquences en face. L'Hermite retire le personnage du bruit du monde qu'il vient de conquérir pour l'obliger à s'entendre penser. La Roue de Fortune lui rappelle que rien de ce qu'il a bâti n'est totalement sous son contrôle. La Force lui apprend à dompter sans violence. Le Pendu le suspend, littéralement, pour qu'il voie autrement. L'Arcane sans Nom achève ce qui doit finir. Tempérance recompose les morceaux avec patience. C'est la traversée la plus exigeante du chemin : rien ne s'y gagne, tout s'y clarifie.",
+      "Les sept dernières étapes, du Diable au Monde, sont celles de la libération. Le Diable oblige à regarder en face ce qui enchaîne encore. La Maison-Dieu fait tomber ce qui reposait sur de fausses fondations, sans prévenir. L'Étoile soigne, sincèrement, ce que la chute vient de mettre à nu. La Lune traverse une dernière zone d'ombre, faite d'intuitions et de peurs mêlées. Le Soleil dissipe enfin tout brouillard. Le Jugement force une décision que le personnage ne peut plus repousser. Le Monde referme la boucle : un objectif atteint, un cycle pleinement vécu.",
+      "Et après le Monde ? Rien ne s'arrête vraiment. Le vingt-deuxième arcane ne mène pas à un point final, il ramène au Fou, prêt à sauter de nouveau, ailleurs, autrement, avec ce que le chemin précédent lui a appris. C'est cette circularité qui donne tout son sens à la position d'un arcane majeur dans un tirage : elle ne dit pas seulement ce qui se joue, elle situe où vous en êtes sur ce chemin, sans jamais le figer à votre place. Le chemin trace une carte, pas un itinéraire imposé : ce que vous en faites reste, à chaque étape, entièrement entre vos mains.",
+    ],
+  },
+  {
     id: "art-marseille-vs-riderwaite",
     category: "styles",
     title: "Tarot de Marseille et Rider-Waite : deux visages du même chemin",
