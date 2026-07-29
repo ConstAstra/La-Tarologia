@@ -5,46 +5,46 @@ import { AppTextInput as TextInput } from "@/components/AppTextInput";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
-import { cards, getCardById } from "@/data/cards";
+import { useCards } from "@/data/i18n";
 import { getComboForCards } from "@/data/combos";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
+import { CardMeaning } from "@/types/tarot";
 
 type CategoryKey = "general" | "amour" | "travail" | "guidance" | "sentimentsDeLAutre";
-
-const CATEGORIES: { key: CategoryKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { key: "general", label: "Général", icon: "compass-outline" },
-  { key: "amour", label: "Amour", icon: "heart-outline" },
-  { key: "travail", label: "Pro", icon: "briefcase-outline" },
-  { key: "guidance", label: "Guidance", icon: "flash-outline" },
-  { key: "sentimentsDeLAutre", label: "Ses sentiments pour vous", icon: "eye-outline" },
-];
 
 function CardPicker({
   label,
   selectedId,
   onSelect,
+  cards,
+  choosePlaceholder,
+  searchPlaceholder,
 }: {
   label: string;
   selectedId: string | null;
   onSelect: (id: string) => void;
+  cards: CardMeaning[];
+  choosePlaceholder: string;
+  searchPlaceholder: string;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const selected = selectedId ? getCardById(selectedId) : undefined;
+  const selected = selectedId ? cards.find((c) => c.id === selectedId) : undefined;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (q.length === 0) return cards.slice(0, 25);
     return cards.filter((c) => c.name.toLowerCase().includes(q));
-  }, [query]);
+  }, [query, cards]);
 
   return (
     <View style={styles.pickerBlock}>
       <Text style={styles.pickerLabel}>{label}</Text>
       <Pressable style={styles.pickerButton} onPress={() => setOpen((v) => !v)}>
         <Text style={selected ? styles.pickerButtonText : styles.pickerButtonPlaceholder}>
-          {selected ? selected.name : "Choisir une carte…"}
+          {selected ? selected.name : choosePlaceholder}
         </Text>
         <Ionicons name={open ? "chevron-up" : "chevron-down"} size={16} color={colors.textMuted} />
       </Pressable>
@@ -52,7 +52,7 @@ function CardPicker({
       {open && (
         <View style={styles.pickerDropdown}>
           <TextInput
-            placeholder="Rechercher…"
+            placeholder={searchPlaceholder}
             placeholderTextColor={colors.textMuted}
             value={query}
             onChangeText={setQuery}
@@ -81,23 +81,44 @@ function CardPicker({
 
 export default function ExplorerScreen() {
   const { isPremium } = useSubscription();
+  const t = useT();
+  const cards = useCards();
   const [cardAId, setCardAId] = useState<string | null>(null);
   const [cardBId, setCardBId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("general");
+
+  const CATEGORIES: { key: CategoryKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+    { key: "general", label: t.explorer.categoryGeneral, icon: "compass-outline" },
+    { key: "amour", label: t.explorer.categoryLove, icon: "heart-outline" },
+    { key: "travail", label: t.explorer.categoryWork, icon: "briefcase-outline" },
+    { key: "guidance", label: t.explorer.categoryGuidance, icon: "flash-outline" },
+    { key: "sentimentsDeLAutre", label: t.explorer.categoryTheirFeelings, icon: "eye-outline" },
+  ];
 
   const match = cardAId && cardBId ? getComboForCards(cardAId, cardBId) : undefined;
   const locked = match ? !match.combo.isFree && !isPremium : false;
 
   return (
     <Screen>
-      <Text style={styles.intro}>
-        Choisissez deux cartes parmi les 78 pour découvrir leur association, qu'elle fasse partie de
-        nos analyses rédigées ou qu'elle soit composée à partir des significations de chaque carte.
-      </Text>
+      <Text style={styles.intro}>{t.explorer.intro}</Text>
 
       <View style={styles.pickers}>
-        <CardPicker label="Première carte (énergie dominante)" selectedId={cardAId} onSelect={setCardAId} />
-        <CardPicker label="Seconde carte (vient préciser)" selectedId={cardBId} onSelect={setCardBId} />
+        <CardPicker
+          label={t.explorer.firstCard}
+          selectedId={cardAId}
+          onSelect={setCardAId}
+          cards={cards}
+          choosePlaceholder={t.explorer.choose}
+          searchPlaceholder={t.explorer.search}
+        />
+        <CardPicker
+          label={t.explorer.secondCard}
+          selectedId={cardBId}
+          onSelect={setCardBId}
+          cards={cards}
+          choosePlaceholder={t.explorer.choose}
+          searchPlaceholder={t.explorer.search}
+        />
       </View>
 
       {match && (
@@ -107,7 +128,7 @@ export default function ExplorerScreen() {
             {locked && (
               <Pressable style={styles.paywallButton} onPress={() => router.push("/paywall")}>
                 <Ionicons name="lock-closed" size={14} color={colors.background} />
-                <Text style={styles.paywallButtonText}>Débloquer</Text>
+                <Text style={styles.paywallButtonText}>{t.explorer.unlock}</Text>
               </Pressable>
             )}
           </View>
@@ -146,13 +167,7 @@ export default function ExplorerScreen() {
                 <Text style={styles.orderNoteText}>{match.combo.siOrdreInverse}</Text>
               </View>
 
-              {match.generated && (
-                <Text style={styles.generatedNote}>
-                  Cette combinaison précise ne fait pas partie de nos analyses entièrement rédigées à la main :
-                  elle est composée automatiquement à partir des significations propres à chacune des deux
-                  cartes, pour qu'aucune combinaison ne reste sans réponse.
-                </Text>
-              )}
+              {match.generated && <Text style={styles.generatedNote}>{t.explorer.generatedNote}</Text>}
             </>
           )}
         </View>

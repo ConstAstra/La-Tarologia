@@ -1,8 +1,10 @@
 import React from "react";
 import { Stack } from "expo-router";
 import { colors, fonts } from "@/theme/colors";
+import { useT } from "@/i18n/useT";
 
 export default function CartesLayout() {
+  const t = useT();
   return (
     <Stack
       screenOptions={{
@@ -12,9 +14,9 @@ export default function CartesLayout() {
         contentStyle: { backgroundColor: colors.background },
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Les 78 cartes" }} />
-      <Stack.Screen name="associations" options={{ title: "Associations de cartes" }} />
-      <Stack.Screen name="explorer" options={{ title: "Choisir deux cartes" }} />
+      <Stack.Screen name="index" options={{ title: t.nav.cartesIndex }} />
+      <Stack.Screen name="associations" options={{ title: t.nav.cartesAssociations }} />
+      <Stack.Screen name="explorer" options={{ title: t.nav.cartesExplorer }} />
       <Stack.Screen name="[id]" options={{ title: "" }} />
     </Stack>
   );

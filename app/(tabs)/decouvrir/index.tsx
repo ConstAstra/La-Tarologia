@@ -5,26 +5,26 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { PremiumBadge } from "@/components/PremiumBadge";
-import { articles } from "@/data/articles";
+import { useArticles } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
-
-const CATEGORY_LABELS: Record<string, string> = {
-  histoire: "Histoire du tarot",
-  styles: "Styles de tarot",
-  pratique: "Pratique et lecture",
-};
+import { useT } from "@/i18n/useT";
 
 export default function DecouvrirIndex() {
   const { isPremium } = useSubscription();
+  const t = useT();
+  const articles = useArticles();
   const categories = Array.from(new Set(articles.map((a) => a.category)));
+
+  const CATEGORY_LABELS: Record<string, string> = {
+    histoire: t.decouvrir.categoryHistoire,
+    styles: t.decouvrir.categoryStyles,
+    pratique: t.decouvrir.categoryPratique,
+  };
 
   return (
     <Screen>
-      <Text style={styles.intro}>
-        De l'origine du tarot à la différence entre le tarot de Marseille et le Rider-Waite-Smith, en passant par
-        quelques clés de lecture : de quoi mieux comprendre ce que vous pratiquez.
-      </Text>
+      <Text style={styles.intro}>{t.decouvrir.intro}</Text>
 
       {categories.map((category) => (
         <View key={category} style={styles.section}>

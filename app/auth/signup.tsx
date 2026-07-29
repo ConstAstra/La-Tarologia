@@ -6,9 +6,11 @@ import { router } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
+import { useT } from "@/i18n/useT";
 
 export default function SignupScreen() {
   const { signUpWithEmail } = useAuth();
+  const t = useT();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +21,7 @@ export default function SignupScreen() {
   const handleSubmit = async () => {
     setError(null);
     if (password.length < 6) {
-      setError("Le mot de passe doit contenir au moins 6 caractères.");
+      setError(t.auth.passwordTooShort);
       return;
     }
     setIsSubmitting(true);
@@ -35,13 +37,10 @@ export default function SignupScreen() {
   if (confirmationSent) {
     return (
       <Screen>
-        <Text style={styles.title}>Vérifiez vos e-mails</Text>
-        <Text style={styles.subtitle}>
-          Un e-mail de confirmation vient de vous être envoyé. Cliquez sur le lien qu'il contient pour activer votre
-          compte, puis revenez vous connecter.
-        </Text>
+        <Text style={styles.title}>{t.auth.confirmTitle}</Text>
+        <Text style={styles.subtitle}>{t.auth.confirmText}</Text>
         <Pressable style={styles.button} onPress={() => router.replace("/auth/login")}>
-          <Text style={styles.buttonText}>Retour à la connexion</Text>
+          <Text style={styles.buttonText}>{t.auth.backToLogin}</Text>
         </Pressable>
       </Screen>
     );
@@ -49,19 +48,19 @@ export default function SignupScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Créer un compte</Text>
-      <Text style={styles.subtitle}>Retrouvez vos tirages sur tous vos appareils et débloquez le contenu Premium.</Text>
+      <Text style={styles.title}>{t.auth.signupTitle}</Text>
+      <Text style={styles.subtitle}>{t.auth.signupSubtitle}</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Prénom ou pseudo"
+        placeholder={t.auth.namePlaceholder}
         placeholderTextColor={colors.textMuted}
         value={displayName}
         onChangeText={setDisplayName}
       />
       <TextInput
         style={styles.input}
-        placeholder="Adresse e-mail"
+        placeholder={t.auth.emailPlaceholder}
         placeholderTextColor={colors.textMuted}
         autoCapitalize="none"
         keyboardType="email-address"
@@ -70,7 +69,7 @@ export default function SignupScreen() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Mot de passe (6 caractères minimum)"
+        placeholder={t.auth.passwordMinPlaceholder}
         placeholderTextColor={colors.textMuted}
         secureTextEntry
         value={password}
@@ -80,11 +79,11 @@ export default function SignupScreen() {
       {error && <Text style={styles.error}>{error}</Text>}
 
       <Pressable style={styles.button} onPress={handleSubmit} disabled={isSubmitting}>
-        <Text style={styles.buttonText}>{isSubmitting ? "Création…" : "Créer mon compte"}</Text>
+        <Text style={styles.buttonText}>{isSubmitting ? t.auth.signupLoading : t.auth.signupButton}</Text>
       </Pressable>
 
       <Pressable onPress={() => router.push("/auth/login")}>
-        <Text style={styles.link}>Déjà un compte ? Connectez-vous</Text>
+        <Text style={styles.link}>{t.auth.hasAccountLink}</Text>
       </Pressable>
     </Screen>
   );

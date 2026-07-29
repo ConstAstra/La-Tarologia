@@ -3,16 +3,19 @@ import { StyleSheet } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
-import { getArticleById } from "@/data/articles";
+import { useArticles } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 
 export default function ArticleDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
   const navigationState = useRootNavigationState();
   const { isPremium } = useSubscription();
-  const article = getArticleById(id);
+  const t = useT();
+  const articles = useArticles();
+  const article = articles.find((a) => a.id === id);
 
   useEffect(() => {
     if (article) navigation.setOptions({ title: article.title });
@@ -27,7 +30,7 @@ export default function ArticleDetail() {
   if (!article) {
     return (
       <Screen>
-        <Text style={styles.paragraph}>Cet article est introuvable.</Text>
+        <Text style={styles.paragraph}>{t.decouvrir.notFound}</Text>
       </Screen>
     );
   }

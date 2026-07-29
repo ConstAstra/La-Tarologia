@@ -6,25 +6,28 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { CardListItem } from "@/components/CardListItem";
-import { cards } from "@/data/cards";
+import { useCards } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 
 type FilterKey = "tous" | "majeur" | "batons" | "coupes" | "epees" | "deniers";
 
-const FILTERS: { key: FilterKey; label: string }[] = [
-  { key: "tous", label: "Toutes" },
-  { key: "majeur", label: "Arcanes majeurs" },
-  { key: "batons", label: "Bâtons" },
-  { key: "coupes", label: "Coupes" },
-  { key: "epees", label: "Épées" },
-  { key: "deniers", label: "Deniers" },
-];
-
 export default function CartesIndex() {
   const { isPremium } = useSubscription();
+  const t = useT();
+  const cards = useCards();
   const [filter, setFilter] = useState<FilterKey>("tous");
   const [query, setQuery] = useState("");
+
+  const FILTERS: { key: FilterKey; label: string }[] = [
+    { key: "tous", label: t.cartes.filterAll },
+    { key: "majeur", label: t.cartes.filterMajeurs },
+    { key: "batons", label: t.cartes.filterBatons },
+    { key: "coupes", label: t.cartes.filterCoupes },
+    { key: "epees", label: t.cartes.filterEpees },
+    { key: "deniers", label: t.cartes.filterDeniers },
+  ];
 
   const filtered = useMemo(() => {
     return cards.filter((c) => {
@@ -33,7 +36,7 @@ export default function CartesIndex() {
       const matchesQuery = query.trim().length === 0 || c.name.toLowerCase().includes(query.trim().toLowerCase());
       return matchesFilter && matchesQuery;
     });
-  }, [filter, query]);
+  }, [cards, filter, query]);
 
   return (
     <Screen scroll={false} style={styles.flex}>
@@ -41,7 +44,7 @@ export default function CartesIndex() {
         <View style={styles.searchBar}>
           <Ionicons name="search" size={16} color={colors.textMuted} />
           <TextInput
-            placeholder="Rechercher une carte…"
+            placeholder={t.cartes.searchPlaceholder}
             placeholderTextColor={colors.textMuted}
             value={query}
             onChangeText={setQuery}
@@ -54,8 +57,8 @@ export default function CartesIndex() {
             <Ionicons name="git-network-outline" size={20} color={colors.background} />
           </View>
           <View style={styles.combosBannerText}>
-            <Text style={styles.combosBannerTitle}>Associations de cartes</Text>
-            <Text style={styles.combosBannerSubtitle}>Ce que deux cartes racontent ensemble</Text>
+            <Text style={styles.combosBannerTitle}>{t.cartes.associationsTitle}</Text>
+            <Text style={styles.combosBannerSubtitle}>{t.cartes.associationsSubtitle}</Text>
           </View>
           <Ionicons name="chevron-forward" size={18} color={colors.gold} />
         </Pressable>

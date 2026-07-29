@@ -7,18 +7,12 @@ import { Screen } from "@/components/Screen";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
-
-const BENEFITS = [
-  "Les 56 arcanes mineurs interprétés en détail",
-  "Tous les articles sur l'histoire et les styles de tarot",
-  "Toutes les méthodes de tirage : croix, croix celtique, amour, tirage de l'année…",
-  "Les associations de cartes et leurs significations croisées",
-  "Historique illimité de vos tirages, synchronisé sur tous vos appareils",
-];
+import { useT } from "@/i18n/useT";
 
 export default function PaywallScreen() {
   const { user } = useAuth();
   const { offering, purchase, restore, isPremium } = useSubscription();
+  const t = useT();
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,9 +21,9 @@ export default function PaywallScreen() {
       <Screen>
         <View style={styles.centered}>
           <Ionicons name="checkmark-circle" size={56} color={colors.success} />
-          <Text style={styles.title}>Vous êtes déjà Premium</Text>
+          <Text style={styles.title}>{t.paywall.alreadyPremiumTitle}</Text>
           <Pressable style={styles.secondaryButton} onPress={() => router.back()}>
-            <Text style={styles.secondaryButtonText}>Fermer</Text>
+            <Text style={styles.secondaryButtonText}>{t.paywall.close}</Text>
           </Pressable>
         </View>
       </Screen>
@@ -41,15 +35,13 @@ export default function PaywallScreen() {
       <Screen>
         <View style={styles.centered}>
           <Ionicons name="lock-closed" size={48} color={colors.primary} />
-          <Text style={styles.title}>Connectez-vous d'abord</Text>
-          <Text style={styles.subtitle}>
-            Un compte est nécessaire pour activer votre abonnement et le retrouver sur tous vos appareils.
-          </Text>
+          <Text style={styles.title}>{t.paywall.loginFirstTitle}</Text>
+          <Text style={styles.subtitle}>{t.paywall.loginFirstText}</Text>
           <Pressable style={styles.primaryButton} onPress={() => router.push("/auth/login")}>
-            <Text style={styles.primaryButtonText}>Se connecter</Text>
+            <Text style={styles.primaryButtonText}>{t.profil.login}</Text>
           </Pressable>
           <Pressable style={styles.secondaryButton} onPress={() => router.push("/auth/signup")}>
-            <Text style={styles.secondaryButtonText}>Créer un compte</Text>
+            <Text style={styles.secondaryButtonText}>{t.profil.signup}</Text>
           </Pressable>
         </View>
       </Screen>
@@ -70,11 +62,11 @@ export default function PaywallScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Passez en Premium</Text>
-      <Text style={styles.subtitle}>Débloquez l'intégralité de La Tarologia.</Text>
+      <Text style={styles.title}>{t.paywall.title}</Text>
+      <Text style={styles.subtitle}>{t.paywall.subtitle}</Text>
 
       <View style={styles.benefits}>
-        {BENEFITS.map((benefit) => (
+        {t.paywall.benefits.map((benefit) => (
           <View key={benefit} style={styles.benefitRow}>
             <Ionicons name="sparkles" size={16} color={colors.gold} />
             <Text style={styles.benefitText}>{benefit}</Text>
@@ -98,34 +90,26 @@ export default function PaywallScreen() {
           </Pressable>
         ))
       ) : (
-        <Text style={styles.subtitle}>
-          Les offres d'abonnement ne sont pas encore configurées. Renseignez vos clés RevenueCat dans app.json pour
-          afficher les offres réelles de l'App Store.
-        </Text>
+        <Text style={styles.subtitle}>{t.paywall.notConfigured}</Text>
       )}
 
-      <Text style={styles.disclosure}>
-        Abonnement à renouvellement automatique. Le paiement est prélevé sur votre compte Apple ID ou Google Play à
-        la confirmation d'achat, et l'abonnement se renouvelle automatiquement pour une durée identique sauf
-        désactivation au moins 24h avant la fin de la période en cours, dans les réglages de votre compte. Résiliable
-        à tout moment.
-      </Text>
+      <Text style={styles.disclosure}>{t.paywall.disclosure}</Text>
 
       <View style={styles.legalLinks}>
         <Pressable onPress={() => router.push("/legal/terms")}>
-          <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+          <Text style={styles.legalLink}>{t.profil.terms}</Text>
         </Pressable>
         <Text style={styles.legalSeparator}>·</Text>
         <Pressable onPress={() => router.push("/legal/privacy")}>
-          <Text style={styles.legalLink}>Confidentialité</Text>
+          <Text style={styles.legalLink}>{t.profil.privacy}</Text>
         </Pressable>
       </View>
 
       <Pressable style={styles.secondaryButton} onPress={restore}>
-        <Text style={styles.secondaryButtonText}>Restaurer mes achats</Text>
+        <Text style={styles.secondaryButtonText}>{t.paywall.restorePurchases}</Text>
       </Pressable>
       <Pressable onPress={() => router.back()}>
-        <Text style={styles.link}>Plus tard</Text>
+        <Text style={styles.link}>{t.paywall.later}</Text>
       </Pressable>
     </Screen>
   );

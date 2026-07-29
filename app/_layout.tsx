@@ -12,9 +12,35 @@ import {
 } from "@expo-google-fonts/crimson-pro";
 import { AuthProvider } from "@/context/AuthContext";
 import { SubscriptionProvider } from "@/context/SubscriptionContext";
+import { LocaleProvider } from "@/context/LocaleContext";
+import { useT } from "@/i18n/useT";
 import { colors, fonts } from "@/theme/colors";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
+
+function RootStack() {
+  const t = useT();
+  return (
+    <>
+      <StatusBar style="light" />
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.text,
+          headerTitleStyle: { color: colors.text, fontFamily: fonts.heading },
+          contentStyle: { backgroundColor: colors.background },
+        }}
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/login" options={{ title: t.nav.login, presentation: "modal" }} />
+        <Stack.Screen name="auth/signup" options={{ title: t.nav.signup, presentation: "modal" }} />
+        <Stack.Screen name="paywall" options={{ title: t.nav.paywall, presentation: "modal" }} />
+        <Stack.Screen name="legal/terms" options={{ title: t.nav.legalTerms }} />
+        <Stack.Screen name="legal/privacy" options={{ title: t.nav.legalPrivacy }} />
+      </Stack>
+    </>
+  );
+}
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -37,25 +63,12 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <SubscriptionProvider>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerStyle: { backgroundColor: colors.background },
-            headerTintColor: colors.text,
-            headerTitleStyle: { color: colors.text, fontFamily: fonts.heading },
-            contentStyle: { backgroundColor: colors.background },
-          }}
-        >
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="auth/login" options={{ title: "Connexion", presentation: "modal" }} />
-          <Stack.Screen name="auth/signup" options={{ title: "Créer un compte", presentation: "modal" }} />
-          <Stack.Screen name="paywall" options={{ title: "Passer en Premium", presentation: "modal" }} />
-          <Stack.Screen name="legal/terms" options={{ title: "Conditions d'utilisation" }} />
-          <Stack.Screen name="legal/privacy" options={{ title: "Confidentialité" }} />
-        </Stack>
-      </SubscriptionProvider>
-    </AuthProvider>
+    <LocaleProvider>
+      <AuthProvider>
+        <SubscriptionProvider>
+          <RootStack />
+        </SubscriptionProvider>
+      </AuthProvider>
+    </LocaleProvider>
   );
 }

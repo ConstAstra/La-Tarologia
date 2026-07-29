@@ -5,25 +5,36 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { PremiumBadge } from "@/components/PremiumBadge";
-import { spreads } from "@/data/spreads";
+import { useSpreads } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
-
-const DIFFICULTY_LABELS: Record<string, string> = {
-  debutant: "Débutant",
-  intermediaire: "Intermédiaire",
-  avance: "Avancé",
-};
+import { useT } from "@/i18n/useT";
 
 export default function TiragesIndex() {
   const { isPremium } = useSubscription();
+  const t = useT();
+  const spreads = useSpreads();
+
+  const DIFFICULTY_LABELS: Record<string, string> = {
+    debutant: t.tirages.difficultyDebutant,
+    intermediaire: t.tirages.difficultyIntermediaire,
+    avance: t.tirages.difficultyAvance,
+  };
 
   return (
     <Screen>
-      <Text style={styles.intro}>
-        Chaque situation appelle une méthode différente. Voici les tirages classiques, du plus simple au plus
-        complet, avec le rôle de chaque position expliqué.
-      </Text>
+      <Text style={styles.intro}>{t.tirages.intro}</Text>
+
+      <Pressable style={styles.guideBanner} onPress={() => router.push("/decouvrir/art-etat-esprit-libre-arbitre")}>
+        <View style={styles.guideBannerIcon}>
+          <Ionicons name="school-outline" size={20} color={colors.background} />
+        </View>
+        <View style={styles.guideBannerText}>
+          <Text style={styles.guideBannerTitle}>{t.tirages.guideTitle}</Text>
+          <Text style={styles.guideBannerSubtitle}>{t.tirages.guideSubtitle}</Text>
+        </View>
+        <Ionicons name="chevron-forward" size={18} color={colors.gold} />
+      </Pressable>
 
       {spreads.map((spread) => {
         const locked = !spread.isFree && !isPremium;
@@ -38,7 +49,7 @@ export default function TiragesIndex() {
               <Text style={styles.cardTitle}>{spread.name}</Text>
             </View>
             <Text style={styles.cardMeta}>
-              {spread.cardCount} carte{spread.cardCount > 1 ? "s" : ""} · {DIFFICULTY_LABELS[spread.difficulty]}
+              {t.tirages.cardCount(spread.cardCount)} · {DIFFICULTY_LABELS[spread.difficulty]}
             </Text>
             <Text style={styles.cardSummary}>{spread.shortDescription}</Text>
             {!spread.isFree && <PremiumBadge />}
@@ -50,7 +61,30 @@ export default function TiragesIndex() {
 }
 
 const styles = StyleSheet.create({
-  intro: { color: colors.textMuted, marginBottom: spacing.lg, lineHeight: 20 },
+  intro: { color: colors.textMuted, marginBottom: spacing.md, lineHeight: 20 },
+  guideBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    backgroundColor: colors.cardAlt,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.gold,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.sm,
+    marginBottom: spacing.lg,
+  },
+  guideBannerIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.gold,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  guideBannerText: { flex: 1 },
+  guideBannerTitle: { color: colors.gold, fontSize: 15, fontFamily: fonts.bodyBold },
+  guideBannerSubtitle: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
   card: {
     backgroundColor: colors.card,
     borderRadius: 14,

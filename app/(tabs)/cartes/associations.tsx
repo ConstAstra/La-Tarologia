@@ -7,36 +7,40 @@ import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { PremiumBadge } from "@/components/PremiumBadge";
 import { combos } from "@/data/combos";
-import { getCardById } from "@/data/cards";
-import { CardCombo } from "@/types/tarot";
+import { useCards } from "@/data/i18n";
+import { CardCombo, CardMeaning } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 
 type CategoryKey = "general" | "amour" | "travail" | "guidance" | "sentimentsDeLAutre";
-
-const CATEGORIES: { key: CategoryKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { key: "general", label: "Général", icon: "compass-outline" },
-  { key: "amour", label: "Amour", icon: "heart-outline" },
-  { key: "travail", label: "Pro", icon: "briefcase-outline" },
-  { key: "guidance", label: "Guidance", icon: "flash-outline" },
-  { key: "sentimentsDeLAutre", label: "Ses sentiments pour vous", icon: "eye-outline" },
-];
-
 type ScopeKey = "toutes" | "majeurs" | "mixtes" | "mineurs";
-
-const SCOPES: { key: ScopeKey; label: string }[] = [
-  { key: "toutes", label: `Toutes (${combos.length})` },
-  { key: "majeurs", label: "Majeurs entre eux" },
-  { key: "mixtes", label: "Majeurs + mineurs" },
-  { key: "mineurs", label: "Mineurs entre eux" },
-];
 
 export default function AssociationsScreen() {
   const { isPremium } = useSubscription();
+  const t = useT();
+  const cards = useCards();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("general");
   const [query, setQuery] = useState("");
   const [scope, setScope] = useState<ScopeKey>("toutes");
+
+  const getCardById = (id: string): CardMeaning | undefined => cards.find((c) => c.id === id);
+
+  const CATEGORIES: { key: CategoryKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+    { key: "general", label: t.explorer.categoryGeneral, icon: "compass-outline" },
+    { key: "amour", label: t.explorer.categoryLove, icon: "heart-outline" },
+    { key: "travail", label: t.explorer.categoryWork, icon: "briefcase-outline" },
+    { key: "guidance", label: t.explorer.categoryGuidance, icon: "flash-outline" },
+    { key: "sentimentsDeLAutre", label: t.explorer.categoryTheirFeelings, icon: "eye-outline" },
+  ];
+
+  const SCOPES: { key: ScopeKey; label: string }[] = [
+    { key: "toutes", label: t.associations.scopeAll(combos.length) },
+    { key: "majeurs", label: t.associations.scopeMajeurs },
+    { key: "mixtes", label: t.associations.scopeMixtes },
+    { key: "mineurs", label: t.associations.scopeMineurs },
+  ];
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -56,7 +60,8 @@ export default function AssociationsScreen() {
         cardB?.name.toLowerCase().includes(q);
       return matchesScope && matchesQuery;
     });
-  }, [query, scope]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, scope, cards]);
 
   const renderItem = ({ item: combo }: { item: CardCombo }) => {
     const locked = !combo.isFree && !isPremium;
@@ -126,33 +131,25 @@ export default function AssociationsScreen() {
   return (
     <Screen scroll={false} style={styles.flex}>
       <View style={styles.header}>
-        <Text style={styles.intro}>
-          Deux cartes qui se retrouvent dans un même tirage racontent plus, ensemble, que la somme de leurs
-          significations prises séparément. La première carte porte l'énergie dominante du tirage ; la seconde vient
-          la préciser ou la nuancer — si elles sortent dans l'ordre inverse, l'accent se déplace, comme expliqué à
-          la fin de chaque association.
-        </Text>
+        <Text style={styles.intro}>{t.associations.intro}</Text>
 
         {!isPremium && (
           <Pressable style={styles.paywallBanner} onPress={() => router.push("/paywall")}>
             <Ionicons name="lock-closed" size={16} color={colors.background} />
-            <Text style={styles.paywallBannerText}>Débloquez les {combos.length} associations avec Premium</Text>
+            <Text style={styles.paywallBannerText}>{t.associations.unlockBanner(combos.length)}</Text>
           </Pressable>
         )}
 
         <Pressable style={styles.explorerLink} onPress={() => router.push("/cartes/explorer")}>
           <Ionicons name="shuffle-outline" size={16} color={colors.gold} />
-          <Text style={styles.explorerLinkText}>
-            Ces {combos.length} associations rédigées ne couvrent qu'une partie du jeu : choisissez deux cartes au
-            hasard pour obtenir leur association, quelle qu'elle soit.
-          </Text>
+          <Text style={styles.explorerLinkText}>{t.associations.explorerLink(combos.length)}</Text>
           <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
         </Pressable>
 
         <View style={styles.searchBar}>
           <Ionicons name="search" size={16} color={colors.textMuted} />
           <TextInput
-            placeholder="Rechercher une carte ou une association…"
+            placeholder={t.associations.searchPlaceholder}
             placeholderTextColor={colors.textMuted}
             value={query}
             onChangeText={setQuery}
@@ -180,7 +177,7 @@ export default function AssociationsScreen() {
         contentContainerStyle={styles.list}
         initialNumToRender={12}
         windowSize={7}
-        ListEmptyComponent={<Text style={styles.emptyText}>Aucune association ne correspond à votre recherche.</Text>}
+        ListEmptyComponent={<Text style={styles.emptyText}>{t.associations.emptyText}</Text>}
       />
     </Screen>
   );

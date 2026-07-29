@@ -3,9 +3,10 @@ import { StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
-import { getCardById } from "@/data/cards";
+import { useCards } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -21,7 +22,9 @@ export default function CardDetail() {
   const navigation = useNavigation();
   const navigationState = useRootNavigationState();
   const { isPremium } = useSubscription();
-  const card = getCardById(id);
+  const t = useT();
+  const cards = useCards();
+  const card = cards.find((c) => c.id === id);
 
   useEffect(() => {
     if (card) navigation.setOptions({ title: card.name });
@@ -36,7 +39,7 @@ export default function CardDetail() {
   if (!card) {
     return (
       <Screen>
-        <Text style={styles.paragraph}>Cette carte est introuvable.</Text>
+        <Text style={styles.paragraph}>{t.cardDetail.notFound}</Text>
       </Screen>
     );
   }
@@ -45,56 +48,48 @@ export default function CardDetail() {
     return null;
   }
 
+  const suitLabels: Record<string, string> = {
+    batons: t.cartes.filterBatons,
+    coupes: t.cartes.filterCoupes,
+    epees: t.cartes.filterEpees,
+    deniers: t.cartes.filterDeniers,
+  };
+
   return (
     <Screen>
       <Text style={styles.title}>{card.name}</Text>
       <Text style={styles.subtitle}>
-        {card.arcana === "majeur" ? "Arcane majeur" : `Arcane mineur · ${suitLabel(card.suit)}`}
+        {card.arcana === "majeur" ? t.cardDetail.majeur : `${t.cardDetail.mineur} · ${suitLabels[card.suit ?? ""] ?? ""}`}
         {card.number !== null ? ` · ${card.number}` : ""}
       </Text>
 
-      <Section title="Symbolisme">
+      <Section title={t.cardDetail.symbolisme}>
         <Text style={styles.paragraph}>{card.symbolisme}</Text>
       </Section>
 
-      <Section title="À l'endroit">
+      <Section title={t.cardDetail.upright}>
         <Text style={styles.keywords}>{card.keywordsUpright.join(" · ")}</Text>
         <Text style={styles.paragraph}>{card.uprightMeaning}</Text>
       </Section>
 
-      <Section title="Inversée">
+      <Section title={t.cardDetail.reversed}>
         <Text style={styles.keywords}>{card.keywordsReversed.join(" · ")}</Text>
         <Text style={styles.paragraph}>{card.reversedMeaning}</Text>
       </Section>
 
-      <Section title="Amour">
+      <Section title={t.cardDetail.love}>
         <Text style={styles.paragraph}>{card.love}</Text>
       </Section>
 
-      <Section title="Travail et argent">
+      <Section title={t.cardDetail.work}>
         <Text style={styles.paragraph}>{card.travailArgent}</Text>
       </Section>
 
-      <Section title="Conseil">
+      <Section title={t.cardDetail.advice}>
         <Text style={styles.paragraph}>{card.conseil}</Text>
       </Section>
     </Screen>
   );
-}
-
-function suitLabel(suit: string | null): string {
-  switch (suit) {
-    case "batons":
-      return "Bâtons";
-    case "coupes":
-      return "Coupes";
-    case "epees":
-      return "Épées";
-    case "deniers":
-      return "Deniers";
-    default:
-      return "";
-  }
 }
 
 const styles = StyleSheet.create({

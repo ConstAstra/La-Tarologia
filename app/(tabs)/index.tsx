@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,12 +6,14 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { DrawnCardView } from "@/components/DrawnCardView";
-import { cards, drawRandomCards } from "@/data/cards";
+import { drawRandomCards } from "@/data/cards";
+import { useCards } from "@/data/i18n";
 import { getComboForCards } from "@/data/combos";
 import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
@@ -23,7 +25,12 @@ function todayKey(): string {
 export default function AccueilScreen() {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const [draw, setDraw] = useState<DrawnCard[] | null>(null);
+  const t = useT();
+  const cards = useCards();
+  // On ne stocke que les identifiants et l'état renversé : les objets carte affichés sont
+  // toujours recalculés depuis `cards` (localisé) au moment du rendu, pour qu'un changement
+  // de langue mette à jour un tirage déjà affiché sans avoir besoin de le retirer.
+  const [drawIds, setDrawIds] = useState<{ id: string; reversed: boolean }[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [justDrawn, setJustDrawn] = useState(false);
 
@@ -35,28 +42,21 @@ export default function AccueilScreen() {
     if (raw) {
       const parsed = JSON.parse(raw) as { date: string; cardIds: string[]; reversed: boolean[] };
       if (parsed.date === today) {
-        const cardsById = new Map(cards.map((c) => [c.id, c]));
-        const reconstructed: DrawnCard[] = parsed.cardIds
-          .map((id, i) => {
-            const card = cardsById.get(id);
-            return card ? { card, reversed: parsed.reversed[i] } : null;
-          })
-          .filter((d): d is DrawnCard => d !== null);
         setJustDrawn(false);
-        setDraw(reconstructed);
+        setDrawIds(parsed.cardIds.map((id, i) => ({ id, reversed: parsed.reversed[i] })));
         setIsLoading(false);
         return;
       }
     }
 
-    const fresh = drawRandomCards(2);
+    const fresh = drawRandomCards(2).map((d) => ({ id: d.card.id, reversed: d.reversed }));
     setJustDrawn(true);
-    setDraw(fresh);
+    setDrawIds(fresh);
     await AsyncStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
         date: today,
-        cardIds: fresh.map((d) => d.card.id),
+        cardIds: fresh.map((d) => d.id),
         reversed: fresh.map((d) => d.reversed),
       })
     );
@@ -65,7 +65,7 @@ export default function AccueilScreen() {
       await supabase.from("draws").insert({
         user_id: user.id,
         spread_id: "spread-deux-cartes",
-        card_ids: fresh.map((d) => d.card.id),
+        card_ids: fresh.map((d) => d.id),
         reversed: fresh.map((d) => d.reversed),
       });
     }
@@ -77,16 +77,37 @@ export default function AccueilScreen() {
     loadOrCreateDraw();
   }, [loadOrCreateDraw]);
 
+  const draw = useMemo<DrawnCard[] | null>(() => {
+    if (!drawIds) return null;
+    const cardsById = new Map(cards.map((c) => [c.id, c]));
+    return drawIds
+      .map(({ id, reversed }) => {
+        const card = cardsById.get(id);
+        return card ? { card, reversed } : null;
+      })
+      .filter((d): d is DrawnCard => d !== null);
+  }, [drawIds, cards]);
+
   const comboMatch =
     draw && draw.length === 2 ? getComboForCards(draw[0].card.id, draw[1].card.id) : undefined;
 
   return (
     <Screen>
+      <View style={styles.flourishRow}>
+        <View style={styles.flourishLine} />
+        <Ionicons name="sparkles" size={13} color={colors.gold} style={styles.flourishIcon} />
+        <View style={styles.flourishLine} />
+      </View>
       <Text style={styles.title}>La Tarologia</Text>
-      <Text style={styles.subtitle}>Votre tirage gratuit du jour</Text>
+      <View style={styles.flourishRow}>
+        <View style={styles.flourishLine} />
+        <Ionicons name="sparkles" size={9} color={colors.goldSoft} style={styles.flourishIcon} />
+        <View style={styles.flourishLine} />
+      </View>
+      <Text style={styles.subtitle}>{t.accueil.subtitle}</Text>
 
       {isLoading || !draw ? (
-        <Text style={styles.loading}>Les cartes se mélangent…</Text>
+        <Text style={styles.loading}>{t.accueil.loading}</Text>
       ) : (
         <>
           <View style={styles.cardsRow}>
@@ -94,7 +115,7 @@ export default function AccueilScreen() {
               <DrawnCardView
                 key={d.card.id}
                 drawn={d}
-                positionLabel={i === 0 ? "Ce qui vous influence" : "Ce à quoi tendre"}
+                positionLabel={i === 0 ? t.accueil.influence : t.accueil.tendre}
                 onPress={() => router.push(`/cartes/${d.card.id}`)}
                 revealDelay={justDrawn ? 300 + i * 300 : undefined}
               />
@@ -102,10 +123,13 @@ export default function AccueilScreen() {
           </View>
 
           <View style={styles.interpretationBox}>
-            <Text style={styles.interpretationTitle}>Lecture du jour</Text>
+            <Text style={styles.interpretationTitle}>{t.accueil.lectureDuJour}</Text>
             {draw.map((d) => (
               <Text key={d.card.id} style={styles.interpretationText}>
-                <Text style={styles.interpretationCardName}>{d.card.name}</Text>
+                <Text style={styles.interpretationCardName}>
+                  {d.card.name}
+                  {d.reversed ? t.accueil.reversedSuffix : ""}
+                </Text>
                 {" — "}
                 {d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning}
               </Text>
@@ -117,17 +141,18 @@ export default function AccueilScreen() {
               >
                 <View style={styles.comboHeader}>
                   <Ionicons name={isPremium ? "sparkles" : "lock-closed"} size={14} color={colors.gold} />
-                  <Text style={styles.comboTitle}>Association : {comboMatch.combo.title}</Text>
+                  <Text style={styles.comboTitle}>
+                    {t.accueil.comboPrefix}
+                    {comboMatch.combo.title}
+                  </Text>
                 </View>
                 <Text style={styles.comboText}>{comboMatch.combo.contexte}</Text>
-                <Text style={styles.comboLink}>
-                  {isPremium ? "Voir l'analyse complète (amour, pro, guidance…)" : "Débloquer l'analyse complète avec Premium"}
-                </Text>
+                <Text style={styles.comboLink}>{isPremium ? t.accueil.comboUnlocked : t.accueil.comboLocked}</Text>
               </Pressable>
             )}
           </View>
 
-          <Text style={styles.hint}>Un nouveau tirage sera proposé demain. Explorez d'autres méthodes de tirage dans l'onglet Tirages.</Text>
+          <Text style={styles.hint}>{t.accueil.hint}</Text>
         </>
       )}
     </Screen>
@@ -135,8 +160,21 @@ export default function AccueilScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: { color: colors.gold, fontFamily: fonts.heading, fontSize: 30, textAlign: "center" },
-  subtitle: { color: colors.textMuted, fontSize: 14, textAlign: "center", marginBottom: spacing.lg },
+  flourishRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: spacing.sm },
+  flourishLine: { width: 42, height: 1, backgroundColor: colors.gold, opacity: 0.55 },
+  flourishIcon: { marginHorizontal: 2 },
+  title: {
+    color: colors.gold,
+    fontFamily: fonts.heading,
+    fontSize: 34,
+    letterSpacing: 1.5,
+    textAlign: "center",
+    marginTop: spacing.xs,
+    textShadowColor: "rgba(217, 179, 108, 0.45)",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 14,
+  },
+  subtitle: { color: colors.textMuted, fontSize: 14, textAlign: "center", marginTop: spacing.xs, marginBottom: spacing.lg, fontFamily: fonts.bodyItalic },
   loading: { color: colors.textMuted, textAlign: "center", marginTop: spacing.xl },
   cardsRow: { flexDirection: "row", justifyContent: "center", gap: spacing.lg, marginBottom: spacing.lg },
   interpretationBox: {

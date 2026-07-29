@@ -2,8 +2,10 @@ import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, fonts } from "@/theme/colors";
+import { useT } from "@/i18n/useT";
 
 export default function TabsLayout() {
+  const t = useT();
   return (
     <Tabs
       screenOptions={{
@@ -19,14 +21,14 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Accueil",
+          title: t.tabs.accueil,
           tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />,
         }}
       />
       <Tabs.Screen
         name="decouvrir"
         options={{
-          title: "Découvrir",
+          title: t.tabs.decouvrir,
           headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="book" color={color} size={size} />,
         }}
@@ -34,7 +36,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="tirages"
         options={{
-          title: "Tirages",
+          title: t.tabs.tirages,
           headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="grid" color={color} size={size} />,
         }}
@@ -42,7 +44,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="cartes"
         options={{
-          title: "Cartes",
+          title: t.tabs.cartes,
           headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="albums" color={color} size={size} />,
         }}
@@ -50,7 +52,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profil"
         options={{
-          title: "Profil",
+          title: t.tabs.profil,
           headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="person-circle" color={color} size={size} />,
         }}

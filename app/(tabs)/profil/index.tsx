@@ -7,8 +7,11 @@ import { Screen } from "@/components/Screen";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useLocale } from "@/context/LocaleContext";
+import { LOCALES } from "@/i18n/locales";
+import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
-import { getCardById } from "@/data/cards";
+import { useCards } from "@/data/i18n";
 
 interface DrawHistoryItem {
   id: string;
@@ -17,9 +20,34 @@ interface DrawHistoryItem {
   created_at: string;
 }
 
+function LanguagePicker() {
+  const { locale, setLocale } = useLocale();
+  const t = useT();
+  return (
+    <View style={styles.languageBlock}>
+      <Text style={styles.sectionTitle}>{t.profil.language}</Text>
+      <View style={styles.languageRow}>
+        {LOCALES.map((l) => (
+          <Pressable
+            key={l.code}
+            style={[styles.languageChip, locale === l.code && styles.languageChipActive]}
+            onPress={() => setLocale(l.code)}
+          >
+            <Text style={[styles.languageChipText, locale === l.code && styles.languageChipTextActive]}>
+              {l.nativeLabel}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+    </View>
+  );
+}
+
 export default function ProfilScreen() {
   const { user, signOut } = useAuth();
   const { isPremium, restore } = useSubscription();
+  const t = useT();
+  const cards = useCards();
   const [history, setHistory] = useState<DrawHistoryItem[]>([]);
 
   useEffect(() => {
@@ -40,24 +68,22 @@ export default function ProfilScreen() {
       <Screen>
         <View style={styles.guestBox}>
           <Ionicons name="person-circle-outline" size={64} color={colors.primary} />
-          <Text style={styles.guestTitle}>Créez votre compte</Text>
-          <Text style={styles.guestText}>
-            Connectez-vous pour retrouver l'historique de vos tirages sur tous vos appareils et gérer votre
-            abonnement.
-          </Text>
+          <Text style={styles.guestTitle}>{t.profil.guestTitle}</Text>
+          <Text style={styles.guestText}>{t.profil.guestText}</Text>
           <Pressable style={styles.primaryButton} onPress={() => router.push("/auth/login")}>
-            <Text style={styles.primaryButtonText}>Se connecter</Text>
+            <Text style={styles.primaryButtonText}>{t.profil.login}</Text>
           </Pressable>
           <Pressable style={styles.secondaryButton} onPress={() => router.push("/auth/signup")}>
-            <Text style={styles.secondaryButtonText}>Créer un compte</Text>
+            <Text style={styles.secondaryButtonText}>{t.profil.signup}</Text>
           </Pressable>
+          <LanguagePicker />
           <View style={styles.legalLinks}>
             <Pressable onPress={() => router.push("/legal/terms")}>
-              <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+              <Text style={styles.legalLink}>{t.profil.terms}</Text>
             </Pressable>
             <Text style={styles.legalSeparator}>·</Text>
             <Pressable onPress={() => router.push("/legal/privacy")}>
-              <Text style={styles.legalLink}>Confidentialité</Text>
+              <Text style={styles.legalLink}>{t.profil.privacy}</Text>
             </Pressable>
           </View>
         </View>
@@ -72,46 +98,48 @@ export default function ProfilScreen() {
         <Text style={styles.email}>{user.email}</Text>
         <View style={[styles.statusBadge, { backgroundColor: isPremium ? colors.gold : colors.border }]}>
           <Text style={[styles.statusText, { color: isPremium ? colors.background : colors.textMuted }]}>
-            {isPremium ? "Compte Premium" : "Compte gratuit"}
+            {isPremium ? t.profil.premiumAccount : t.profil.freeAccount}
           </Text>
         </View>
       </View>
 
       {!isPremium && (
         <Pressable style={styles.primaryButton} onPress={() => router.push("/paywall")}>
-          <Text style={styles.primaryButtonText}>Découvrir Premium</Text>
+          <Text style={styles.primaryButtonText}>{t.profil.discoverPremium}</Text>
         </Pressable>
       )}
 
       <Pressable style={styles.secondaryButton} onPress={restore}>
-        <Text style={styles.secondaryButtonText}>Restaurer mes achats</Text>
+        <Text style={styles.secondaryButtonText}>{t.profil.restorePurchases}</Text>
       </Pressable>
 
-      <Text style={styles.sectionTitle}>Historique de vos tirages</Text>
+      <LanguagePicker />
+
+      <Text style={styles.sectionTitle}>{t.profil.historyTitle}</Text>
       {history.length === 0 ? (
-        <Text style={styles.emptyText}>Vos prochains tirages apparaîtront ici.</Text>
+        <Text style={styles.emptyText}>{t.profil.historyEmpty}</Text>
       ) : (
         history.map((item) => (
           <View key={item.id} style={styles.historyRow}>
-            <Text style={styles.historyDate}>{new Date(item.created_at).toLocaleDateString("fr-FR")}</Text>
+            <Text style={styles.historyDate}>{new Date(item.created_at).toLocaleDateString()}</Text>
             <Text style={styles.historyCards}>
-              {item.card_ids.map((id) => getCardById(id)?.name ?? id).join(", ")}
+              {item.card_ids.map((id) => cards.find((c) => c.id === id)?.name ?? id).join(", ")}
             </Text>
           </View>
         ))
       )}
 
       <Pressable style={styles.signOutButton} onPress={signOut}>
-        <Text style={styles.signOutText}>Se déconnecter</Text>
+        <Text style={styles.signOutText}>{t.profil.signOut}</Text>
       </Pressable>
 
       <View style={styles.legalLinks}>
         <Pressable onPress={() => router.push("/legal/terms")}>
-          <Text style={styles.legalLink}>Conditions d'utilisation</Text>
+          <Text style={styles.legalLink}>{t.profil.terms}</Text>
         </Pressable>
         <Text style={styles.legalSeparator}>·</Text>
         <Pressable onPress={() => router.push("/legal/privacy")}>
-          <Text style={styles.legalLink}>Confidentialité</Text>
+          <Text style={styles.legalLink}>{t.profil.privacy}</Text>
         </Pressable>
       </View>
     </Screen>
@@ -155,4 +183,17 @@ const styles = StyleSheet.create({
   legalLinks: { flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 6, marginTop: spacing.lg },
   legalLink: { color: colors.primary, fontSize: 12 },
   legalSeparator: { color: colors.textMuted, fontSize: 12 },
+  languageBlock: { width: "100%", marginBottom: spacing.lg },
+  languageRow: { flexDirection: "row", gap: spacing.sm },
+  languageChip: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 12,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  languageChipActive: { backgroundColor: colors.gold, borderColor: colors.gold },
+  languageChipText: { color: colors.textMuted, fontSize: 13, fontFamily: fonts.bodySemiBold },
+  languageChipTextActive: { color: colors.background },
 });

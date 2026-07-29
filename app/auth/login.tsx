@@ -6,9 +6,11 @@ import { router } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
+import { useT } from "@/i18n/useT";
 
 export default function LoginScreen() {
   const { signInWithEmail } = useAuth();
+  const t = useT();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -28,12 +30,12 @@ export default function LoginScreen() {
 
   return (
     <Screen>
-      <Text style={styles.title}>Bon retour</Text>
-      <Text style={styles.subtitle}>Connectez-vous pour retrouver vos tirages et votre abonnement.</Text>
+      <Text style={styles.title}>{t.auth.loginTitle}</Text>
+      <Text style={styles.subtitle}>{t.auth.loginSubtitle}</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Adresse e-mail"
+        placeholder={t.auth.emailPlaceholder}
         placeholderTextColor={colors.textMuted}
         autoCapitalize="none"
         keyboardType="email-address"
@@ -42,7 +44,7 @@ export default function LoginScreen() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Mot de passe"
+        placeholder={t.auth.passwordPlaceholder}
         placeholderTextColor={colors.textMuted}
         secureTextEntry
         value={password}
@@ -52,11 +54,11 @@ export default function LoginScreen() {
       {error && <Text style={styles.error}>{error}</Text>}
 
       <Pressable style={styles.button} onPress={handleSubmit} disabled={isSubmitting}>
-        <Text style={styles.buttonText}>{isSubmitting ? "Connexion…" : "Se connecter"}</Text>
+        <Text style={styles.buttonText}>{isSubmitting ? t.auth.loginLoading : t.auth.loginButton}</Text>
       </Pressable>
 
       <Pressable onPress={() => router.push("/auth/signup")}>
-        <Text style={styles.link}>Pas encore de compte ? Créez-en un</Text>
+        <Text style={styles.link}>{t.auth.noAccountLink}</Text>
       </Pressable>
     </Screen>
   );

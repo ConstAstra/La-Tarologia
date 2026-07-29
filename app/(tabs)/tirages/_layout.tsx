@@ -1,8 +1,10 @@
 import React from "react";
 import { Stack } from "expo-router";
 import { colors, fonts } from "@/theme/colors";
+import { useT } from "@/i18n/useT";
 
 export default function TiragesLayout() {
+  const t = useT();
   return (
     <Stack
       screenOptions={{
@@ -12,7 +14,7 @@ export default function TiragesLayout() {
         contentStyle: { backgroundColor: colors.background },
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Méthodes de tirage" }} />
+      <Stack.Screen name="index" options={{ title: t.nav.tiragesIndex }} />
       <Stack.Screen name="[id]" options={{ title: "" }} />
     </Stack>
   );

@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation, useRootNavigationState } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { DrawnCardView } from "@/components/DrawnCardView";
-import { getSpreadById } from "@/data/spreads";
+import { useSpreads } from "@/data/i18n";
+import { useCards } from "@/data/i18n";
 import { drawRandomCards } from "@/data/cards";
 import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { playCardShuffle } from "@/lib/sound";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
+import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
 
 export default function SpreadDetail() {
@@ -19,9 +21,25 @@ export default function SpreadDetail() {
   const navigationState = useRootNavigationState();
   const { user } = useAuth();
   const { isPremium } = useSubscription();
-  const spread = getSpreadById(id);
-  const [draw, setDraw] = useState<DrawnCard[] | null>(null);
+  const t = useT();
+  const spreads = useSpreads();
+  const cards = useCards();
+  const spread = spreads.find((s) => s.id === id);
+  // Comme sur l'Accueil : seuls les identifiants sont conservés, les objets carte affichés
+  // sont recalculés depuis `cards` (localisé) au rendu, pour rester à jour si la langue change.
+  const [drawIds, setDrawIds] = useState<{ id: string; reversed: boolean }[] | null>(null);
   const [drawNonce, setDrawNonce] = useState(0);
+
+  const draw = useMemo<DrawnCard[] | null>(() => {
+    if (!drawIds) return null;
+    const cardsById = new Map(cards.map((c) => [c.id, c]));
+    return drawIds
+      .map(({ id: cardId, reversed }) => {
+        const card = cardsById.get(cardId);
+        return card ? { card, reversed } : null;
+      })
+      .filter((d): d is DrawnCard => d !== null);
+  }, [drawIds, cards]);
 
   useEffect(() => {
     if (spread) navigation.setOptions({ title: spread.name });
@@ -36,7 +54,7 @@ export default function SpreadDetail() {
   if (!spread) {
     return (
       <Screen>
-        <Text style={styles.paragraph}>Ce tirage est introuvable.</Text>
+        <Text style={styles.paragraph}>{t.tirages.notFound}</Text>
       </Screen>
     );
   }
@@ -47,14 +65,14 @@ export default function SpreadDetail() {
 
   const handleDraw = async () => {
     playCardShuffle();
-    const fresh = drawRandomCards(spread.cardCount);
-    setDraw(fresh);
+    const fresh = drawRandomCards(spread.cardCount).map((d) => ({ id: d.card.id, reversed: d.reversed }));
+    setDrawIds(fresh);
     setDrawNonce((n) => n + 1);
     if (user) {
       await supabase.from("draws").insert({
         user_id: user.id,
         spread_id: spread.id,
-        card_ids: fresh.map((d) => d.card.id),
+        card_ids: fresh.map((d) => d.id),
         reversed: fresh.map((d) => d.reversed),
       });
     }
@@ -66,7 +84,7 @@ export default function SpreadDetail() {
       <Text style={styles.paragraph}>{spread.whenToUse}</Text>
 
       <Pressable style={styles.drawButton} onPress={handleDraw}>
-        <Text style={styles.drawButtonText}>{draw ? "Retirer les cartes" : "Tirer les cartes"}</Text>
+        <Text style={styles.drawButtonText}>{draw ? t.tirages.redrawButton : t.tirages.drawButton}</Text>
       </Pressable>
 
       {draw ? (
@@ -90,7 +108,7 @@ export default function SpreadDetail() {
         </View>
       ) : (
         <View style={styles.positions}>
-          <Text style={styles.positionsTitle}>Positions du tirage</Text>
+          <Text style={styles.positionsTitle}>{t.tirages.positionsTitle}</Text>
           {spread.positions.map((p, i) => (
             <Text key={i} style={styles.positionItem}>
               {i + 1}. {p.label} — {p.meaning}
