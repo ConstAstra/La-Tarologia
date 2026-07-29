@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { iconForCard } from "@/lib/suitIcon";
+import { cardNumeral } from "@/lib/cardNumeral";
 import { playCardReveal } from "@/lib/sound";
 
 interface Props {
@@ -18,7 +19,7 @@ interface Props {
 }
 
 function Corner({ style }: { style: object }) {
-  return <View style={[styles.corner, style]} />;
+  return <Ionicons name="sparkles" size={11} color={colors.gold} style={[styles.corner, style]} />;
 }
 
 function CardBack() {
@@ -31,6 +32,7 @@ function CardBack() {
       style={styles.cardFace}
     >
       <View style={styles.innerBorder} />
+      <View style={styles.backEmblemHalo} />
       <View style={styles.backEmblemRing}>
         <View style={styles.backEmblemDiamond} />
       </View>
@@ -44,6 +46,7 @@ function CardBack() {
 
 export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Props) {
   const { card, reversed } = drawn;
+  const numeral = cardNumeral(card);
   const startsHidden = revealDelay !== undefined;
   const flip = useRef(new Animated.Value(startsHidden ? 0 : 1)).current;
   const [revealed, setRevealed] = useState(!startsHidden);
@@ -93,9 +96,17 @@ export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Pr
             style={styles.cardFace}
           >
             <View style={styles.innerBorder} />
-            <Ionicons name={iconForCard(card)} size={26} color={colors.gold} />
+            {numeral && <Text style={styles.numeral}>{numeral}</Text>}
+            <View style={styles.iconRing}>
+              <Ionicons name={iconForCard(card)} size={22} color={colors.gold} />
+            </View>
+            <View style={styles.divider} />
             <Text style={styles.name}>{card.name}</Text>
-            {reversed && <Text style={styles.reversedLabel}>Inversée</Text>}
+            {reversed && (
+              <View style={styles.reversedBadge}>
+                <Text style={styles.reversedLabel}>Inversée</Text>
+              </View>
+            )}
             <Corner style={styles.cornerTL} />
             <Corner style={styles.cornerTR} />
             <Corner style={styles.cornerBL} />
@@ -138,7 +149,7 @@ const styles = StyleSheet.create({
     borderColor: colors.gold,
     alignItems: "center",
     justifyContent: "center",
-    gap: 6,
+    gap: 4,
     padding: spacing.sm,
     overflow: "hidden",
   },
@@ -152,6 +163,41 @@ const styles = StyleSheet.create({
     borderWidth: 0.75,
     borderColor: colors.goldSoft,
     opacity: 0.45,
+  },
+  numeral: {
+    position: "absolute",
+    top: 12,
+    color: colors.goldSoft,
+    fontFamily: fonts.heading,
+    fontSize: 11,
+    letterSpacing: 1,
+    opacity: 0.85,
+  },
+  iconRing: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: colors.gold,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  divider: {
+    width: 28,
+    height: 1,
+    backgroundColor: colors.goldSoft,
+    opacity: 0.5,
+    marginVertical: 3,
+  },
+  backEmblemHalo: {
+    position: "absolute",
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    borderWidth: 1,
+    borderColor: colors.goldSoft,
+    opacity: 0.3,
   },
   backEmblemRing: {
     width: 56,
@@ -168,18 +214,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gold,
     transform: [{ rotate: "45deg" }],
   },
-  name: { color: colors.text, fontFamily: fonts.heading, textAlign: "center", fontSize: 15 },
-  reversedLabel: { color: colors.gold, fontSize: 10 },
+  name: { color: colors.text, fontFamily: fonts.heading, textAlign: "center", fontSize: 14 },
+  reversedBadge: {
+    borderWidth: 0.75,
+    borderColor: colors.gold,
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    marginTop: 2,
+  },
+  reversedLabel: { color: colors.gold, fontSize: 9, letterSpacing: 0.5 },
   keyword: { color: colors.textMuted, fontSize: 11, marginTop: spacing.xs, textAlign: "center" },
   corner: {
     position: "absolute",
-    width: 6,
-    height: 6,
-    backgroundColor: colors.gold,
-    transform: [{ rotate: "45deg" }],
   },
-  cornerTL: { top: 9, left: 9 },
-  cornerTR: { top: 9, right: 9 },
-  cornerBL: { bottom: 9, left: 9 },
-  cornerBR: { bottom: 9, right: 9 },
+  cornerTL: { top: 7, left: 7 },
+  cornerTR: { top: 7, right: 7 },
+  cornerBL: { bottom: 7, left: 7 },
+  cornerBR: { bottom: 7, right: 7 },
 });
