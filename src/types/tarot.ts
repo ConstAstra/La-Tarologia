@@ -21,10 +21,17 @@ export interface CardMeaning {
 
 export interface CardCombo {
   id: string;
+  // La première carte est celle dont l'énergie domine le tirage ; la seconde vient la clarifier ou la nuancer.
   cardIds: [string, string];
   title: string;
-  interpretation: string;
   isFree: boolean;
+  contexte: string;
+  general: string;
+  amour: string;
+  travail: string;
+  guidance: string;
+  sentimentsDeLAutre: string;
+  siOrdreInverse: string;
 }
 
 export interface SpreadPosition {

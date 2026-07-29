@@ -45,10 +45,21 @@ supabase/schema.sql        Schéma SQL à exécuter dans votre projet Supabase
 - **Gratuit** : tirage du jour (accueil), les 22 arcanes majeurs + 4 as, les 3 premiers articles
   pédagogiques, les tirages à 1, 2 et 3 cartes.
 - **Premium** : les 56 arcanes mineurs restants, tous les articles, tous les tirages avancés
-  (croix, croix celtique, amour, année, décision, chakras) et les associations de cartes.
+  (croix, croix celtique, amour, année, décision, chakras) et **toutes les associations de cartes**
+  (`src/data/combos.ts`), intégralement payantes.
 
-Le statut `isFree` de chaque carte/tirage/article dans `src/data` contrôle cet accès ; il est
-entièrement modifiable selon la stratégie commerciale souhaitée.
+Le statut `isFree` de chaque carte/tirage/article/association dans `src/data` contrôle cet accès ;
+il est entièrement modifiable selon la stratégie commerciale souhaitée.
+
+### Associations de cartes (contenu Premium)
+
+Chaque association (ex. Deux de Coupes + Le Soleil, La Lune + L'Impératrice) est analysée sous
+5 angles : **Général**, **Amour**, **Pro**, **Guidance** et **Les sentiments de la personne envers
+vous**. Le principe de lecture retenu est celui, classique chez les tarologues, où la première
+carte tirée porte l'énergie dominante du tirage et la seconde vient la préciser : chaque
+association explique donc aussi comment son sens se déplace si l'ordre de tirage est inversé
+(champ `siOrdreInverse`). Le contenu s'appuie sur une synthèse de significations de combinaisons
+largement partagées dans la pratique du tarot, reformulée dans un style propre à l'application.
 
 ## Mise en route (développement local)
 

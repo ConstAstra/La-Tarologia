@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { DrawnCardView } from "@/components/DrawnCardView";
 import { cards, drawRandomCards } from "@/data/cards";
@@ -9,6 +10,7 @@ import { getComboForCards } from "@/data/combos";
 import { DrawnCard } from "@/types/tarot";
 import { colors, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
+import { useSubscription } from "@/context/SubscriptionContext";
 import { supabase } from "@/lib/supabase";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
@@ -19,6 +21,7 @@ function todayKey(): string {
 
 export default function AccueilScreen() {
   const { user } = useAuth();
+  const { isPremium } = useSubscription();
   const [draw, setDraw] = useState<DrawnCard[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -70,7 +73,8 @@ export default function AccueilScreen() {
     loadOrCreateDraw();
   }, [loadOrCreateDraw]);
 
-  const combo = draw && draw.length === 2 ? getComboForCards(draw[0].card.id, draw[1].card.id) : undefined;
+  const comboMatch =
+    draw && draw.length === 2 ? getComboForCards(draw[0].card.id, draw[1].card.id) : undefined;
 
   return (
     <Screen>
@@ -101,11 +105,20 @@ export default function AccueilScreen() {
                 {d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning}
               </Text>
             ))}
-            {combo && (
-              <Text style={styles.comboText}>
-                <Text style={styles.interpretationCardName}>Association : </Text>
-                {combo.interpretation}
-              </Text>
+            {comboMatch && (
+              <Pressable
+                style={styles.comboBox}
+                onPress={() => router.push(isPremium ? "/cartes/associations" : "/paywall")}
+              >
+                <View style={styles.comboHeader}>
+                  <Ionicons name={isPremium ? "sparkles" : "lock-closed"} size={14} color={colors.gold} />
+                  <Text style={styles.comboTitle}>Association : {comboMatch.combo.title}</Text>
+                </View>
+                <Text style={styles.comboText}>{comboMatch.combo.contexte}</Text>
+                <Text style={styles.comboLink}>
+                  {isPremium ? "Voir l'analyse complète (amour, pro, guidance…)" : "Débloquer l'analyse complète avec Premium"}
+                </Text>
+              </Pressable>
             )}
           </View>
 
@@ -130,6 +143,10 @@ const styles = StyleSheet.create({
   interpretationTitle: { color: colors.gold, fontWeight: "700", fontSize: 16, marginBottom: spacing.xs },
   interpretationText: { color: colors.text, lineHeight: 20 },
   interpretationCardName: { fontWeight: "700", color: colors.primary },
-  comboText: { color: colors.text, lineHeight: 20, marginTop: spacing.xs, fontStyle: "italic" },
+  comboBox: { backgroundColor: colors.cardAlt, borderRadius: 12, padding: spacing.sm, marginTop: spacing.xs, gap: 4 },
+  comboHeader: { flexDirection: "row", alignItems: "center", gap: 6 },
+  comboTitle: { color: colors.gold, fontWeight: "700", fontSize: 13 },
+  comboText: { color: colors.text, lineHeight: 19, fontSize: 13, fontStyle: "italic" },
+  comboLink: { color: colors.primary, fontSize: 12, fontWeight: "600", marginTop: 2 },
   hint: { color: colors.textMuted, fontSize: 12, textAlign: "center", marginTop: spacing.lg },
 });
