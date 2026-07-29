@@ -1,4 +1,5 @@
 import { CardCombo } from "@/types/tarot";
+import { combosMajeurs } from "./combos.majeurs";
 
 // Associations de cartes : contenu Premium.
 // Principe de lecture : la première carte de "cardIds" porte l'énergie dominante du tirage,
@@ -9,7 +10,12 @@ import { CardCombo } from "@/types/tarot";
 // Contenu rédigé pour l'application à partir d'une synthèse de connaissances générales sur les
 // associations de cartes classiques, reformulée avec un style propre — aucun texte n'est copié
 // d'un site ou d'un ouvrage existant.
-export const combos: CardCombo[] = [
+//
+// Ce fichier réunit deux ensembles :
+// - combosMixtes : une sélection d'associations emblématiques mêlant arcanes majeurs et mineurs
+// - combosMajeurs (src/data/combos.majeurs.ts) : la couverture complète des 231 associations
+//   possibles entre les 22 arcanes majeurs
+const combosMixtes: CardCombo[] = [
   {
     id: "combo-deuxcoupes-soleil",
     cardIds: ["cou-02", "maj-19"],
@@ -451,6 +457,8 @@ export const combos: CardCombo[] = [
       "Si le Dix de Coupes sort en premier et la Reine de Deniers ensuite, un bonheur familial déjà présent s'appuie désormais sur une gestion concrète et posée du quotidien pour continuer à durer sereinement.",
   },
 ];
+
+export const combos: CardCombo[] = [...combosMixtes, ...combosMajeurs];
 
 export function getComboForCards(
   cardIdFirst: string,

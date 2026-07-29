@@ -53,13 +53,24 @@ il est entièrement modifiable selon la stratégie commerciale souhaitée.
 
 ### Associations de cartes (contenu Premium)
 
-Chaque association (ex. Deux de Coupes + Le Soleil, La Lune + L'Impératrice) est analysée sous
-5 angles : **Général**, **Amour**, **Pro**, **Guidance** et **Les sentiments de la personne envers
-vous**. Le principe de lecture retenu est celui, classique chez les tarologues, où la première
-carte tirée porte l'énergie dominante du tirage et la seconde vient la préciser : chaque
-association explique donc aussi comment son sens se déplace si l'ordre de tirage est inversé
-(champ `siOrdreInverse`). Le contenu s'appuie sur une synthèse de significations de combinaisons
-largement partagées dans la pratique du tarot, reformulée dans un style propre à l'application.
+Chaque association est analysée sous 5 angles : **Général**, **Amour**, **Pro**, **Guidance** et
+**Les sentiments de la personne envers vous**. Le principe de lecture retenu est celui, classique
+chez les tarologues, où la première carte tirée porte l'énergie dominante du tirage et la seconde
+vient la préciser : chaque association explique donc aussi comment son sens se déplace si l'ordre
+de tirage est inversé (champ `siOrdreInverse`). Le contenu s'appuie sur une synthèse de
+significations de combinaisons largement partagées dans la pratique du tarot, reformulée dans un
+style propre à l'application.
+
+C'est la fonctionnalité la plus riche de l'application : elle couvre **248 associations**,
+réparties en deux fichiers :
+- `src/data/combos.ts` : 22 associations emblématiques mêlant arcanes majeurs et mineurs
+  (ex. Deux de Coupes + Le Soleil, La Lune + L'Impératrice)
+- `src/data/combos.majeurs.ts` : la **couverture complète des 231 associations possibles entre
+  les 22 arcanes majeurs** deux à deux (226 paires dans ce fichier, 5 déjà présentes dans
+  `combos.ts`), organisées par première carte
+
+L'écran Associations (`app/(tabs)/cartes/associations.tsx`) propose une recherche et un filtre
+par carte pour naviguer facilement dans ce volume de contenu.
 
 ## Mise en route (développement local)
 
