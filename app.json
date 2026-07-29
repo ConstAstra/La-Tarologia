@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "La Tarologia",
+    "slug": "la-tarologia",
+    "scheme": "latarologia",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#12071F"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.constastra.latarologia",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#12071F"
+      },
+      "package": "com.constastra.latarologia"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router"],
+    "extra": {
+      "supabaseUrl": "https://YOUR-PROJECT.supabase.co",
+      "supabaseAnonKey": "YOUR-SUPABASE-ANON-KEY",
+      "revenueCatApiKeyIOS": "YOUR-REVENUECAT-IOS-KEY",
+      "revenueCatApiKeyAndroid": "YOUR-REVENUECAT-ANDROID-KEY",
+      "revenueCatEntitlementId": "premium"
+    }
+  }
+}
