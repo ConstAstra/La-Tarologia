@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { getArticleById } from "@/data/articles";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 export default function ArticleDetail() {
@@ -42,6 +43,6 @@ export default function ArticleDetail() {
 }
 
 const styles = StyleSheet.create({
-  title: { color: colors.gold, fontSize: 22, fontWeight: "700", marginBottom: spacing.md },
+  title: { color: colors.gold, fontSize: 24, fontFamily: fonts.heading, marginBottom: spacing.md },
   paragraph: { color: colors.text, fontSize: 15, lineHeight: 23, marginBottom: spacing.md },
 });

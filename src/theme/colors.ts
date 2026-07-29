@@ -25,3 +25,15 @@ export const spacing = {
   lg: 24,
   xl: 32,
 };
+
+// Typographie de l'identité "Velvet Occultation" : Gloock pour les titres — un serif
+// display gravé, à l'autorité tranquille — et Crimson Pro pour le corps de texte, plus
+// chaleureux et lisible sur de longs paragraphes. Les mêmes polices que l'icône et le splash.
+export const fonts = {
+  heading: "Gloock_400Regular",
+  body: "CrimsonPro_400Regular",
+  bodyMedium: "CrimsonPro_500Medium",
+  bodySemiBold: "CrimsonPro_600SemiBold",
+  bodyBold: "CrimsonPro_700Bold",
+  bodyItalic: "CrimsonPro_400Regular_Italic",
+};

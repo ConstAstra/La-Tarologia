@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,7 +9,7 @@ import { DrawnCardView } from "@/components/DrawnCardView";
 import { cards, drawRandomCards } from "@/data/cards";
 import { getComboForCards } from "@/data/combos";
 import { DrawnCard } from "@/types/tarot";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { supabase } from "@/lib/supabase";
@@ -130,7 +131,7 @@ export default function AccueilScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: { color: colors.gold, fontSize: 28, fontWeight: "700", textAlign: "center" },
+  title: { color: colors.gold, fontFamily: fonts.heading, fontSize: 30, textAlign: "center" },
   subtitle: { color: colors.textMuted, fontSize: 14, textAlign: "center", marginBottom: spacing.lg },
   loading: { color: colors.textMuted, textAlign: "center", marginTop: spacing.xl },
   cardsRow: { flexDirection: "row", justifyContent: "center", gap: spacing.lg, marginBottom: spacing.lg },
@@ -140,13 +141,13 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     gap: spacing.sm,
   },
-  interpretationTitle: { color: colors.gold, fontWeight: "700", fontSize: 16, marginBottom: spacing.xs },
+  interpretationTitle: { color: colors.gold, fontFamily: fonts.heading, fontSize: 17, marginBottom: spacing.xs },
   interpretationText: { color: colors.text, lineHeight: 20 },
-  interpretationCardName: { fontWeight: "700", color: colors.primary },
+  interpretationCardName: { fontFamily: fonts.bodyBold, color: colors.primary },
   comboBox: { backgroundColor: colors.cardAlt, borderRadius: 12, padding: spacing.sm, marginTop: spacing.xs, gap: 4 },
   comboHeader: { flexDirection: "row", alignItems: "center", gap: 6 },
-  comboTitle: { color: colors.gold, fontWeight: "700", fontSize: 13 },
-  comboText: { color: colors.text, lineHeight: 19, fontSize: 13, fontStyle: "italic" },
-  comboLink: { color: colors.primary, fontSize: 12, fontWeight: "600", marginTop: 2 },
+  comboTitle: { color: colors.gold, fontFamily: fonts.bodySemiBold, fontSize: 13 },
+  comboText: { color: colors.text, lineHeight: 19, fontSize: 13, fontFamily: fonts.bodyItalic },
+  comboLink: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodySemiBold, marginTop: 2 },
   hint: { color: colors.textMuted, fontSize: 12, textAlign: "center", marginTop: spacing.lg },
 });

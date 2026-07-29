@@ -1,8 +1,9 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { Ionicons } from "@expo/vector-icons";
 import { CardMeaning } from "@/types/tarot";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { PremiumBadge } from "@/components/PremiumBadge";
 
 interface Props {
@@ -41,6 +42,6 @@ const styles = StyleSheet.create({
   },
   iconWrap: { width: 28, alignItems: "center" },
   info: { flex: 1 },
-  name: { color: colors.text, fontSize: 16, fontWeight: "600" },
+  name: { color: colors.text, fontSize: 17, fontFamily: fonts.heading },
   keywords: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
 });

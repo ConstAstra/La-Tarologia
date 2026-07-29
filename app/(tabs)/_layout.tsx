@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { colors } from "@/theme/colors";
+import { colors, fonts } from "@/theme/colors";
 
 export default function TabsLayout() {
   return (
@@ -9,10 +9,11 @@ export default function TabsLayout() {
       screenOptions={{
         headerStyle: { backgroundColor: colors.background },
         headerTintColor: colors.text,
-        headerTitleStyle: { color: colors.text },
+        headerTitleStyle: { color: colors.text, fontFamily: fonts.heading },
         tabBarStyle: { backgroundColor: colors.backgroundAlt, borderTopColor: colors.border },
         tabBarActiveTintColor: colors.gold,
         tabBarInactiveTintColor: colors.textMuted,
+        tabBarLabelStyle: { fontFamily: fonts.bodySemiBold, fontSize: 11 },
       }}
     >
       <Tabs.Screen

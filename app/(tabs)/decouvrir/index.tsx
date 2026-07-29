@@ -1,11 +1,12 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { PremiumBadge } from "@/components/PremiumBadge";
 import { articles } from "@/data/articles";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -62,7 +63,7 @@ export default function DecouvrirIndex() {
 const styles = StyleSheet.create({
   intro: { color: colors.textMuted, marginBottom: spacing.lg, lineHeight: 20 },
   section: { marginBottom: spacing.lg },
-  sectionTitle: { color: colors.primary, fontWeight: "700", fontSize: 16, marginBottom: spacing.sm },
+  sectionTitle: { color: colors.primary, fontFamily: fonts.bodyBold, fontSize: 16, marginBottom: spacing.sm },
   card: {
     backgroundColor: colors.card,
     borderRadius: 14,
@@ -71,6 +72,6 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   cardHeader: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
-  cardTitle: { color: colors.text, fontWeight: "600", fontSize: 15, flex: 1 },
+  cardTitle: { color: colors.text, fontFamily: fonts.heading, fontSize: 16, flex: 1 },
   cardSummary: { color: colors.textMuted, fontSize: 13, lineHeight: 18 },
 });

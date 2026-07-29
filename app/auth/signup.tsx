@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
+import { AppText as Text } from "@/components/AppText";
+import { AppTextInput as TextInput } from "@/components/AppTextInput";
 import { router } from "expo-router";
 import { Screen } from "@/components/Screen";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 
 export default function SignupScreen() {
@@ -89,7 +91,7 @@ export default function SignupScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: { color: colors.gold, fontSize: 24, fontWeight: "700", marginBottom: spacing.xs },
+  title: { color: colors.gold, fontSize: 26, fontFamily: fonts.heading, marginBottom: spacing.xs },
   subtitle: { color: colors.textMuted, marginBottom: spacing.lg, lineHeight: 20 },
   input: {
     backgroundColor: colors.card,
@@ -107,6 +109,6 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
     marginBottom: spacing.md,
   },
-  buttonText: { color: colors.background, fontWeight: "700" },
+  buttonText: { color: colors.background, fontFamily: fonts.bodyBold },
   link: { color: colors.primary, textAlign: "center" },
 });

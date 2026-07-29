@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { DrawnCardView } from "@/components/DrawnCardView";
 import { getSpreadById } from "@/data/spreads";
 import { drawRandomCards } from "@/data/cards";
 import { DrawnCard } from "@/types/tarot";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { supabase } from "@/lib/supabase";
@@ -100,13 +101,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: spacing.lg,
   },
-  drawButtonText: { color: colors.background, fontWeight: "700", fontSize: 15 },
+  drawButtonText: { color: colors.background, fontFamily: fonts.bodyBold, fontSize: 15 },
   positions: { backgroundColor: colors.card, borderRadius: 14, padding: spacing.md },
-  positionsTitle: { color: colors.primary, fontWeight: "700", marginBottom: spacing.sm },
+  positionsTitle: { color: colors.primary, fontFamily: fonts.bodyBold, marginBottom: spacing.sm },
   positionItem: { color: colors.textMuted, fontSize: 13, marginBottom: spacing.xs, lineHeight: 18 },
   results: { gap: spacing.md },
   resultRow: { flexDirection: "row", gap: spacing.md, backgroundColor: colors.card, borderRadius: 14, padding: spacing.md },
   resultText: { flex: 1, gap: spacing.xs },
-  positionMeaning: { color: colors.primary, fontSize: 12, fontWeight: "700" },
+  positionMeaning: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodyBold },
   cardMeaning: { color: colors.text, fontSize: 13, lineHeight: 19 },
 });

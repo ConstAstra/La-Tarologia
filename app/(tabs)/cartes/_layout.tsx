@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack } from "expo-router";
-import { colors } from "@/theme/colors";
+import { colors, fonts } from "@/theme/colors";
 
 export default function CartesLayout() {
   return (
@@ -8,7 +8,7 @@ export default function CartesLayout() {
       screenOptions={{
         headerStyle: { backgroundColor: colors.background },
         headerTintColor: colors.text,
-        headerTitleStyle: { color: colors.text },
+        headerTitleStyle: { color: colors.text, fontFamily: fonts.heading },
         contentStyle: { backgroundColor: colors.background },
       }}
     >

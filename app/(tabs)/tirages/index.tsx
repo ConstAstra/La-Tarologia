@@ -1,11 +1,12 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { PremiumBadge } from "@/components/PremiumBadge";
 import { spreads } from "@/data/spreads";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 const DIFFICULTY_LABELS: Record<string, string> = {
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   cardHeader: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
-  cardTitle: { color: colors.text, fontWeight: "600", fontSize: 15, flex: 1 },
+  cardTitle: { color: colors.text, fontFamily: fonts.heading, fontSize: 16, flex: 1 },
   cardMeta: { color: colors.primary, fontSize: 12 },
   cardSummary: { color: colors.textMuted, fontSize: 13, lineHeight: 18 },
 });

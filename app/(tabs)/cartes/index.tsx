@@ -1,11 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
+import { AppTextInput as TextInput } from "@/components/AppTextInput";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { CardListItem } from "@/components/CardListItem";
 import { cards } from "@/data/cards";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 type FilterKey = "tous" | "majeur" | "batons" | "coupes" | "epees" | "deniers";
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
     marginBottom: spacing.sm,
   },
-  combosLinkText: { color: colors.gold, fontSize: 13, fontWeight: "600" },
+  combosLinkText: { color: colors.gold, fontSize: 13, fontFamily: fonts.bodySemiBold },
   filters: { marginBottom: spacing.sm },
   filterChip: {
     borderWidth: 1,
@@ -113,6 +115,6 @@ const styles = StyleSheet.create({
   },
   filterChipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   filterChipText: { color: colors.textMuted, fontSize: 12 },
-  filterChipTextActive: { color: colors.background, fontWeight: "700" },
+  filterChipTextActive: { color: colors.background, fontFamily: fonts.bodyBold },
   list: { paddingHorizontal: spacing.md, paddingBottom: spacing.xl },
 });

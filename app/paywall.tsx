@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 
@@ -115,7 +116,7 @@ export default function PaywallScreen() {
 
 const styles = StyleSheet.create({
   centered: { alignItems: "center", gap: spacing.sm, paddingTop: spacing.xl },
-  title: { color: colors.gold, fontSize: 24, fontWeight: "700", marginBottom: spacing.xs, textAlign: "center" },
+  title: { color: colors.gold, fontSize: 26, fontFamily: fonts.heading, marginBottom: spacing.xs, textAlign: "center" },
   subtitle: { color: colors.textMuted, marginBottom: spacing.lg, lineHeight: 20, textAlign: "center" },
   benefits: { gap: spacing.sm, marginBottom: spacing.lg },
   benefitRow: { flexDirection: "row", alignItems: "flex-start", gap: spacing.sm },
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: spacing.sm,
   },
-  primaryButtonText: { color: colors.background, fontWeight: "700" },
+  primaryButtonText: { color: colors.background, fontFamily: fonts.bodyBold },
   secondaryButton: {
     borderWidth: 1,
     borderColor: colors.border,
@@ -138,6 +139,6 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
     marginBottom: spacing.md,
   },
-  secondaryButtonText: { color: colors.text, fontWeight: "600" },
+  secondaryButtonText: { color: colors.text, fontFamily: fonts.bodySemiBold },
   link: { color: colors.primary, textAlign: "center" },
 });

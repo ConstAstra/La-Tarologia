@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { supabase } from "@/lib/supabase";
@@ -100,12 +101,12 @@ export default function ProfilScreen() {
 
 const styles = StyleSheet.create({
   guestBox: { alignItems: "center", gap: spacing.sm, paddingTop: spacing.xl, paddingHorizontal: spacing.md },
-  guestTitle: { color: colors.text, fontSize: 20, fontWeight: "700", marginTop: spacing.sm },
+  guestTitle: { color: colors.text, fontSize: 21, fontFamily: fonts.heading, marginTop: spacing.sm },
   guestText: { color: colors.textMuted, textAlign: "center", marginBottom: spacing.md, lineHeight: 20 },
   header: { alignItems: "center", gap: spacing.xs, marginBottom: spacing.lg },
-  email: { color: colors.text, fontSize: 16, fontWeight: "600" },
+  email: { color: colors.text, fontSize: 16, fontFamily: fonts.bodySemiBold },
   statusBadge: { borderRadius: 12, paddingHorizontal: spacing.md, paddingVertical: 4, marginTop: spacing.xs },
-  statusText: { fontSize: 12, fontWeight: "700" },
+  statusText: { fontSize: 12, fontFamily: fonts.bodyBold },
   primaryButton: {
     backgroundColor: colors.gold,
     borderRadius: 14,
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     width: "100%",
   },
-  primaryButtonText: { color: colors.background, fontWeight: "700", fontSize: 15 },
+  primaryButtonText: { color: colors.background, fontFamily: fonts.bodyBold, fontSize: 15 },
   secondaryButton: {
     borderWidth: 1,
     borderColor: colors.border,
@@ -124,12 +125,12 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
     width: "100%",
   },
-  secondaryButtonText: { color: colors.text, fontWeight: "600" },
-  sectionTitle: { color: colors.primary, fontWeight: "700", fontSize: 14, marginBottom: spacing.sm, textTransform: "uppercase" },
+  secondaryButtonText: { color: colors.text, fontFamily: fonts.bodySemiBold },
+  sectionTitle: { color: colors.primary, fontFamily: fonts.bodyBold, fontSize: 14, marginBottom: spacing.sm, textTransform: "uppercase" },
   emptyText: { color: colors.textMuted, fontSize: 13 },
   historyRow: { backgroundColor: colors.card, borderRadius: 12, padding: spacing.sm, marginBottom: spacing.xs },
   historyDate: { color: colors.textMuted, fontSize: 11 },
   historyCards: { color: colors.text, fontSize: 13, marginTop: 2 },
   signOutButton: { marginTop: spacing.lg, alignItems: "center" },
-  signOutText: { color: colors.danger, fontWeight: "600" },
+  signOutText: { color: colors.danger, fontFamily: fonts.bodySemiBold },
 });

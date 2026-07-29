@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { Screen } from "@/components/Screen";
 import { getCardById } from "@/data/cards";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -91,10 +92,10 @@ function suitLabel(suit: string | null): string {
 }
 
 const styles = StyleSheet.create({
-  title: { color: colors.gold, fontSize: 24, fontWeight: "700" },
+  title: { color: colors.gold, fontSize: 26, fontFamily: fonts.heading },
   subtitle: { color: colors.textMuted, fontSize: 13, marginBottom: spacing.lg },
   section: { marginBottom: spacing.lg },
-  sectionTitle: { color: colors.primary, fontWeight: "700", fontSize: 14, marginBottom: spacing.xs, textTransform: "uppercase" },
-  keywords: { color: colors.text, fontWeight: "600", marginBottom: spacing.xs },
+  sectionTitle: { color: colors.primary, fontFamily: fonts.bodyBold, fontSize: 14, marginBottom: spacing.xs, textTransform: "uppercase" },
+  keywords: { color: colors.text, fontFamily: fonts.bodySemiBold, marginBottom: spacing.xs },
   paragraph: { color: colors.text, fontSize: 15, lineHeight: 22 },
 });

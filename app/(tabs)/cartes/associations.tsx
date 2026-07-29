@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
+import { AppTextInput as TextInput } from "@/components/AppTextInput";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
@@ -7,7 +9,7 @@ import { PremiumBadge } from "@/components/PremiumBadge";
 import { combos } from "@/data/combos";
 import { getCardById } from "@/data/cards";
 import { CardCombo } from "@/types/tarot";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 type CategoryKey = "general" | "amour" | "travail" | "guidance" | "sentimentsDeLAutre";
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
     padding: spacing.sm,
     marginBottom: spacing.md,
   },
-  paywallBannerText: { color: colors.background, fontWeight: "700", fontSize: 13, flex: 1 },
+  paywallBannerText: { color: colors.background, fontFamily: fonts.bodyBold, fontSize: 13, flex: 1 },
   explorerLink: {
     flexDirection: "row",
     alignItems: "center",
@@ -230,13 +232,13 @@ const styles = StyleSheet.create({
   },
   filterChipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   filterChipText: { color: colors.textMuted, fontSize: 12 },
-  filterChipTextActive: { color: colors.background, fontWeight: "700" },
+  filterChipTextActive: { color: colors.background, fontFamily: fonts.bodyBold },
   list: { paddingHorizontal: spacing.md, paddingBottom: spacing.xl },
   emptyText: { color: colors.textMuted, textAlign: "center", marginTop: spacing.xl },
   card: { backgroundColor: colors.card, borderRadius: 14, padding: spacing.md, marginBottom: spacing.sm },
   cardHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing.sm },
   cardHeaderText: { flex: 1 },
-  title: { color: colors.gold, fontWeight: "700", fontSize: 15 },
+  title: { color: colors.gold, fontFamily: fonts.bodySemiBold, fontSize: 15 },
   subtitle: { color: colors.primary, fontSize: 12, marginTop: 2 },
   blurred: { color: colors.textMuted, fontSize: 13, lineHeight: 19, opacity: 0.6, marginTop: spacing.sm },
   body: { marginTop: spacing.md, gap: spacing.sm },
@@ -254,7 +256,7 @@ const styles = StyleSheet.create({
   },
   tabActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   tabText: { color: colors.textMuted, fontSize: 11 },
-  tabTextActive: { color: colors.background, fontWeight: "700" },
+  tabTextActive: { color: colors.background, fontFamily: fonts.bodyBold },
   text: { color: colors.text, fontSize: 14, lineHeight: 21 },
   orderNote: {
     flexDirection: "row",

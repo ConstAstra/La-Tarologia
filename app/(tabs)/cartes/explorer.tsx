@@ -1,11 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { AppText as Text } from "@/components/AppText";
+import { AppTextInput as TextInput } from "@/components/AppTextInput";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { cards, getCardById } from "@/data/cards";
 import { getComboForCards } from "@/data/combos";
-import { colors, spacing } from "@/theme/colors";
+import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 
 type CategoryKey = "general" | "amour" | "travail" | "guidance" | "sentimentsDeLAutre";
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
   intro: { color: colors.textMuted, marginBottom: spacing.lg, lineHeight: 20 },
   pickers: { gap: spacing.md, marginBottom: spacing.lg },
   pickerBlock: { gap: spacing.xs },
-  pickerLabel: { color: colors.primary, fontSize: 12, fontWeight: "700" },
+  pickerLabel: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodyBold },
   pickerButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
   pickerItemText: { color: colors.text, fontSize: 14 },
   result: { backgroundColor: colors.card, borderRadius: 14, padding: spacing.md, gap: spacing.sm },
   resultHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  resultTitle: { color: colors.gold, fontWeight: "700", fontSize: 16, flex: 1 },
+  resultTitle: { color: colors.gold, fontFamily: fonts.bodySemiBold, fontSize: 16, flex: 1 },
   paywallButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
   },
-  paywallButtonText: { color: colors.background, fontWeight: "700", fontSize: 12 },
+  paywallButtonText: { color: colors.background, fontFamily: fonts.bodyBold, fontSize: 12 },
   blurred: { color: colors.textMuted, fontSize: 13, lineHeight: 19, opacity: 0.6 },
   contexte: { color: colors.text, fontSize: 13, lineHeight: 19, fontStyle: "italic" },
   tabs: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
   },
   tabActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   tabText: { color: colors.textMuted, fontSize: 11 },
-  tabTextActive: { color: colors.background, fontWeight: "700" },
+  tabTextActive: { color: colors.background, fontFamily: fonts.bodyBold },
   text: { color: colors.text, fontSize: 14, lineHeight: 21 },
   orderNote: {
     flexDirection: "row",
