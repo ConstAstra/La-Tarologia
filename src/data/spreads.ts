@@ -157,25 +157,6 @@ export const spreads: Spread[] = [
       { label: "Issue finale", meaning: "La tendance de fond vers laquelle tout semble converger." },
     ],
   },
-  {
-    id: "spread-chakras",
-    name: "Le tirage des centres d'énergie",
-    cardCount: 7,
-    difficulty: "avance",
-    isFree: false,
-    shortDescription: "Une carte par grand centre énergétique du corps, pour une lecture axée sur l'équilibre intérieur.",
-    whenToUse:
-      "Pour un bilan personnel global, en dehors de toute question précise, centré sur le ressenti et l'équilibre de vie.",
-    positions: [
-      { label: "Racine", meaning: "Sécurité, ancrage, stabilité matérielle." },
-      { label: "Sacré", meaning: "Émotions, désir, créativité." },
-      { label: "Plexus solaire", meaning: "Confiance en soi, volonté, affirmation personnelle." },
-      { label: "Cœur", meaning: "Amour, relations, capacité à donner et recevoir." },
-      { label: "Gorge", meaning: "Communication, expression de sa vérité." },
-      { label: "Troisième œil", meaning: "Intuition, clarté d'esprit, vision intérieure." },
-      { label: "Couronne", meaning: "Connexion à un sens plus large, spiritualité, ouverture." },
-    ],
-  },
 ];
 
 export function getSpreadById(id: string): Spread | undefined {

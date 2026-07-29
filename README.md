@@ -42,10 +42,11 @@ supabase/schema.sql        Schéma SQL à exécuter dans votre projet Supabase
 
 ## Modèle freemium
 
-- **Gratuit** : tirage du jour (accueil), les 22 arcanes majeurs + 4 as, les 3 premiers articles
-  pédagogiques, les tirages à 1, 2 et 3 cartes.
+- **Gratuit** : tirage du jour (accueil), les 22 arcanes majeurs + 4 as, les 5 premiers articles
+  pédagogiques (histoire, Marseille vs Rider-Waite, majeurs/mineurs, familles des mineurs), les
+  tirages à 1, 2 et 3 cartes.
 - **Premium** : les 56 arcanes mineurs restants, tous les articles, tous les tirages avancés
-  (croix, croix celtique, amour, année, décision, chakras) et **toutes les associations de cartes**
+  (croix, croix celtique, amour, année, décision) et **toutes les associations de cartes**
   (`src/data/combos.ts`), intégralement payantes.
 
 Le statut `isFree` de chaque carte/tirage/article/association dans `src/data` contrôle cet accès ;

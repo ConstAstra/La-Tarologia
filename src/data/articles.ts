@@ -55,6 +55,21 @@ export const articles: Article[] = [
     ],
   },
   {
+    id: "art-familles-mineures",
+    category: "pratique",
+    title: "Les quatre familles des arcanes mineurs",
+    isFree: true,
+    summary: "Bâtons, Coupes, Épées, Deniers : chaque famille couvre un pan différent de la vie. Voici comment les reconnaître et les lire.",
+    body: [
+      "Les cinquante-six arcanes mineurs se répartissent en quatre familles de quatorze cartes chacune, un peu comme les couleurs d'un jeu de cartes classique. Chaque famille est associée à un élément et à un domaine de vie bien particulier, ce qui permet, dès le premier coup d'œil sur un tirage, de sentir de quoi il va vraiment être question avant même de lire le détail de chaque carte.",
+      "Les Bâtons appartiennent à l'élément Feu. Ils portent tout ce qui relève de l'élan, de l'action et du désir : l'envie d'entreprendre, l'ambition, la passion, la créativité qui pousse à se lancer. Une main de tirage riche en Bâtons parle généralement de mouvement, de projets, d'énergie à canaliser, parfois aussi de compétition ou de précipitation quand cette énergie manque de direction. C'est la famille du « faire » et du « vouloir ».",
+      "Les Coupes appartiennent à l'élément Eau. Elles couvrent tout ce qui touche au ressenti : l'amour, les liens affectifs, l'intuition, la vie intérieure, l'imagination. Un tirage marqué par les Coupes oriente la lecture vers le cœur et les relations, qu'il s'agisse d'un sentiment naissant, d'une émotion à digérer ou d'un lien à réparer. C'est la famille du « ressentir » et de l'« aimer ».",
+      "Les Épées appartiennent à l'élément Air. Elles représentent la pensée : la clarté d'esprit, la communication, mais aussi les conflits, les peurs et les vérités parfois difficiles à entendre. Une présence marquée des Épées dans un tirage signale souvent une situation qui se joue autant dans la tête que dans les faits : une décision à prendre, une conversation à avoir, un mental à apaiser. C'est la famille du « penser » et du « dire ».",
+      "Les Deniers, enfin, appartiennent à l'élément Terre. Ils concernent tout ce qui est concret : l'argent, le travail, le corps, la sécurité matérielle, le quotidien. Un tirage riche en Deniers ramène généralement la question vers des enjeux tangibles, palpables, loin de l'abstraction : un projet professionnel, une gestion de budget, une question de santé ou d'organisation pratique. C'est la famille du « bâtir » et du « posséder ».",
+      "Dans une lecture, il est utile de regarder quelle famille domine un tirage, au-delà du sens de chaque carte prise isolément : plusieurs Coupes ensemble insistent sur la dimension affective d'une situation, plusieurs Épées sur sa dimension mentale ou conflictuelle, et ainsi de suite. Cette vue d'ensemble, souvent négligée par les débutants, est pourtant l'un des réflexes les plus utiles pour ne pas se perdre dans le détail avant d'avoir saisi la tonalité générale du tirage.",
+    ],
+  },
+  {
     id: "art-symbolisme-nombres",
     category: "pratique",
     title: "Ce que racontent les nombres dans le tarot",

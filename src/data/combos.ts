@@ -1,8 +1,10 @@
 import { CardCombo } from "@/types/tarot";
 import { getCardById } from "./cards";
 import { combosMajeurs } from "./combos.majeurs";
+import { combosMajeursAs } from "./combos.majeursAs";
 import { combosMajeursMineurs } from "./combos.majeursMineurs";
 import { combosMineurs } from "./combos.mineurs";
+import { combosMineursRangs } from "./combos.mineursRangs";
 import { generateCombo } from "./combosGenerator";
 
 // Associations de cartes : contenu Premium.
@@ -15,13 +17,16 @@ import { generateCombo } from "./combosGenerator";
 // associations de cartes classiques, reformulée avec un style propre — aucun texte n'est copié
 // d'un site ou d'un ouvrage existant.
 //
-// Ce fichier réunit tout le contenu rédigé à la main :
+// Ce fichier réunit tout le contenu rédigé à la main (482 associations au total) :
 // - combosMixtes : une sélection d'associations emblématiques mêlant arcanes majeurs et mineurs
 // - combosMajeurs (combos.majeurs.ts) : la couverture complète des 231 associations possibles
 //   entre les 22 arcanes majeurs
+// - combosMajeursAs (combos.majeursAs.ts) : chaque arcane majeur associé aux 4 As
 // - combosMajeursMineurs (combos.majeursMineurs.ts) : une sélection de mineurs particulièrement
 //   résonnants pour chaque majeur
 // - combosMineurs (combos.mineurs.ts) : une sélection d'associations entre arcanes mineurs
+// - combosMineursRangs (combos.mineursRangs.ts) : la couverture complète des associations entre
+//   arcanes mineurs de même rang à travers les 4 familles (numérologie partagée)
 //
 // Pour toute paire de cartes qui n'est couverte par aucun de ces ensembles (le jeu complet
 // compte 3003 paires possibles au total, ce qui dépasse ce qu'il est raisonnable de rédiger
@@ -474,8 +479,10 @@ const combosMixtes: CardCombo[] = [
 export const combos: CardCombo[] = [
   ...combosMixtes,
   ...combosMajeurs,
+  ...combosMajeursAs,
   ...combosMajeursMineurs,
   ...combosMineurs,
+  ...combosMineursRangs,
 ];
 
 // Index pour une recherche O(1) plutôt que de parcourir tout le contenu rédigé à chaque tirage.
