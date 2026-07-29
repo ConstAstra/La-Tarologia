@@ -20,12 +20,13 @@ const CATEGORIES: { key: CategoryKey; label: string; icon: keyof typeof Ionicons
   { key: "sentimentsDeLAutre", label: "Ses sentiments pour vous", icon: "eye-outline" },
 ];
 
-type ScopeKey = "toutes" | "majeurs" | "mixtes";
+type ScopeKey = "toutes" | "majeurs" | "mixtes" | "mineurs";
 
 const SCOPES: { key: ScopeKey; label: string }[] = [
   { key: "toutes", label: `Toutes (${combos.length})` },
-  { key: "majeurs", label: "Arcanes majeurs entre eux" },
+  { key: "majeurs", label: "Majeurs entre eux" },
   { key: "mixtes", label: "Majeurs + mineurs" },
+  { key: "mineurs", label: "Mineurs entre eux" },
 ];
 
 export default function AssociationsScreen() {
@@ -39,8 +40,13 @@ export default function AssociationsScreen() {
     const q = query.trim().toLowerCase();
     return combos.filter((combo) => {
       const [cardA, cardB] = combo.cardIds.map(getCardById);
+      const bothMajeurs = cardA?.arcana === "majeur" && cardB?.arcana === "majeur";
+      const bothMineurs = cardA?.arcana === "mineur" && cardB?.arcana === "mineur";
       const matchesScope =
-        scope === "toutes" ? true : scope === "majeurs" ? combo.id.startsWith("combo-maj") : !combo.id.startsWith("combo-maj");
+        scope === "toutes" ||
+        (scope === "majeurs" && bothMajeurs) ||
+        (scope === "mineurs" && bothMineurs) ||
+        (scope === "mixtes" && !bothMajeurs && !bothMineurs);
       const matchesQuery =
         q.length === 0 ||
         combo.title.toLowerCase().includes(q) ||
@@ -132,6 +138,15 @@ export default function AssociationsScreen() {
           </Pressable>
         )}
 
+        <Pressable style={styles.explorerLink} onPress={() => router.push("/cartes/explorer")}>
+          <Ionicons name="shuffle-outline" size={16} color={colors.gold} />
+          <Text style={styles.explorerLinkText}>
+            Ces {combos.length} associations rédigées ne couvrent qu'une partie du jeu : choisissez deux cartes au
+            hasard pour obtenir leur association, quelle qu'elle soit.
+          </Text>
+          <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
+        </Pressable>
+
         <View style={styles.searchBar}>
           <Ionicons name="search" size={16} color={colors.textMuted} />
           <TextInput
@@ -183,6 +198,16 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   paywallBannerText: { color: colors.background, fontWeight: "700", fontSize: 13, flex: 1 },
+  explorerLink: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    backgroundColor: colors.cardAlt,
+    borderRadius: 12,
+    padding: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  explorerLinkText: { color: colors.textMuted, fontSize: 12, lineHeight: 16, flex: 1 },
   searchBar: {
     flexDirection: "row",
     alignItems: "center",

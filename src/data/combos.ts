@@ -1,5 +1,9 @@
 import { CardCombo } from "@/types/tarot";
+import { getCardById } from "./cards";
 import { combosMajeurs } from "./combos.majeurs";
+import { combosMajeursMineurs } from "./combos.majeursMineurs";
+import { combosMineurs } from "./combos.mineurs";
+import { generateCombo } from "./combosGenerator";
 
 // Associations de cartes : contenu Premium.
 // Principe de lecture : la première carte de "cardIds" porte l'énergie dominante du tirage,
@@ -11,10 +15,19 @@ import { combosMajeurs } from "./combos.majeurs";
 // associations de cartes classiques, reformulée avec un style propre — aucun texte n'est copié
 // d'un site ou d'un ouvrage existant.
 //
-// Ce fichier réunit deux ensembles :
+// Ce fichier réunit tout le contenu rédigé à la main :
 // - combosMixtes : une sélection d'associations emblématiques mêlant arcanes majeurs et mineurs
-// - combosMajeurs (src/data/combos.majeurs.ts) : la couverture complète des 231 associations
-//   possibles entre les 22 arcanes majeurs
+// - combosMajeurs (combos.majeurs.ts) : la couverture complète des 231 associations possibles
+//   entre les 22 arcanes majeurs
+// - combosMajeursMineurs (combos.majeursMineurs.ts) : une sélection de mineurs particulièrement
+//   résonnants pour chaque majeur
+// - combosMineurs (combos.mineurs.ts) : une sélection d'associations entre arcanes mineurs
+//
+// Pour toute paire de cartes qui n'est couverte par aucun de ces ensembles (le jeu complet
+// compte 3003 paires possibles au total, ce qui dépasse ce qu'il est raisonnable de rédiger
+// entièrement à la main), getComboForCards génère une interprétation à la volée via
+// combosGenerator.ts, construite à partir des significations déjà rédigées pour chaque carte
+// individuellement — jamais une interprétation vide ou inventée au hasard.
 const combosMixtes: CardCombo[] = [
   {
     id: "combo-deuxcoupes-soleil",
@@ -458,17 +471,34 @@ const combosMixtes: CardCombo[] = [
   },
 ];
 
-export const combos: CardCombo[] = [...combosMixtes, ...combosMajeurs];
+export const combos: CardCombo[] = [
+  ...combosMixtes,
+  ...combosMajeurs,
+  ...combosMajeursMineurs,
+  ...combosMineurs,
+];
+
+// Index pour une recherche O(1) plutôt que de parcourir tout le contenu rédigé à chaque tirage.
+const combosByPairKey = new Map<string, CardCombo>();
+for (const combo of combos) {
+  combosByPairKey.set(`${combo.cardIds[0]}|${combo.cardIds[1]}`, combo);
+}
 
 export function getComboForCards(
   cardIdFirst: string,
   cardIdSecond: string
-): { combo: CardCombo; reversedOrder: boolean } | undefined {
-  const exact = combos.find((c) => c.cardIds[0] === cardIdFirst && c.cardIds[1] === cardIdSecond);
-  if (exact) return { combo: exact, reversedOrder: false };
+): { combo: CardCombo; reversedOrder: boolean; generated: boolean } | undefined {
+  const exact = combosByPairKey.get(`${cardIdFirst}|${cardIdSecond}`);
+  if (exact) return { combo: exact, reversedOrder: false, generated: false };
 
-  const inverted = combos.find((c) => c.cardIds[0] === cardIdSecond && c.cardIds[1] === cardIdFirst);
-  if (inverted) return { combo: inverted, reversedOrder: true };
+  const inverted = combosByPairKey.get(`${cardIdSecond}|${cardIdFirst}`);
+  if (inverted) return { combo: inverted, reversedOrder: true, generated: false };
+
+  const cardA = getCardById(cardIdFirst);
+  const cardB = getCardById(cardIdSecond);
+  if (cardA && cardB) {
+    return { combo: generateCombo(cardA, cardB), reversedOrder: false, generated: true };
+  }
 
   return undefined;
 }

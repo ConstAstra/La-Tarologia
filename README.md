@@ -61,16 +61,34 @@ de tirage est inversé (champ `siOrdreInverse`). Le contenu s'appuie sur une syn
 significations de combinaisons largement partagées dans la pratique du tarot, reformulée dans un
 style propre à l'application.
 
-C'est la fonctionnalité la plus riche de l'application : elle couvre **248 associations**,
-réparties en deux fichiers :
-- `src/data/combos.ts` : 22 associations emblématiques mêlant arcanes majeurs et mineurs
-  (ex. Deux de Coupes + Le Soleil, La Lune + L'Impératrice)
-- `src/data/combos.majeurs.ts` : la **couverture complète des 231 associations possibles entre
-  les 22 arcanes majeurs** deux à deux (226 paires dans ce fichier, 5 déjà présentes dans
-  `combos.ts`), organisées par première carte
+C'est la fonctionnalité la plus riche de l'application, avec une couverture à 100 % : sur les
+**3003 associations possibles** entre les 78 cartes du jeu (78 × 77 ÷ 2), chacune obtient une
+interprétation réelle, jamais un vide.
 
-L'écran Associations (`app/(tabs)/cartes/associations.tsx`) propose une recherche et un filtre
-par carte pour naviguer facilement dans ce volume de contenu.
+- **335 associations rédigées entièrement à la main**, réparties dans quatre fichiers :
+  - `src/data/combos.ts` : 22 associations emblématiques mêlant arcanes majeurs et mineurs
+    (ex. Deux de Coupes + Le Soleil, La Lune + L'Impératrice)
+  - `src/data/combos.majeurs.ts` : la **couverture complète des 231 associations possibles
+    entre les 22 arcanes majeurs** deux à deux
+  - `src/data/combos.majeursMineurs.ts` : 44 associations entre un arcane majeur et un mineur
+    particulièrement résonnant
+  - `src/data/combos.mineurs.ts` : 43 associations entre arcanes mineurs (numérologie partagée,
+    figures de cour, thèmes croisés)
+- **2668 associations générées à la volée** par `src/data/combosGenerator.ts` pour toute paire
+  non couverte par le contenu rédigé : le texte n'est pas inventé au hasard, il est composé à
+  partir des significations déjà écrites pour chaque carte individuellement (mots-clés, sens à
+  l'endroit, amour, travail/argent, conseil), avec plusieurs variantes de formulation choisies de
+  façon déterministe pour éviter un rendu trop répétitif.
+
+`getComboForCards()` (dans `combos.ts`) cherche d'abord dans le contenu rédigé, puis bascule
+automatiquement sur le générateur — utilisé par l'accueil et les tirages. Vérifié par un test
+exhaustif sur les 3003 paires (aucune exception, aucun champ vide).
+
+L'écran Associations (`app/(tabs)/cartes/associations.tsx`) propose une recherche et des filtres
+(majeurs entre eux / majeurs + mineurs / mineurs entre eux) sur le contenu rédigé. Un second écran,
+« Choisir deux cartes » (`app/(tabs)/cartes/explorer.tsx`, accessible depuis l'écran Associations),
+permet de sélectionner n'importe quelle paire parmi les 78 cartes et d'obtenir son association,
+rédigée ou générée — avec une mention transparente quand elle est générée.
 
 ## Mise en route (développement local)
 
