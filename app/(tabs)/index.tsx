@@ -22,6 +22,8 @@ import { MeditationQuestionsBox } from "@/components/MeditationQuestionsBox";
 import { getMeditationQuestions } from "@/lib/meditationQuestions";
 import { recordDrawAndGetStreak, getStreak } from "@/lib/streak";
 import { getMoonPhase, getMoonLabel, getMoonIonicon } from "@/lib/moonPhase";
+import { Share } from "react-native";
+import { IntentionBox } from "@/components/IntentionBox";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
 
@@ -108,6 +110,21 @@ export default function AccueilScreen() {
   const moonLabel = getMoonLabel(moonPhase, locale);
   const moonIcon = getMoonIonicon(moonPhase) as React.ComponentProps<typeof Ionicons>["name"];
 
+  const handleShare = useCallback(async () => {
+    if (!draw) return;
+    const date = new Date().toLocaleDateString(locale === "fr" ? "fr-FR" : locale === "es" ? "es-ES" : "en-GB");
+    const lines = [
+      t.share.drawTitle(date),
+      "",
+      ...draw.map((d) =>
+        `${d.card.name}${d.reversed ? ` (${t.share.reversed})` : ""} — ${d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning}`
+      ),
+      "",
+      t.share.via,
+    ];
+    await Share.share({ message: lines.join("\n") });
+  }, [draw, locale, t]);
+
   return (
     <Screen>
       <View style={styles.flourishRow}>
@@ -139,6 +156,8 @@ export default function AccueilScreen() {
         <Text style={styles.loading}>{t.accueil.loading}</Text>
       ) : (
         <>
+          <IntentionBox />
+
           <View style={styles.cardsRow}>
             {draw.map((d, i) => (
               <DrawnCardView
@@ -152,7 +171,12 @@ export default function AccueilScreen() {
           </View>
 
           <View style={styles.interpretationBox}>
-            <Text style={styles.interpretationTitle}>{t.accueil.lectureDuJour}</Text>
+            <View style={styles.interpretationHeader}>
+              <Text style={styles.interpretationTitle}>{t.accueil.lectureDuJour}</Text>
+              <Pressable onPress={handleShare} hitSlop={10} style={styles.shareButton}>
+                <Ionicons name="share-outline" size={18} color={colors.textMuted} />
+              </Pressable>
+            </View>
             {draw.map((d) => (
               <Text key={d.card.id} style={styles.interpretationText}>
                 <Text style={styles.interpretationCardName}>
@@ -227,7 +251,9 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     gap: spacing.sm,
   },
-  interpretationTitle: { color: colors.gold, fontFamily: fonts.heading, fontSize: 17, marginBottom: spacing.xs },
+  interpretationHeader: { flexDirection: "row", alignItems: "center", marginBottom: spacing.xs },
+  shareButton: { padding: 4 },
+  interpretationTitle: { color: colors.gold, fontFamily: fonts.heading, fontSize: 17, flex: 1 },
   interpretationText: { color: colors.text, lineHeight: 20 },
   interpretationCardName: { fontFamily: fonts.bodyBold, color: colors.primary },
   comboBox: { backgroundColor: colors.cardAlt, borderRadius: 12, padding: spacing.sm, marginTop: spacing.xs, gap: 4 },

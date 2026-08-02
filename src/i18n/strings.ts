@@ -115,6 +115,17 @@ export const STRINGS = {
       startButton: "Commencer",
       dots: ["", "", ""],
     },
+    intention: {
+      title: "Mon intention de la semaine",
+      placeholder: "Quelle énergie voulez-vous cultiver cette semaine ?",
+      saved: "sauvegardée",
+    },
+    share: {
+      drawTitle: (date: string) => `Mon tirage du ${date}`,
+      via: "via La Tarologia",
+      reversed: "inversée",
+      button: "Partager ce tirage",
+    },
     streak: {
       label: (n: number) => n === 1 ? "1er tirage" : `${n} jours de suite`,
     },
@@ -321,6 +332,17 @@ export const STRINGS = {
       startButton: "Begin",
       dots: ["", "", ""],
     },
+    intention: {
+      title: "My intention for the week",
+      placeholder: "What energy do you want to cultivate this week?",
+      saved: "saved",
+    },
+    share: {
+      drawTitle: (date: string) => `My draw of ${date}`,
+      via: "via La Tarologia",
+      reversed: "reversed",
+      button: "Share this draw",
+    },
     streak: {
       label: (n: number) => n === 1 ? "First draw" : `${n} days in a row`,
     },
@@ -526,6 +548,17 @@ export const STRINGS = {
       notifSkip: "Más tarde",
       startButton: "Comenzar",
       dots: ["", "", ""],
+    },
+    intention: {
+      title: "Mi intención de la semana",
+      placeholder: "¿Qué energía quieres cultivar esta semana?",
+      saved: "guardada",
+    },
+    share: {
+      drawTitle: (date: string) => `Mi tirada del ${date}`,
+      via: "vía La Tarologia",
+      reversed: "invertida",
+      button: "Compartir esta tirada",
     },
     streak: {
       label: (n: number) => n === 1 ? "Primera tirada" : `${n} días seguidos`,
