@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View, Platform } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,6 +12,12 @@ import { LOCALES } from "@/i18n/locales";
 import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
 import { useCards } from "@/data/i18n";
+import {
+  cancelDailyReminder,
+  getNotificationPrefs,
+  requestNotificationPermission,
+  scheduleDailyReminder,
+} from "@/lib/notifications";
 
 interface DrawHistoryItem {
   id: string;
@@ -19,6 +25,8 @@ interface DrawHistoryItem {
   card_ids: string[];
   created_at: string;
 }
+
+type NotifHour = 8 | 12 | 20;
 
 function LanguagePicker() {
   const { locale, setLocale } = useLocale();
@@ -43,6 +51,75 @@ function LanguagePicker() {
   );
 }
 
+function NotificationBlock() {
+  const t = useT();
+  const [enabled, setEnabled] = useState(false);
+  const [hour, setHour] = useState<NotifHour>(8);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getNotificationPrefs().then((prefs) => {
+      setEnabled(prefs.enabled);
+      setHour(prefs.hour as NotifHour);
+      setLoading(false);
+    });
+  }, []);
+
+  if (Platform.OS === "web" || loading) return null;
+
+  const toggle = async () => {
+    if (enabled) {
+      await cancelDailyReminder();
+      setEnabled(false);
+    } else {
+      const granted = await requestNotificationPermission();
+      if (granted) {
+        await scheduleDailyReminder(hour, 0);
+        setEnabled(true);
+      }
+    }
+  };
+
+  const setTime = async (h: NotifHour) => {
+    setHour(h);
+    if (enabled) await scheduleDailyReminder(h, 0);
+  };
+
+  const timeLabels: Record<NotifHour, string> = {
+    8: t.profil.notifTimeMorning,
+    12: t.profil.notifTimeMidday,
+    20: t.profil.notifTimeEvening,
+  };
+
+  return (
+    <View style={styles.notifBlock}>
+      <View style={styles.notifHeader}>
+        <Text style={styles.sectionTitle}>{t.profil.notifications}</Text>
+        <Pressable style={[styles.togglePill, enabled && styles.togglePillOn]} onPress={toggle}>
+          <Text style={[styles.toggleText, enabled && styles.toggleTextOn]}>
+            {enabled ? t.profil.notifEnabled : t.profil.notifDisabled}
+          </Text>
+        </Pressable>
+      </View>
+      {enabled && (
+        <View style={styles.timeRow}>
+          {([8, 12, 20] as NotifHour[]).map((h) => (
+            <Pressable
+              key={h}
+              style={[styles.timeChip, h === hour && styles.timeChipActive]}
+              onPress={() => setTime(h)}
+            >
+              <Text style={[styles.timeChipText, h === hour && styles.timeChipTextActive]}>
+                {timeLabels[h]}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}
+
 export default function ProfilScreen() {
   const { user, signOut } = useAuth();
   const { isPremium, restore } = useSubscription();
@@ -59,7 +136,7 @@ export default function ProfilScreen() {
       .from("draws")
       .select("id, spread_id, card_ids, created_at")
       .order("created_at", { ascending: false })
-      .limit(20)
+      .limit(5)
       .then(({ data }) => setHistory(data ?? []));
   }, [user]);
 
@@ -115,7 +192,14 @@ export default function ProfilScreen() {
 
       <LanguagePicker />
 
-      <Text style={styles.sectionTitle}>{t.profil.historyTitle}</Text>
+      <NotificationBlock />
+
+      <View style={styles.historyHeader}>
+        <Text style={styles.sectionTitle}>{t.profil.historyTitle}</Text>
+        <Pressable onPress={() => router.push("/(tabs)/profil/historique")}>
+          <Text style={styles.historyViewAll}>{t.profil.historyViewAll}</Text>
+        </Pressable>
+      </View>
       {history.length === 0 ? (
         <Text style={styles.emptyText}>{t.profil.historyEmpty}</Text>
       ) : (
@@ -196,4 +280,30 @@ const styles = StyleSheet.create({
   languageChipActive: { backgroundColor: colors.gold, borderColor: colors.gold },
   languageChipText: { color: colors.textMuted, fontSize: 13, fontFamily: fonts.bodySemiBold },
   languageChipTextActive: { color: colors.background },
+  notifBlock: { width: "100%", marginBottom: spacing.lg },
+  notifHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: spacing.sm },
+  togglePill: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+  },
+  togglePillOn: { backgroundColor: colors.gold, borderColor: colors.gold },
+  toggleText: { color: colors.textMuted, fontSize: 12, fontFamily: fonts.bodySemiBold },
+  toggleTextOn: { color: colors.background },
+  timeRow: { flexDirection: "row", gap: spacing.sm },
+  timeChip: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingVertical: 8,
+    alignItems: "center",
+  },
+  timeChipActive: { backgroundColor: colors.cardAlt, borderColor: colors.primary },
+  timeChipText: { color: colors.textMuted, fontSize: 11, fontFamily: fonts.bodySemiBold },
+  timeChipTextActive: { color: colors.primary },
+  historyHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: spacing.sm },
+  historyViewAll: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodySemiBold },
 });

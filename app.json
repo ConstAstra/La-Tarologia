@@ -31,7 +31,17 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#210911",
+          "sounds": []
+        }
+      ]
+    ],
     "extra": {
       "supabaseUrl": "https://YOUR-PROJECT.supabase.co",
       "supabaseAnonKey": "YOUR-SUPABASE-ANON-KEY",

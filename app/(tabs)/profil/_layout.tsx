@@ -15,6 +15,7 @@ export default function ProfilLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: t.nav.profil }} />
+      <Stack.Screen name="historique" options={{ title: t.historique.title }} />
     </Stack>
   );
 }
