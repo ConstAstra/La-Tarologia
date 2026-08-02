@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { AppText as Text } from "@/components/AppText";
 import { AppTextInput as TextInput } from "@/components/AppTextInput";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Screen } from "@/components/Screen";
 import { CardListItem } from "@/components/CardListItem";
@@ -10,8 +10,9 @@ import { useCards } from "@/data/i18n";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { useT } from "@/i18n/useT";
+import { getFavorites } from "@/lib/favorites";
 
-type FilterKey = "tous" | "majeur" | "batons" | "coupes" | "epees" | "deniers";
+type FilterKey = "tous" | "majeur" | "batons" | "coupes" | "epees" | "deniers" | "favoris";
 
 export default function CartesIndex() {
   const { isPremium } = useSubscription();
@@ -19,6 +20,13 @@ export default function CartesIndex() {
   const cards = useCards();
   const [filter, setFilter] = useState<FilterKey>("tous");
   const [query, setQuery] = useState("");
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      getFavorites().then(setFavoriteIds);
+    }, [])
+  );
 
   const FILTERS: { key: FilterKey; label: string }[] = [
     { key: "tous", label: t.cartes.filterAll },
@@ -27,16 +35,20 @@ export default function CartesIndex() {
     { key: "coupes", label: t.cartes.filterCoupes },
     { key: "epees", label: t.cartes.filterEpees },
     { key: "deniers", label: t.cartes.filterDeniers },
+    { key: "favoris", label: t.cartes.filterFavoris },
   ];
 
   const filtered = useMemo(() => {
     return cards.filter((c) => {
       const matchesFilter =
-        filter === "tous" ? true : filter === "majeur" ? c.arcana === "majeur" : c.suit === filter;
+        filter === "tous" ? true
+        : filter === "majeur" ? c.arcana === "majeur"
+        : filter === "favoris" ? favoriteIds.includes(c.id)
+        : c.suit === filter;
       const matchesQuery = query.trim().length === 0 || c.name.toLowerCase().includes(query.trim().toLowerCase());
       return matchesFilter && matchesQuery;
     });
-  }, [cards, filter, query]);
+  }, [cards, filter, query, favoriteIds]);
 
   return (
     <Screen scroll={false} style={styles.flex}>
@@ -77,16 +89,20 @@ export default function CartesIndex() {
       </View>
 
       <ScrollView contentContainerStyle={styles.list}>
-        {filtered.map((card) => (
-          <CardListItem
-            key={card.id}
-            card={card}
-            locked={!card.isFree && !isPremium}
-            onPress={() =>
-              !card.isFree && !isPremium ? router.push("/paywall") : router.push(`/cartes/${card.id}`)
-            }
-          />
-        ))}
+        {filter === "favoris" && filtered.length === 0 ? (
+          <Text style={styles.emptyFavorites}>{t.cartes.noFavorites}</Text>
+        ) : (
+          filtered.map((card) => (
+            <CardListItem
+              key={card.id}
+              card={card}
+              locked={!card.isFree && !isPremium}
+              onPress={() =>
+                !card.isFree && !isPremium ? router.push("/paywall") : router.push(`/cartes/${card.id}`)
+              }
+            />
+          ))
+        )}
       </ScrollView>
     </Screen>
   );
@@ -142,4 +158,5 @@ const styles = StyleSheet.create({
   filterChipText: { color: colors.textMuted, fontSize: 12 },
   filterChipTextActive: { color: colors.background, fontFamily: fonts.bodyBold },
   list: { paddingHorizontal: spacing.md, paddingBottom: spacing.xl },
+  emptyFavorites: { color: colors.textMuted, fontSize: 13, textAlign: "center", marginTop: spacing.xl, lineHeight: 20 },
 });

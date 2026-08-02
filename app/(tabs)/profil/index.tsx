@@ -120,6 +120,55 @@ function NotificationBlock() {
   );
 }
 
+interface StatsData {
+  totalDraws: number;
+  mostDrawnCard: string | null;
+}
+
+function StatsBlock() {
+  const t = useT();
+  const { user } = useAuth();
+  const cards = useCards();
+  const [stats, setStats] = useState<StatsData | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    supabase
+      .from("draws")
+      .select("card_ids")
+      .eq("user_id", user.id)
+      .then(({ data }) => {
+        if (!data) return;
+        const allIds = data.flatMap((d) => d.card_ids as string[]);
+        const freq: Record<string, number> = {};
+        for (const id of allIds) freq[id] = (freq[id] ?? 0) + 1;
+        const topId = Object.entries(freq).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
+        const topName = topId ? (cards.find((c) => c.id === topId)?.name ?? null) : null;
+        setStats({ totalDraws: data.length, mostDrawnCard: topName });
+      });
+  }, [user, cards]);
+
+  if (!user || !stats) return null;
+
+  return (
+    <View style={styles.statsBlock}>
+      <Text style={styles.sectionTitle}>{t.profil.statsTitle}</Text>
+      <View style={styles.statsRow}>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{stats.totalDraws}</Text>
+          <Text style={styles.statLabel}>{t.profil.statsTotalDraws}</Text>
+        </View>
+        {stats.mostDrawnCard && (
+          <View style={[styles.statItem, styles.statItemRight]}>
+            <Text style={styles.statNumber} numberOfLines={1}>{stats.mostDrawnCard}</Text>
+            <Text style={styles.statLabel}>{t.profil.statsMostDrawn}</Text>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+}
+
 export default function ProfilScreen() {
   const { user, signOut } = useAuth();
   const { isPremium, restore } = useSubscription();
@@ -189,6 +238,8 @@ export default function ProfilScreen() {
       <Pressable style={styles.secondaryButton} onPress={restore}>
         <Text style={styles.secondaryButtonText}>{t.profil.restorePurchases}</Text>
       </Pressable>
+
+      <StatsBlock />
 
       <LanguagePicker />
 
@@ -306,4 +357,10 @@ const styles = StyleSheet.create({
   timeChipTextActive: { color: colors.primary },
   historyHeader: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: spacing.sm },
   historyViewAll: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodySemiBold },
+  statsBlock: { width: "100%", marginBottom: spacing.lg },
+  statsRow: { flexDirection: "row", gap: spacing.sm },
+  statItem: { flex: 1, backgroundColor: colors.card, borderRadius: 14, padding: spacing.md, alignItems: "center" },
+  statItemRight: { flex: 2 },
+  statNumber: { color: colors.gold, fontFamily: fonts.heading, fontSize: 20, textAlign: "center" },
+  statLabel: { color: colors.textMuted, fontSize: 11, fontFamily: fonts.body, textAlign: "center", marginTop: 2 },
 });

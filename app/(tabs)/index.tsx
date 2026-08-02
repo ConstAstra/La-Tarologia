@@ -21,6 +21,7 @@ import { JournalBox } from "@/components/JournalBox";
 import { MeditationQuestionsBox } from "@/components/MeditationQuestionsBox";
 import { getMeditationQuestions } from "@/lib/meditationQuestions";
 import { recordDrawAndGetStreak, getStreak } from "@/lib/streak";
+import { getMoonPhase, getMoonLabel, getMoonIonicon } from "@/lib/moonPhase";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
 
@@ -103,6 +104,10 @@ export default function AccueilScreen() {
     return getMeditationQuestions(draw, locale);
   }, [draw, locale]);
 
+  const moonPhase = useMemo(() => getMoonPhase(), []);
+  const moonLabel = getMoonLabel(moonPhase, locale);
+  const moonIcon = getMoonIonicon(moonPhase) as React.ComponentProps<typeof Ionicons>["name"];
+
   return (
     <Screen>
       <View style={styles.flourishRow}>
@@ -117,6 +122,11 @@ export default function AccueilScreen() {
         <View style={styles.flourishLine} />
       </View>
       <Text style={styles.subtitle}>{t.accueil.subtitle}</Text>
+
+      <View style={styles.moonRow}>
+        <Ionicons name={moonIcon} size={11} color={colors.textMuted} />
+        <Text style={styles.moonText}>{moonLabel}</Text>
+      </View>
 
       {streak > 1 && (
         <View style={styles.streakChip}>
@@ -238,4 +248,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   streakText: { color: colors.gold, fontFamily: fonts.bodySemiBold, fontSize: 12 },
+  moonRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 5, marginBottom: spacing.xs },
+  moonText: { color: colors.textMuted, fontSize: 11, fontFamily: fonts.body },
 });
