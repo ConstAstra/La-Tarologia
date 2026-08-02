@@ -14,8 +14,13 @@ import { colors, fonts, spacing } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { useT } from "@/i18n/useT";
+import { useLocale } from "@/context/LocaleContext";
 import { supabase } from "@/lib/supabase";
 import { AiReadingBox } from "@/components/AiReadingBox";
+import { JournalBox } from "@/components/JournalBox";
+import { MeditationQuestionsBox } from "@/components/MeditationQuestionsBox";
+import { getMeditationQuestions } from "@/lib/meditationQuestions";
+import { recordDrawAndGetStreak, getStreak } from "@/lib/streak";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
 
@@ -27,13 +32,12 @@ export default function AccueilScreen() {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   const t = useT();
+  const { locale } = useLocale();
   const cards = useCards();
-  // On ne stocke que les identifiants et l'état renversé : les objets carte affichés sont
-  // toujours recalculés depuis `cards` (localisé) au moment du rendu, pour qu'un changement
-  // de langue mette à jour un tirage déjà affiché sans avoir besoin de le retirer.
   const [drawIds, setDrawIds] = useState<{ id: string; reversed: boolean }[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [justDrawn, setJustDrawn] = useState(false);
+  const [streak, setStreak] = useState(0);
 
   const loadOrCreateDraw = useCallback(async () => {
     setIsLoading(true);
@@ -45,6 +49,7 @@ export default function AccueilScreen() {
       if (parsed.date === today) {
         setJustDrawn(false);
         setDrawIds(parsed.cardIds.map((id, i) => ({ id, reversed: parsed.reversed[i] })));
+        getStreak().then(setStreak);
         setIsLoading(false);
         return;
       }
@@ -53,6 +58,7 @@ export default function AccueilScreen() {
     const fresh = drawRandomCards(2).map((d) => ({ id: d.card.id, reversed: d.reversed }));
     setJustDrawn(true);
     setDrawIds(fresh);
+    recordDrawAndGetStreak().then(setStreak);
     await AsyncStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
@@ -92,6 +98,11 @@ export default function AccueilScreen() {
   const comboMatch =
     draw && draw.length === 2 ? getComboForCards(draw[0].card.id, draw[1].card.id) : undefined;
 
+  const meditationQuestions = useMemo<string[]>(() => {
+    if (!draw) return [];
+    return getMeditationQuestions(draw, locale);
+  }, [draw, locale]);
+
   return (
     <Screen>
       <View style={styles.flourishRow}>
@@ -106,6 +117,13 @@ export default function AccueilScreen() {
         <View style={styles.flourishLine} />
       </View>
       <Text style={styles.subtitle}>{t.accueil.subtitle}</Text>
+
+      {streak > 1 && (
+        <View style={styles.streakChip}>
+          <Ionicons name="flame" size={13} color={colors.gold} />
+          <Text style={styles.streakText}>{t.streak.label(streak)}</Text>
+        </View>
+      )}
 
       {isLoading || !draw ? (
         <Text style={styles.loading}>{t.accueil.loading}</Text>
@@ -162,6 +180,12 @@ export default function AccueilScreen() {
             }))}
           />
 
+          {meditationQuestions.length > 0 && (
+            <MeditationQuestionsBox questions={meditationQuestions} />
+          )}
+
+          <JournalBox journalKey={todayKey()} />
+
           <Text style={styles.hint}>{t.accueil.hint}</Text>
         </>
       )}
@@ -202,4 +226,16 @@ const styles = StyleSheet.create({
   comboText: { color: colors.text, lineHeight: 19, fontSize: 13, fontFamily: fonts.bodyItalic },
   comboLink: { color: colors.primary, fontSize: 12, fontFamily: fonts.bodySemiBold, marginTop: 2 },
   hint: { color: colors.textMuted, fontSize: 12, textAlign: "center", marginTop: spacing.lg },
+  streakChip: {
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    backgroundColor: colors.cardAlt,
+    borderRadius: 20,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    marginBottom: spacing.sm,
+  },
+  streakText: { color: colors.gold, fontFamily: fonts.bodySemiBold, fontSize: 12 },
 });

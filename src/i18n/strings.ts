@@ -111,6 +111,17 @@ export const STRINGS = {
       startButton: "Commencer",
       dots: ["", "", ""],
     },
+    streak: {
+      label: (n: number) => n === 1 ? "1er tirage" : `${n} jours de suite`,
+    },
+    journal: {
+      title: "Mes impressions",
+      placeholder: "Notez vos réflexions, ce que vous ressentez, ce qui vous touche dans ce tirage…",
+      saved: "sauvegardé",
+    },
+    meditation: {
+      title: "Questions pour méditer",
+    },
     aiReading: {
       title: "Lecture personnalisée",
       intentionPlaceholder: "Votre question ou intention (ex : « comment avancer dans ma carrière ? »)",
@@ -298,6 +309,17 @@ export const STRINGS = {
       startButton: "Begin",
       dots: ["", "", ""],
     },
+    streak: {
+      label: (n: number) => n === 1 ? "First draw" : `${n} days in a row`,
+    },
+    journal: {
+      title: "My impressions",
+      placeholder: "Note your reflections, what you feel, what strikes you about this draw…",
+      saved: "saved",
+    },
+    meditation: {
+      title: "Questions to meditate on",
+    },
     aiReading: {
       title: "Personalized reading",
       intentionPlaceholder: "Your question or intention (e.g. 'how can I move forward in my career?')",
@@ -484,6 +506,17 @@ export const STRINGS = {
       notifSkip: "Más tarde",
       startButton: "Comenzar",
       dots: ["", "", ""],
+    },
+    streak: {
+      label: (n: number) => n === 1 ? "Primera tirada" : `${n} días seguidos`,
+    },
+    journal: {
+      title: "Mis impresiones",
+      placeholder: "Anota tus reflexiones, lo que sientes, lo que te toca de esta tirada…",
+      saved: "guardado",
+    },
+    meditation: {
+      title: "Preguntas para meditar",
     },
     aiReading: {
       title: "Lectura personalizada",

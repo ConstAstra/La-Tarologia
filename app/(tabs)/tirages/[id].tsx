@@ -15,6 +15,10 @@ import { useSubscription } from "@/context/SubscriptionContext";
 import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
 import { AiReadingBox } from "@/components/AiReadingBox";
+import { JournalBox } from "@/components/JournalBox";
+import { MeditationQuestionsBox } from "@/components/MeditationQuestionsBox";
+import { getMeditationQuestions } from "@/lib/meditationQuestions";
+import { useLocale } from "@/context/LocaleContext";
 
 export default function SpreadDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -23,6 +27,7 @@ export default function SpreadDetail() {
   const { user } = useAuth();
   const { isPremium } = useSubscription();
   const t = useT();
+  const { locale } = useLocale();
   const spreads = useSpreads();
   const cards = useCards();
   const spread = spreads.find((s) => s.id === id);
@@ -41,6 +46,11 @@ export default function SpreadDetail() {
       })
       .filter((d): d is DrawnCard => d !== null);
   }, [drawIds, cards]);
+
+  const meditationQuestions = useMemo<string[]>(() => {
+    if (!draw) return [];
+    return getMeditationQuestions(draw, locale);
+  }, [draw, locale]);
 
   useEffect(() => {
     if (spread) navigation.setOptions({ title: spread.name });
@@ -114,6 +124,12 @@ export default function SpreadDetail() {
               meaning: d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning,
             }))}
           />
+
+          {meditationQuestions.length > 0 && (
+            <MeditationQuestionsBox questions={meditationQuestions} />
+          )}
+
+          <JournalBox journalKey={`${spread.id}-${new Date().toISOString().slice(0, 10)}`} />
         </View>
       ) : (
         <View style={styles.positions}>
