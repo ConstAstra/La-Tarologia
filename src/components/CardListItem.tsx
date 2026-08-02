@@ -6,6 +6,7 @@ import { CardMeaning } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { PremiumBadge } from "@/components/PremiumBadge";
 import { iconForCard } from "@/lib/suitIcon";
+import { getCardTheme } from "@/lib/cardTheme";
 
 interface Props {
   card: CardMeaning;
@@ -14,13 +15,19 @@ interface Props {
 }
 
 export function CardListItem({ card, locked, onPress }: Props) {
+  const theme = getCardTheme(card);
   return (
     <Pressable style={styles.row} onPress={onPress}>
-      <View style={[styles.iconWrap, locked && styles.iconWrapLocked]}>
+      <View
+        style={[
+          styles.iconWrap,
+          locked ? styles.iconWrapLocked : { backgroundColor: theme.accent + "22", borderColor: theme.accent + "55" },
+        ]}
+      >
         <Ionicons
           name={locked ? "lock-closed" : iconForCard(card)}
           size={16}
-          color={locked ? colors.textMuted : colors.background}
+          color={locked ? colors.textMuted : theme.accent}
         />
       </View>
       <View style={styles.info}>
@@ -46,16 +53,15 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   iconWrap: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: colors.gold,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   iconWrapLocked: {
     backgroundColor: "transparent",
-    borderWidth: 1,
     borderColor: colors.border,
   },
   info: { flex: 1 },

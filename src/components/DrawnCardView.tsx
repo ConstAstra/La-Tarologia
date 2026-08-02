@@ -8,6 +8,7 @@ import { DrawnCard } from "@/types/tarot";
 import { colors, fonts, spacing } from "@/theme/colors";
 import { iconForCard } from "@/lib/suitIcon";
 import { cardNumeral } from "@/lib/cardNumeral";
+import { getCardTheme } from "@/lib/cardTheme";
 import { playCardReveal } from "@/lib/sound";
 
 interface Props {
@@ -47,6 +48,7 @@ function CardBack() {
 export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Props) {
   const { card, reversed } = drawn;
   const numeral = cardNumeral(card);
+  const theme = getCardTheme(card);
   const startsHidden = revealDelay !== undefined;
   const flip = useRef(new Animated.Value(startsHidden ? 0 : 1)).current;
   const [revealed, setRevealed] = useState(!startsHidden);
@@ -89,24 +91,39 @@ export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Pr
           ]}
         >
           <LinearGradient
-            colors={[colors.mystic, colors.card, colors.accentDeep]}
-            locations={[0, 0.55, 1]}
-            start={{ x: 0.15, y: 0 }}
-            end={{ x: 0.85, y: 1 }}
-            style={styles.cardFace}
+            colors={theme.gradient}
+            locations={[0, 0.5, 1]}
+            start={{ x: 0.2, y: 0 }}
+            end={{ x: 0.8, y: 1 }}
+            style={[styles.cardFace, { borderColor: theme.accent }]}
           >
-            <View style={styles.innerBorder} />
-            {numeral && <Text style={styles.numeral}>{numeral}</Text>}
-            <View style={styles.iconRing}>
-              <Ionicons name={iconForCard(card)} size={22} color={colors.gold} />
+            <View style={[styles.innerBorder, { borderColor: theme.accentSoft }]} />
+
+            {/* top numeral + suit row */}
+            <View style={styles.topRow}>
+              {numeral ? (
+                <Text style={[styles.numeral, { color: theme.accentSoft }]}>{numeral}</Text>
+              ) : null}
             </View>
-            <View style={styles.divider} />
-            <Text style={styles.name}>{card.name}</Text>
+
+            {/* central icon with glow rings */}
+            <View style={styles.iconArea}>
+              <View style={[styles.iconGlow, { borderColor: theme.accent + "30" }]} />
+              <View style={[styles.iconRing, { borderColor: theme.accent }]}>
+                <Ionicons name={iconForCard(card)} size={26} color={theme.accent} />
+              </View>
+            </View>
+
+            <View style={[styles.divider, { backgroundColor: theme.accentSoft }]} />
+
+            <Text style={styles.name} numberOfLines={2}>{card.name}</Text>
+
             {reversed && (
-              <View style={styles.reversedBadge}>
-                <Text style={styles.reversedLabel}>Inversée</Text>
+              <View style={[styles.reversedBadge, { borderColor: theme.accent }]}>
+                <Text style={[styles.reversedLabel, { color: theme.accent }]}>↑↓</Text>
               </View>
             )}
+
             <Corner style={styles.cornerTL} />
             <Corner style={styles.cornerTR} />
             <Corner style={styles.cornerBL} />
@@ -164,31 +181,43 @@ const styles = StyleSheet.create({
     borderColor: colors.goldSoft,
     opacity: 0.45,
   },
-  numeral: {
-    position: "absolute",
-    top: 12,
-    color: colors.goldSoft,
-    fontFamily: fonts.heading,
-    fontSize: 11,
-    letterSpacing: 1,
-    opacity: 0.85,
+  topRow: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 4,
+    minHeight: 18,
   },
-  iconRing: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: colors.gold,
+  numeral: {
+    fontFamily: fonts.heading,
+    fontSize: 12,
+    letterSpacing: 1.5,
+    opacity: 0.9,
+  },
+  iconArea: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 8,
+    marginVertical: 4,
+  },
+  iconGlow: {
+    position: "absolute",
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    borderWidth: 1,
+  },
+  iconRing: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   divider: {
-    width: 28,
+    width: 32,
     height: 1,
-    backgroundColor: colors.goldSoft,
-    opacity: 0.5,
-    marginVertical: 3,
+    opacity: 0.6,
+    marginVertical: 4,
   },
   backEmblemHalo: {
     position: "absolute",
@@ -217,13 +246,12 @@ const styles = StyleSheet.create({
   name: { color: colors.text, fontFamily: fonts.heading, textAlign: "center", fontSize: 14 },
   reversedBadge: {
     borderWidth: 0.75,
-    borderColor: colors.gold,
     borderRadius: 8,
     paddingHorizontal: 6,
     paddingVertical: 1,
     marginTop: 2,
   },
-  reversedLabel: { color: colors.gold, fontSize: 9, letterSpacing: 0.5 },
+  reversedLabel: { fontSize: 10, letterSpacing: 0.5 },
   keyword: { color: colors.textMuted, fontSize: 11, marginTop: spacing.xs, textAlign: "center" },
   corner: {
     position: "absolute",
