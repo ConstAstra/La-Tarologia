@@ -14,6 +14,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
+import { AiReadingBox } from "@/components/AiReadingBox";
 
 export default function SpreadDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -105,6 +106,14 @@ export default function SpreadDetail() {
               </View>
             </View>
           ))}
+          <AiReadingBox
+            spreadName={spread.name}
+            cards={draw.map((d) => ({
+              name: d.card.name,
+              reversed: d.reversed,
+              meaning: d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning,
+            }))}
+          />
         </View>
       ) : (
         <View style={styles.positions}>

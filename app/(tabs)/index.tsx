@@ -15,6 +15,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/context/SubscriptionContext";
 import { useT } from "@/i18n/useT";
 import { supabase } from "@/lib/supabase";
+import { AiReadingBox } from "@/components/AiReadingBox";
 
 const STORAGE_KEY = "latarologia.dailyDraw";
 
@@ -151,6 +152,15 @@ export default function AccueilScreen() {
               </Pressable>
             )}
           </View>
+
+          <AiReadingBox
+            spreadName={t.accueil.lectureDuJour}
+            cards={draw.map((d) => ({
+              name: d.card.name,
+              reversed: d.reversed,
+              meaning: d.reversed ? d.card.reversedMeaning : d.card.uprightMeaning,
+            }))}
+          />
 
           <Text style={styles.hint}>{t.accueil.hint}</Text>
         </>
