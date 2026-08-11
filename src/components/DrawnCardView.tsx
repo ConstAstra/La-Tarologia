@@ -20,23 +20,28 @@ interface Props {
 }
 
 function Corner({ style }: { style: object }) {
-  return <Ionicons name="sparkles" size={11} color={colors.gold} style={[styles.corner, style]} />;
+  return <Ionicons name="flower-outline" size={10} color={colors.gold} style={[styles.corner, style]} />;
 }
 
 function CardBack() {
   return (
     <LinearGradient
-      colors={[colors.mystic, colors.card, colors.accentDeep]}
+      colors={["#1C0A14", colors.mystic, "#3D1020"]}
       locations={[0, 0.5, 1]}
       start={{ x: 0.15, y: 1 }}
       end={{ x: 0.85, y: 0 }}
       style={styles.cardFace}
     >
       <View style={styles.innerBorder} />
+      <View style={styles.backEmblemHaloOuter} />
       <View style={styles.backEmblemHalo} />
       <View style={styles.backEmblemRing}>
         <View style={styles.backEmblemDiamond} />
       </View>
+      <Ionicons name="flower-outline" size={8} color={colors.goldSoft} style={{ position: "absolute", top: 45, left: 56, opacity: 0.65 }} />
+      <Ionicons name="flower-outline" size={8} color={colors.goldSoft} style={{ position: "absolute", top: 127, left: 56, opacity: 0.65 }} />
+      <Ionicons name="flower-outline" size={8} color={colors.goldSoft} style={{ position: "absolute", top: 86, left: 15, opacity: 0.65 }} />
+      <Ionicons name="flower-outline" size={8} color={colors.goldSoft} style={{ position: "absolute", top: 86, left: 97, opacity: 0.65 }} />
       <Corner style={styles.cornerTL} />
       <Corner style={styles.cornerTR} />
       <Corner style={styles.cornerBL} />
@@ -114,7 +119,11 @@ export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Pr
               </View>
             </View>
 
-            <View style={[styles.divider, { backgroundColor: theme.accentSoft }]} />
+            <View style={styles.dividerRow}>
+              <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
+              <View style={[styles.divider, { backgroundColor: theme.accentSoft }]} />
+              <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
+            </View>
 
             <Text style={styles.name} numberOfLines={2}>{card.name}</Text>
 
@@ -213,11 +222,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  divider: {
-    width: 32,
-    height: 1,
-    opacity: 0.6,
+  dividerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    width: "72%",
     marginVertical: 4,
+    opacity: 0.7,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+  },
+  backEmblemHaloOuter: {
+    position: "absolute",
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 0.5,
+    borderColor: colors.goldSoft,
+    opacity: 0.15,
   },
   backEmblemHalo: {
     position: "absolute",
