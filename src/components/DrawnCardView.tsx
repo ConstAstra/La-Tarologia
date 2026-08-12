@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Easing, Platform, Pressable, StyleSheet, View } from "react-native";
+import { Animated, Easing, Image, Platform, Pressable, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Haptics from "expo-haptics";
 import { AppText as Text } from "@/components/AppText";
@@ -9,6 +9,7 @@ import { colors, fonts, spacing } from "@/theme/colors";
 import { iconForCard } from "@/lib/suitIcon";
 import { cardNumeral } from "@/lib/cardNumeral";
 import { getCardTheme } from "@/lib/cardTheme";
+import { getCardImageUri } from "@/lib/cardImages";
 import { playCardReveal } from "@/lib/sound";
 
 interface Props {
@@ -54,6 +55,7 @@ export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Pr
   const { card, reversed } = drawn;
   const numeral = cardNumeral(card);
   const theme = getCardTheme(card);
+  const imageUri = getCardImageUri(card.id);
   const startsHidden = revealDelay !== undefined;
   const flip = useRef(new Animated.Value(startsHidden ? 0 : 1)).current;
   const [revealed, setRevealed] = useState(!startsHidden);
@@ -102,37 +104,64 @@ export function DrawnCardView({ drawn, positionLabel, onPress, revealDelay }: Pr
             end={{ x: 0.8, y: 1 }}
             style={[styles.cardFace, { borderColor: theme.accent }]}
           >
-            <View style={[styles.innerBorder, { borderColor: theme.accentSoft }]} />
+            {imageUri ? (
+              // ── Illustrated face ──────────────────────────────
+              <>
+                <Image
+                  source={{ uri: imageUri }}
+                  style={StyleSheet.absoluteFillObject}
+                  resizeMode="cover"
+                />
+                <LinearGradient
+                  colors={["transparent", "rgba(28,10,20,0.88)"]}
+                  style={styles.imageOverlay}
+                  pointerEvents="none"
+                />
+                <View style={styles.imageNameRow}>
+                  <Text style={styles.imageName} numberOfLines={2}>{card.name}</Text>
+                  {reversed && (
+                    <View style={[styles.reversedBadge, { borderColor: theme.accent }]}>
+                      <Text style={[styles.reversedLabel, { color: theme.accent }]}>↑↓</Text>
+                    </View>
+                  )}
+                </View>
+              </>
+            ) : (
+              // ── Gradient face (no image yet) ──────────────────
+              <>
+                {/* top numeral */}
+                <View style={styles.topRow}>
+                  {numeral ? (
+                    <Text style={[styles.numeral, { color: theme.accentSoft }]}>{numeral}</Text>
+                  ) : null}
+                </View>
 
-            {/* top numeral + suit row */}
-            <View style={styles.topRow}>
-              {numeral ? (
-                <Text style={[styles.numeral, { color: theme.accentSoft }]}>{numeral}</Text>
-              ) : null}
-            </View>
+                {/* central icon with glow rings */}
+                <View style={styles.iconArea}>
+                  <View style={[styles.iconGlow, { borderColor: theme.accent + "30" }]} />
+                  <View style={[styles.iconRing, { borderColor: theme.accent }]}>
+                    <Ionicons name={iconForCard(card)} size={26} color={theme.accent} />
+                  </View>
+                </View>
 
-            {/* central icon with glow rings */}
-            <View style={styles.iconArea}>
-              <View style={[styles.iconGlow, { borderColor: theme.accent + "30" }]} />
-              <View style={[styles.iconRing, { borderColor: theme.accent }]}>
-                <Ionicons name={iconForCard(card)} size={26} color={theme.accent} />
-              </View>
-            </View>
+                <View style={styles.dividerRow}>
+                  <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
+                  <View style={[styles.divider, { backgroundColor: theme.accentSoft }]} />
+                  <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
+                </View>
 
-            <View style={styles.dividerRow}>
-              <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
-              <View style={[styles.divider, { backgroundColor: theme.accentSoft }]} />
-              <Ionicons name="flower-outline" size={7} color={theme.accentSoft} />
-            </View>
+                <Text style={styles.name} numberOfLines={2}>{card.name}</Text>
 
-            <Text style={styles.name} numberOfLines={2}>{card.name}</Text>
-
-            {reversed && (
-              <View style={[styles.reversedBadge, { borderColor: theme.accent }]}>
-                <Text style={[styles.reversedLabel, { color: theme.accent }]}>↑↓</Text>
-              </View>
+                {reversed && (
+                  <View style={[styles.reversedBadge, { borderColor: theme.accent }]}>
+                    <Text style={[styles.reversedLabel, { color: theme.accent }]}>↑↓</Text>
+                  </View>
+                )}
+              </>
             )}
 
+            {/* Always: inner frame + corner ornaments on top of everything */}
+            <View style={[styles.innerBorder, { borderColor: theme.accentSoft }]} />
             <Corner style={styles.cornerTL} />
             <Corner style={styles.cornerTR} />
             <Corner style={styles.cornerBL} />
@@ -267,6 +296,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gold,
     transform: [{ rotate: "45deg" }],
   },
+  imageOverlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 70,
+    borderBottomLeftRadius: 13,
+    borderBottomRightRadius: 13,
+  },
+  imageNameRow: {
+    position: "absolute",
+    bottom: 14,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    gap: 3,
+  },
+  imageName: { color: "#fff", fontFamily: fonts.heading, textAlign: "center", fontSize: 13, paddingHorizontal: 8 },
   name: { color: colors.text, fontFamily: fonts.heading, textAlign: "center", fontSize: 14 },
   reversedBadge: {
     borderWidth: 0.75,
